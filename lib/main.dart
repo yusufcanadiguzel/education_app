@@ -1,3 +1,4 @@
+import 'package:education_app/widgets/drawer_menu_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,6 +21,11 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+      drawer: const SideMenu(),
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
