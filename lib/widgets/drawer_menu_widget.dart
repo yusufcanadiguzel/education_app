@@ -7,7 +7,7 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,12 +42,10 @@ class SideMenu extends StatelessWidget {
             title: Text('Tobeto'),
             leading: Icon(Icons.home),
           ),
-          Container(
-            child: const Card(
-              child: ListTile(
-                title: Text('Kullanıcı Adı'),
-                leading: Icon(Icons.person_3),
-              ),
+          const Card(
+            child: ListTile(
+              title: Text('Kullanıcı Adı'),
+              leading: Icon(Icons.person_3),
             ),
           ),
           const ListTile(
