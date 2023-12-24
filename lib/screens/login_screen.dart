@@ -84,7 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       !isPasswordVisible; //parolada yıldız görünümünü kapayıp açar
                                 });
                               },
-                              icon: const Icon(Icons.visibility_off)),
+                              icon: isPasswordVisible
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off)),
                           fillColor: Colors.white,
                           filled: true),
                     ),
