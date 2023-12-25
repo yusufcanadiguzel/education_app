@@ -1,5 +1,6 @@
 import 'package:education_app/widgets/button.dart';
 import 'package:education_app/widgets/drawer_menu_widget.dart';
+import 'package:education_app/widgets/footer.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -122,6 +123,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const MyButton(),
+            const Footer(),
           ],
         ),
       ),
