@@ -1,5 +1,9 @@
+import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
 import 'package:education_app/screens/home_screen.dart';
+import 'package:education_app/screens/register_screen.dart';
+import 'package:education_app/screens/welcome_screen.dart';
+import 'package:education_app/theme/theme_constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,12 +20,17 @@ Future<void> main() async {
       providers: [
         BlocProvider(
           create: (context) => UserBloc(),
-        )
+        ),
+        BlocProvider(
+            create: (context) => AuthBloc(),
+        ),
       ],
       child: MaterialApp(
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        home: const LoginScreen(),
+        home: const WelcomeScreen(),
+        theme: lightTheme,
+        darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
-      ),),);
+      ),
+  ),
+  );
 }
