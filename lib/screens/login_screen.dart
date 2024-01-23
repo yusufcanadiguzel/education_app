@@ -1,7 +1,10 @@
+import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:education_app/blocs/auth_bloc/auth_event.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_event.dart';
 import 'package:education_app/blocs/user_bloc/user_state.dart';
 import 'package:education_app/screens/home_screen.dart';
+import 'package:education_app/screens/register_screen.dart';
 import 'package:education_app/widgets/application_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isPasswordVisible = false;
 
-  String firstName = 'yusufcan';
-  String lastName = 'adıgüzel';
-  late String email;
-  late String password;
+  late String _email;
+  late String _password;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 300,
                           child: TextField(
                             onChanged: (value){
-                              email = value;
+                              _email = value;
                             },
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
@@ -96,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 300,
                           child: TextField(
                             onChanged: (value){
-                              password = value;
+                              _password = value;
                             },
                             obscureText:
                             !isPasswordVisible, // parolada *yıldız görünümü yapar,
@@ -131,8 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: ElevatedButton(
                             onPressed: () async {
                               try{
-                                context.read<UserBloc>().add(AddUser(user: user_model.User(firstName: firstName, lastName: lastName, email: email, password: password)));
-
+                                context.read<AuthBloc>().add(LoginUser(email: _email, password: _password));
                                 if (!context.mounted) return;
                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen(),),);
 
@@ -158,7 +158,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           thickness: 1.0,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen(),));
+                          },
                           child: const Text(
                             'Parolamı Unuttum',
                             style: TextStyle(fontFamily: 'Tinos'),
