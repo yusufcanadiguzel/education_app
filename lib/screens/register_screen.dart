@@ -58,6 +58,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       children: [
                                         Expanded(
                                           child: TextFormField(
+                                            validator: (value) {
+                                              if(value!.isEmpty){
+                                                return 'Lütfen alanı boş geçmeyiniz';
+                                              }
+                                            },
+                                            onChanged: (value) => email = value,
                                             decoration: kTextFormFieldDecoration.copyWith(
                                               labelText: 'Email*',
                                               prefixIcon: const Align(
@@ -66,11 +72,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 child: Icon(Icons.mail),
                                               ),
                                             ),
-                                            validator: (value) {
-                                              if(value!.isEmpty){
-                                                return 'Lütfen alanı boş geçmeyiniz';
-                                              }
-                                            },
                                           ),
                                         ),
                                         Expanded(
@@ -120,9 +121,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 CustomElevatedButton(
                                   onPressed: (){
+                                    print(email);
+                                    print(password);
                                     if(_formKey.currentState!.validate()){
                                       context.read<AuthBloc>().add(RegisterUser(email: email, password: password));
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen(),));
                                     }
                                   },
                                   buttonText: 'Kayıt Ol',
@@ -135,6 +137,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               );
+          }
+
+          if(state is AuthSuccesfull){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen(),));
           }
           
           if(state is AuthError){

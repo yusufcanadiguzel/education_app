@@ -1,5 +1,6 @@
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/auth_bloc/auth_event.dart';
+import 'package:education_app/blocs/auth_bloc/auth_state.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_event.dart';
 import 'package:education_app/blocs/user_bloc/user_state.dart';
@@ -34,18 +35,17 @@ class _LoginScreenState extends State<LoginScreen> {
       extendBodyBehindAppBar: true,
       appBar: ApplicationBar(appBar: AppBar()),
       drawer: const SideMenu(),
-      body: BlocBuilder<UserBloc, UserState>(
+      body: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state){
-          if(state is UserInitial){
-            context.read<UserBloc>().add(FetchUsers());
-            return const Text('userInitial');
+          if(state is AuthInitial){
+            context.read<AuthBloc>().add(CheckUser());
           }
 
-          if(state is UserLoading){
+          if(state is AuthLoading){
             return const Text('userLoading');
           }
 
-          if(state is UserLoaded){
+          if(state is AuthLoaded){
             return Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -133,9 +133,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () async {
                               try{
                                 context.read<AuthBloc>().add(LoginUser(email: _email, password: _password));
-                                if (!context.mounted) return;
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen(),),);
-
                               }catch(exception){
 
                               }
@@ -172,6 +169,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             );
+          }
+
+          if(state is AuthSuccesfull){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),),);
+          }
+
+          if(state is AuthError){
+
           }
 
           return const Text('error');

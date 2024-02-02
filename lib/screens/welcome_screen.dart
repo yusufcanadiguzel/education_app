@@ -18,7 +18,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final user_model.User _user = user_model.User(firstName: 'Yusufcan', lastName: 'Adıgüzel', email: 'ya@gmail.com', password: '123456');
+
 
   User? checkUser(){
     if(_auth.currentUser == null){

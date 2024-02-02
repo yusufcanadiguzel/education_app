@@ -1,8 +1,10 @@
 class User{
+  String userId;
   String firstName;
   String lastName;
   String email;
-  String password;
+  String title;
+  String profilePictureUrl;
 
-  User({required this.firstName, required this.lastName, required this.email, required this.password});
+  User({required this.userId, required this.firstName, required this.lastName, required this.email, required this.title, required this.profilePictureUrl});
 }

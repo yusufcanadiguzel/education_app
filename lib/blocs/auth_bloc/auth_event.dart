@@ -17,3 +17,5 @@ class LoginUser extends AuthEvent{
 }
 
 class CheckUser extends AuthEvent{}
+
+class LoginSuccessfull extends AuthEvent{}
