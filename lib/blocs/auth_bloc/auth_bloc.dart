@@ -37,6 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
     try{
       await _repository.registerUser(event.email, event.password);
       await _userRepository.createUser(user_model.User(userId: _repository.getCurrentUser()!.uid, firstName: '', lastName: '', email: event.email, title: '', profilePictureUrl: ''));
+      _userRepository.currentUserId = _repository.getCurrentUser()!.uid;
       emitter(AuthSuccesfull());
     }catch (exception) {
       result = false;

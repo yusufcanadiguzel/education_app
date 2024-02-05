@@ -1,3 +1,4 @@
+import 'package:education_app/widgets/form_input_field.dart';
 import 'package:flutter/material.dart';
 
 class TestScreen extends StatefulWidget {
@@ -8,120 +9,40 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                  children: [
-                    //Profil
-                    SizedBox(
-                      height: 200.0,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10),),
-                            color: Colors.white,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const CircleAvatar(
-                                backgroundColor: Colors.blue,
-                                radius: 50.0,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'Yusufcan Adıgüzel',
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
-                                  const Text(
-                                    'Software Developer',
-                                    style: TextStyle(
-                                      fontSize: 12.0,
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Icons.person, size: 16.0),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(Icons.person, size: 16.0),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(Icons.person, size: 16.0),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(Icons.person, size: 16.0),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(Icons.person, size: 16.0),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: AspectRatio(
+              aspectRatio: 9 / 16,
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0),),
+                  color: Colors.white
+                ),
+                child: Form(
+                  key: _formKey,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        KFormInput(iconData: Icons.email, labelText: 'email'),
+                        KFormInput(iconData: Icons.person, labelText: 'Ad'),
+                        KFormInput(iconData: Icons.person, labelText: 'Soyad'),
+                        KFormInput(iconData: Icons.email, labelText: 'Başlık'),
+                      ],
                     ),
-                    const SizedBox(height: 10.0,),
-                    //Hakkımda
-                    Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0),),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Hakkımda', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,),),
-                            Text('asdhsjfdnjjfjfdjnfnlfnlfjnfjlnffjnfnlf'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10.0,),
-                    //Kurslarım
-                    Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0),),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Kurslarım', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,),),
-                          ],
-                        ),
-                      ),
-                    )
-                  ]
+                  ),
+                ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

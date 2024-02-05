@@ -9,3 +9,10 @@ class AddUser extends UserEvent{
 
   AddUser({required this.user});
 }
+
+class UpdateUser extends UserEvent{
+  final User user;
+  final String docId;
+
+  UpdateUser({required this.user, required this.docId});
+}

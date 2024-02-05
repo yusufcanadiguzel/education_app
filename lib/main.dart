@@ -1,6 +1,8 @@
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
+import 'package:education_app/blocs/user_details_bloc/user_detail_bloc.dart';
 import 'package:education_app/screens/home_screen.dart';
+import 'package:education_app/screens/profile_screen.dart';
 import 'package:education_app/screens/register_screen.dart';
 import 'package:education_app/screens/test_screen.dart';
 import 'package:education_app/screens/welcome_screen.dart';
@@ -25,9 +27,12 @@ Future<void> main() async {
         BlocProvider(
             create: (context) => AuthBloc(),
         ),
+        BlocProvider(
+            create: (context) => UserDetailBloc(),
+        ),
       ],
       child: MaterialApp(
-        home: const RegisterScreen(),
+        home: const ProfileScreen(userId: 'gJtoBBLZWNs8DP5v2ReM'),
         theme: lightTheme,
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
