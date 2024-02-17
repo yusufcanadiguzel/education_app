@@ -1,11 +1,11 @@
-import 'package:education_app/models/user.dart';
+import 'package:education_app/models/user/user_model.dart';
 
 abstract class UserDetailState {}
 
 class UserDetailInitial extends UserDetailState {}
 
 class UserDetailLoaded extends UserDetailState {
-  final User user;
+  final UserModel user;
 
   UserDetailLoaded({required this.user});
 }

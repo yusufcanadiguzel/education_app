@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class AnnouncementCard extends StatelessWidget {
   const AnnouncementCard({super.key});
 
+  final title ='';
+  final desc = '';
+  final date = '';
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -13,15 +17,15 @@ class AnnouncementCard extends StatelessWidget {
               left: BorderSide(color: Colors.green, width: 10),
             )
           ),
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.all(15.0),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Duyuru', style: TextStyle(color: Color(0xFF00956e),),),
-                    Text('İstanbul Kodluyor', style: TextStyle(color: Color(0xFF00956e),),)
+                    Text(title, style: TextStyle(color: Color(0xFF00956e),),),
+                    Text(desc, style: TextStyle(color: Color(0xFF00956e),),)
                   ],
                 ),
                 Row(

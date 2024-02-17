@@ -4,13 +4,15 @@ import 'package:education_app/blocs/auth_bloc/auth_state.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_event.dart';
 import 'package:education_app/blocs/user_bloc/user_state.dart';
+import 'package:education_app/repositories/concrete/firebase/firebase_user_repository.dart';
 import 'package:education_app/screens/home_screen.dart';
+import 'package:education_app/screens/profile_screen.dart';
 import 'package:education_app/screens/register_screen.dart';
 import 'package:education_app/widgets/application_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:education_app/models/user.dart' as user_model;
+import 'package:education_app/models/user/user_model.dart' as user_model;
 
 import '../widgets/drawer_menu_widget.dart';
 
@@ -172,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }
 
           if(state is AuthSuccesfull){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),),);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(userId: FirebaseUserRepository().currentUserId),),);
           }
 
           if(state is AuthError){

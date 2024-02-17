@@ -1,21 +1,18 @@
-import 'package:education_app/models/user.dart';
+import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class AuthEvent{}
+abstract class AuthenticationEvent extends Equatable{
+  const AuthenticationEvent();
 
-class RegisterUser extends AuthEvent{
-  final String email;
-  final String password;
-
-  RegisterUser({required this.email, required this.password});
+  @override
+  List<Object?> get props => [];
 }
 
-class LoginUser extends AuthEvent{
-  final String email;
-  final String password;
+class AuthenticationUserChanged extends AuthenticationEvent{
+  const AuthenticationUserChanged({this.user});
 
-  LoginUser({required this.email, required this.password});
+  final User? user;
+
+  @override
+  List<Object?> get props => [user];
 }
-
-class CheckUser extends AuthEvent{}
-
-class LoginSuccessfull extends AuthEvent{}

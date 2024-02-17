@@ -1,4 +1,4 @@
-import 'package:education_app/models/user.dart';
+import 'package:education_app/models/user/user_model.dart';
 
 abstract class UserState{}
 

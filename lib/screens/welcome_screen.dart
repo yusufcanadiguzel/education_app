@@ -7,7 +7,7 @@ import 'package:education_app/screens/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:education_app/models/user.dart' as user_model;
+import 'package:education_app/models/user/user_model.dart' as user_model;
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

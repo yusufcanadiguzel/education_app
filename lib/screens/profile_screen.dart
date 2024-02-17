@@ -20,7 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<UserDetailBloc>().add(GetUserDetail(userId: 'gJtoBBLZWNs8DP5v2ReM'));
+
   }
 
   @override
@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: BlocBuilder<UserDetailBloc, UserDetailState>(
   builder: (context, state) {
     if(state is UserDetailInitial){
-
+      context.read<UserDetailBloc>().add(GetUserDetail(userId: 'gJtoBBLZWNs8DP5v2ReM'));
     }
 
     if(state is UserDetailLoaded){
@@ -63,9 +63,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ],
                               ),
-                              const CircleAvatar(
-                                backgroundColor: Colors.blue,
+                              CircleAvatar(
                                 radius: 50.0,
+                                backgroundImage: NetworkImage(state.user.profilePictureUrl),
                               ),
                               AutoSizeText(
                                 '${state.user.firstName} ${state.user.lastName}',
