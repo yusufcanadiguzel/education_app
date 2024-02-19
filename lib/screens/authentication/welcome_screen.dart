@@ -4,6 +4,7 @@ import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:education_app/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:education_app/screens/authentication/sign_in_screen.dart';
 import 'package:education_app/screens/authentication/sign_up_screen.dart';
+import 'package:education_app/widgets/background_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,15 +33,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: AspectRatio(
-              aspectRatio: 9 / 16,
+        child: BackgroundContainer(
+          containerWidget: Center(
+            child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
+                  height: MediaQuery.of(context).size.height / 2,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.white.withOpacity(0.95),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
