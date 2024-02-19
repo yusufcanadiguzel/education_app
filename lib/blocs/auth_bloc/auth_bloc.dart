@@ -7,22 +7,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final UserRepository _userRepository;
+  final UserRepository userRepository;
   late final StreamSubscription<User?> _userSubscription;
 
-  AuthenticationBloc({required UserRepository userRepository})
-      : _userRepository = userRepository,
+  AuthenticationBloc({required UserRepository repository})
+      : userRepository = repository,
         super(const AuthenticationState.unknown()) {
-    _userSubscription = _userRepository.currentUser.listen((authUser) {
-      add(const AuthenticationUserChanged());
+    _userSubscription = userRepository.currentUser.listen((authUser) {
+      add(
+        AuthenticationUserChanged(
+          user: authUser,
+        ),
+      );
     });
     on<AuthenticationUserChanged>(_onAuthenticationUserChanged);
   }
 
-  void _onAuthenticationUserChanged(AuthenticationUserChanged event, Emitter<AuthenticationState> emit){
-    if(event.user != null){
+  void _onAuthenticationUserChanged(
+      AuthenticationUserChanged event, Emitter<AuthenticationState> emit) {
+    if (event.user != null) {
       emit(AuthenticationState.authenticated(event.user!));
-    }else{
+    } else {
       emit(const AuthenticationState.unauthenticated());
     }
   }

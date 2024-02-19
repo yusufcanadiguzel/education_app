@@ -14,7 +14,7 @@ class EducationApp extends StatelessWidget {
       providers: [
         RepositoryProvider<AuthenticationBloc>(
           create: (context) => AuthenticationBloc(
-            userRepository: userRepository,
+            repository: userRepository,
           ),
         )
       ],
