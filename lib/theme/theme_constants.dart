@@ -26,13 +26,19 @@ final ThemeData darkTheme = ThemeData.dark().copyWith(
 );
 
 final InputDecoration kTextFormFieldDecoration = InputDecoration(
-  labelStyle: TextStyle(color: kcolors.Colors.primaryColor),
+  labelStyle: const TextStyle(color: Colors.white),
+  hintStyle: const TextStyle(color: Colors.white),
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.0),
     borderSide: const BorderSide(
-      color: Colors.blue,
+      color: Colors.white,
       width: 3.0,
     )
   ),
-  border: const OutlineInputBorder(),
+  enabledBorder: const OutlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.grey,
+      width: 3.0,
+    ),
+  ),
 );

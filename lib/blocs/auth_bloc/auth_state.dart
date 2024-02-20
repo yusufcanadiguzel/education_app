@@ -1,10 +1,20 @@
-abstract class AuthState{}
+import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthInitial extends AuthState{}
+enum AuthenticationStatus{authenticated, unauthenticated, unknown}
 
-class AuthLoading extends AuthState{}
+class AuthenticationState extends Equatable{
+  final User? user;
+  final AuthenticationStatus status;
 
-class AuthLoaded extends AuthState{
+  const AuthenticationState._({this.status = AuthenticationStatus.unknown, this.user});
+
+  const AuthenticationState.unknown() : this._();
+
+  const AuthenticationState.authenticated(User user) : this._(status: AuthenticationStatus.authenticated, user: user);
+
+  const AuthenticationState.unauthenticated() : this._(status: AuthenticationStatus.unauthenticated);
+
+  @override
+  List<Object?> get props => [user, status];
 }
-
-class AuthError extends AuthState{}

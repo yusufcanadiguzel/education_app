@@ -20,7 +20,7 @@ class Footer extends StatelessWidget {
               Container(
                 width: 100,
                 child: Image.asset(
-                  'assets/images/beyazlogo.png',
+                  'assets/images/tobeto_white_logo.png',
                 ),
               ),
               Container(

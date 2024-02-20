@@ -1,3 +1,4 @@
+import 'package:education_app/widgets/announcement_card.dart';
 import 'package:education_app/widgets/button.dart';
 import 'package:education_app/widgets/drawer_menu_widget.dart';
 import 'package:education_app/widgets/footer.dart';
@@ -63,6 +64,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            AnnouncementCard(),
             Center(
               child: Card(
                 shape: RoundedRectangleBorder(
