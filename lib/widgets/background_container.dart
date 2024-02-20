@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BackgroundContainer extends StatefulWidget {
-  final Widget containerWidget;
-  const BackgroundContainer({required this.containerWidget, super.key});
+  final Widget childWidget;
+  const BackgroundContainer({required this.childWidget, super.key});
 
   @override
   State<BackgroundContainer> createState() => _BackgroundContainerState();
@@ -102,7 +102,7 @@ class _BackgroundContainerState extends State<BackgroundContainer>
               radius: 1,
             ),
           ),
-          child: widget.containerWidget
+          child: widget.childWidget,
         );
       },
     );

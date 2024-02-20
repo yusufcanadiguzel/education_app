@@ -42,6 +42,10 @@ class FirebaseUserRepository extends UserRepository {
     }
   }
 
+  Future<void> signInWithGoogle() async{
+
+  }
+
   //Kullanıcını hesabından çıkış yapar.
   @override
   Future<void> logOut() async {

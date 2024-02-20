@@ -50,7 +50,7 @@
 //                             child: Column(
 //                               mainAxisAlignment: MainAxisAlignment.center,
 //                               children: [
-//                                 Image.asset('assets/images/education-app-blue-logo.png'),
+//                                 Image.asset('assets/images/education_app_blue_logo.png'),
 //                                 Expanded(
 //                                   child: Form(
 //                                     key: _formKey,
