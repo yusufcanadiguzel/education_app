@@ -85,6 +85,12 @@ class _BackgroundContainerState extends State<BackgroundContainer>
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animationController,

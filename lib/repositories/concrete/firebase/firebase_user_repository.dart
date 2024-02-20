@@ -32,7 +32,7 @@ class FirebaseUserRepository extends UserRepository {
 
   //Kullanıcı email ve şifresi ile sisteme giriş yapar.
   @override
-  Future<void> signIn(String email, String password) async {
+  Future<void> signInWithMail(String email, String password) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);

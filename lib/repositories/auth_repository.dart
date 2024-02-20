@@ -26,3 +26,4 @@ class AuthRepository{
     return user;
   }
 }
+

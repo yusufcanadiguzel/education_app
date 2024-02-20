@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 abstract class UserRepository{
   Stream<User?> get currentUser;
 
-  Future<void> signIn(String email, String password);
+  Future<void> signInWithMail(String email, String password);
 
   Future<UserModel> signUp(UserModel userModel, String password);
 

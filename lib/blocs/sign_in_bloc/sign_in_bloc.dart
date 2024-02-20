@@ -15,7 +15,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState>{
   Future<void> _onSignIn(SignInWithMail event, Emitter<SignInState> emit) async {
     emit(SignInProcess());
     try{
-      await _userRepository.signIn(event.email, event.password);
+      await _userRepository.signInWithMail(event.email, event.password);
       emit(SignInSuccess());
     } catch (exception) {
       log(exception.toString());
