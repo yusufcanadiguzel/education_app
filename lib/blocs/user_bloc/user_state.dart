@@ -1,17 +1,21 @@
 import 'package:education_app/models/user/user_model.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class UserState{}
+abstract class UserState extends Equatable{
+  const UserState();
+
+  @override
+  List<Object?> get props => [];
+}
 
 class UserInitial extends UserState{}
 
-class UserLoading extends UserState{
-  final String currentUserId;
+class UserProcess extends UserState{}
 
-  UserLoading({required this.currentUserId});
+class UserSuccess extends UserState{
+  final UserModel userModel;
+
+  const UserSuccess({required this.userModel});
 }
 
-class UserLoaded extends UserState{}
-
-class UserError extends UserState{}
-
-class UserChangesSaved extends UserState{}
+class UserFailure extends UserState{}

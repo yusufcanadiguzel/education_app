@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/blocs/get_users_bloc/get_users_event.dart';
 import 'package:education_app/models/user/user_entity.dart';
 import 'package:education_app/models/user/user_model.dart';
 import 'package:education_app/repositories/abstract/user_repository.dart';
@@ -42,9 +43,7 @@ class FirebaseUserRepository extends UserRepository {
     }
   }
 
-  Future<void> signInWithGoogle() async{
-
-  }
+  Future<void> signInWithGoogle() async {}
 
   //Kullanıcını hesabından çıkış yapar.
   @override
@@ -81,6 +80,19 @@ class FirebaseUserRepository extends UserRepository {
     }
   }
 
+  //Kullanıcı bilgilerini günceller
+  @override
+  Future<void> updateUserInfo(UserModel userModel) async {
+    try {
+      await _userCollection
+          .doc(userModel.id)
+          .update(userModel.toEntity().toDocument());
+    } catch (exception) {
+      log(exception.toString());
+      rethrow;
+    }
+  }
+
   //Gönderilen id ile eşleşen kullanıcıyı getirir.
   @override
   Future<UserModel> getUserById(String id) async {
@@ -90,6 +102,22 @@ class FirebaseUserRepository extends UserRepository {
     } catch (exception) {
       log(exception.toString());
       rethrow;
+    }
+  }
+
+  @override
+  Future<List<UserModel>> getUsersByName(String name) async {
+    try {
+      return _userCollection.orderBy('fullName').get().then(
+            (value) =>
+            value.docs
+                .map((e) =>
+                UserModel.fromEntity(UserEntity.fromDocument(e.data())))
+                .toList(),
+      );
+    } catch (exception) {
+    log(exception.toString());
+    rethrow;
     }
   }
 
@@ -109,7 +137,7 @@ class FirebaseUserRepository extends UserRepository {
     try {
       File imageFile = File(file);
       var firebaseStorageRef =
-          FirebaseStorage.instance.ref().child('$userId/PP/${userId}_lead');
+      FirebaseStorage.instance.ref().child('$userId/PP/${userId}_lead');
       firebaseStorageRef.putFile(imageFile);
 
       String imageUrl = await firebaseStorageRef.getDownloadURL();

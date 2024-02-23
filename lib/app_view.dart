@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/auth_bloc/auth_state.dart';
+import 'package:education_app/blocs/get_users_bloc/get_users_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:education_app/screens/authentication/welcome_screen.dart';
 import 'package:education_app/screens/home_screen.dart';
@@ -28,6 +29,12 @@ class EducationAppView extends StatelessWidget {
                   create: (context) => SignInBloc(
                       userRepository:
                           context.read<AuthenticationBloc>().userRepository),
+                ),
+                BlocProvider<GetUsersBloc>(
+                  create: (context) => GetUsersBloc(
+                    repository:
+                        context.read<AuthenticationBloc>().userRepository,
+                  ),
                 ),
               ],
               child: const HomeScreen(),

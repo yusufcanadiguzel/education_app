@@ -16,7 +16,11 @@ abstract class UserRepository{
 
   Future<UserModel> getUserById(String id);
 
+  Future<List<UserModel>> getUsersByName(String name);
+
   Future<void> createUser(UserModel userModel);
+
+  Future<void> updateUserInfo(UserModel userModel);
 
   Future<String> updatePicture(String userId, String file);
 }

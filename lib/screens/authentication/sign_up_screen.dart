@@ -96,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             if (value!.isEmpty) {
                               return 'Lütfen alanı doldurunuz.';
                             }
+                            return null;
                           },
                         ),
 
@@ -273,9 +274,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   if (_formKey.currentState!.validate()) {
                                     UserModel userModel = UserModel.empty;
                                     userModel = userModel.copyWith(
-                                        email: _emailController.text,
-                                        firstName: _firstNameController.text,
-                                        lastName: _lastNameController.text);
+                                      email: _emailController.text,
+                                      firstName: _firstNameController.text,
+                                      lastName: _lastNameController.text,
+                                      fullName:
+                                          '${_firstNameController.text} ${_lastNameController.text}',
+                                    );
 
                                     setState(() {
                                       context.read<SignUpBloc>().add(
@@ -291,8 +295,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 buttonText: 'Kayıt Ol',
                               )
                             : const CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
+                                color: Colors.white,
+                              ),
                       ],
                     ),
                   ),

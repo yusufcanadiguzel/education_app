@@ -14,6 +14,9 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     required this.validator,
     this.onChanged,
+    this.textColor = Colors.white,
+    this.hintTextColor = Colors.white,
+    this.labelText,
     super.key,
   });
 
@@ -26,6 +29,9 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final Function(String)? onChanged;
+  final Color? textColor;
+  final Color? hintTextColor;
+  final String? labelText;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +41,11 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: textInputType,
         controller: controller,
         obscureText: isObscure,
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(color: textColor),
         decoration: kTextFormFieldDecoration.copyWith(
+          labelText: labelText,
           hintText: hintText,
+          hintStyle: TextStyle(color: hintTextColor, fontWeight: FontWeight.normal,),
           prefixIcon: Align(
             widthFactor: 1.0,
             heightFactor: 1.0,
