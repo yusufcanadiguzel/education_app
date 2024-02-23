@@ -1,25 +1,45 @@
+import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:education_app/blocs/user_bloc/user_bloc.dart';
+import 'package:education_app/blocs/user_bloc/user_event.dart';
+import 'package:education_app/screens/search_screen.dart';
 import 'package:education_app/widgets/announcement_card.dart';
 import 'package:education_app/widgets/button.dart';
+import 'package:education_app/widgets/custom_app_bar.dart';
+import 'package:education_app/widgets/user/custom_user_circle_avatar.dart';
 import 'package:education_app/widgets/drawer_menu_widget.dart';
 import 'package:education_app/widgets/footer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Color(0xFF4D4D4D)),
-        elevation: 0,
-        bottom: const PreferredSize(
-            preferredSize: Size.fromHeight(1), child: Divider()),
-        backgroundColor: Colors.transparent,
-        toolbarHeight: 90.0,
-        title: Image.asset('assets/images/tobeto-logo.png', height: 40.0),
-      ),
-      endDrawer: const SideMenu(),
+      appBar: CustomAppBar(
+          leadingWidget: BlocProvider(
+        create: (context) => UserBloc(
+          repository: context.read<AuthenticationBloc>().userRepository,
+        )..add(
+          GetUserById(
+            id: context.read<AuthenticationBloc>().state.user!.uid,
+          ),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CustomUserPictureCircle(),
+        ),
+      )),
       body: SingleChildScrollView(
         child: Column(
           children: [

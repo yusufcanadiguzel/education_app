@@ -2,27 +2,20 @@
 import 'dart:io';
 
 import 'package:education_app/models/user/user_model.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class UserEvent{}
+abstract class UserEvent extends Equatable{
+  const UserEvent();
 
-class FetchUsers extends UserEvent{}
-
-class AddUser extends UserEvent{
-  final UserModel user;
-
-  AddUser({required this.user});
+  @override
+  List<Object?> get props => [];
 }
 
-class UpdateUser extends UserEvent{
-  final UserModel user;
-  final String docId;
+class GetUserById extends UserEvent{
+  final String id;
 
-  UpdateUser({required this.user, required this.docId});
-}
+  const GetUserById({required this.id});
 
-class UpdateUserPicture extends UserEvent{
-  final File? pickedFile;
-  final String docId;
-
-  UpdateUserPicture({required this.pickedFile, required this.docId});
+  @override
+  List<Object?> get props => [id];
 }
