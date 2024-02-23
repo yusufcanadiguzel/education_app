@@ -14,7 +14,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  String searchText = '';
+  late String searchText;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: TextField(
             onChanged: (value) => setState(() {
               searchText = value;
-              context.read<GetUsersBloc>().add(
-                    GetUsersByName(name: searchText),
-                  );
+              context.read<GetUsersBloc>().add(GetUsersByName());
             }),
             decoration: InputDecoration(
               hintText: 'Arama Yapın',
@@ -50,9 +48,14 @@ class _SearchScreenState extends State<SearchScreen> {
                 return ListView.builder(
                   itemCount: state.users.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(state.users[index].firstName),
-                    );
+                    if (state.users[index].fullName!
+                            .toLowerCase()
+                            .contains(searchText.toLowerCase()) &&
+                        searchText.isNotEmpty) {
+                      return ListTile(
+                        title: Text(state.users[index].firstName),
+                      );
+                    }
                   },
                 );
               }

@@ -7,11 +7,4 @@ class GetUsersEvent extends Equatable{
   List<Object?> get props => [];
 }
 
-class GetUsersByName extends GetUsersEvent{
-  final String name;
-
-  const GetUsersByName({required this.name});
-
-  @override
-  List<Object?> get props => [name];
-}
+class GetUsersByName extends GetUsersEvent{}

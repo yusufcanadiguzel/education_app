@@ -16,7 +16,7 @@ abstract class UserRepository{
 
   Future<UserModel> getUserById(String id);
 
-  Future<List<UserModel>> getUsersByName(String name);
+  Future<List<UserModel>> getUsersByName();
 
   Future<void> createUser(UserModel userModel);
 
