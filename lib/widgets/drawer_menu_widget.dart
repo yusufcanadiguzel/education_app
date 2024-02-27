@@ -3,7 +3,7 @@ import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:education_app/blocs/update_user_info_bloc/update_user_info_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_event.dart';
-import 'package:education_app/screens/profile_screen.dart';
+import 'package:education_app/screens/user/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -46,6 +46,7 @@ dependencies:
   firebase_app_check: ^0.2.1+13
   rive: ^0.12.4
   font_awesome_flutter: ^10.7.0
+  uuid: ^4.3.3
 
 dev_dependencies:
   flutter_test:

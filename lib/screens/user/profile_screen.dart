@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../blocs/update_user_info_bloc/update_user_info_bloc.dart';
-import '../blocs/update_user_info_bloc/update_user_info_state.dart';
+import '../../blocs/update_user_info_bloc/update_user_info_bloc.dart';
+import '../../blocs/update_user_info_bloc/update_user_info_state.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String userId;
