@@ -1,3 +1,7 @@
+import 'package:education_app/blocs/catalog_bloc/catalog_bloc.dart';
+import 'package:education_app/blocs/user_bloc/user_bloc.dart';
+import 'package:education_app/screens/catalog_screen.dart';
+import 'package:education_app/screens/home_screen.dart';
 import 'package:education_app/app.dart';
 import 'package:education_app/custom_bloc_observer.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -21,6 +25,23 @@ Future<void> main() async {
 
   Bloc.observer = CustomBlocObserver();
 
+runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CatalogBloc(),
+        )
+      ],
+      child: MaterialApp(
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        home: const HomeScreen(),
+        debugShowCheckedModeBanner: false,
+      ),
+    ),
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(

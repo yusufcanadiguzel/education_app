@@ -14,7 +14,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<GetUserById>(_onGetUserById);
   }
 
-  Future<void> _onGetUserById(GetUserById event, Emitter<UserState> emit) async {
+Future<void> _onGetUserById(GetUserById event, Emitter<UserState> emit) async {
     emit(UserProcess());
     try{
       var user = await _userRepository.getUserById(event.id);
