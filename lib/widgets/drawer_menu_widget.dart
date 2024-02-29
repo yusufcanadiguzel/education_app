@@ -1,3 +1,4 @@
+import 'package:education_app/screens/catalog_screen.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatelessWidget {
@@ -29,7 +30,14 @@ class SideMenu extends StatelessWidget {
           const ListTile(
             title: Text('Profilim'),
           ),
-          const ListTile(
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CatalogScreen(),
+                  ));
+            },
             title: Text('Katalog'),
           ),
           const ListTile(

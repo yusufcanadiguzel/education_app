@@ -1,6 +1,9 @@
+import 'package:education_app/blocs/catalog_bloc/catalog_bloc.dart';
+import 'package:education_app/blocs/catalog_bloc/catalog_event.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_event.dart';
 import 'package:education_app/blocs/user_bloc/user_state.dart';
+import 'package:education_app/models/course.dart';
 import 'package:education_app/screens/home_screen.dart';
 import 'package:education_app/widgets/application_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,6 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
   late String email;
   late String password;
 
+//baska sayafaya alıcam
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,17 +39,17 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: ApplicationBar(appBar: AppBar()),
       drawer: const SideMenu(),
       body: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state){
-          if(state is UserInitial){
+        builder: (context, state) {
+          if (state is UserInitial) {
             context.read<UserBloc>().add(FetchUsers());
             return const Text('userInitial');
           }
 
-          if(state is UserLoading){
+          if (state is UserLoading) {
             return const Text('userLoading');
           }
 
-          if(state is UserLoaded){
+          if (state is UserLoaded) {
             return Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -73,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           width: 300,
                           child: TextField(
-                            onChanged: (value){
+                            onChanged: (value) {
                               email = value;
                             },
                             decoration: InputDecoration(
@@ -95,11 +100,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           width: 300,
                           child: TextField(
-                            onChanged: (value){
+                            onChanged: (value) {
                               password = value;
                             },
                             obscureText:
-                            !isPasswordVisible, // parolada *yıldız görünümü yapar,
+                                !isPasswordVisible, // parolada *yıldız görünümü yapar,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -113,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onPressed: () {
                                       setState(() {
                                         isPasswordVisible =
-                                        !isPasswordVisible; //parolada yıldız görünümünü kapayıp açar
+                                            !isPasswordVisible; //parolada yıldız görünümünü kapayıp açar
                                       });
                                     },
                                     icon: isPasswordVisible
@@ -130,21 +135,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 300,
                           child: ElevatedButton(
                             onPressed: () async {
-                              try{
-                                context.read<UserBloc>().add(AddUser(user: user_model.User(firstName: firstName, lastName: lastName, email: email, password: password)));
+                              try {
+                                context.read<UserBloc>().add(AddUser(
+                                    user: user_model.User(
+                                        firstName: firstName,
+                                        lastName: lastName,
+                                        email: email,
+                                        password: password)));
 
                                 if (!context.mounted) return;
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen(),),);
-
-                              }catch(exception){
-
-                              }
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomeScreen(),
+                                  ),
+                                );
+                              } catch (exception) {}
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xff9B33FF),
                                 shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)))),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0)))),
                             child: const Text(
                               'GİRİŞ YAP',
                               style: TextStyle(

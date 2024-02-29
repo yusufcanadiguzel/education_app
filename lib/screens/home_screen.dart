@@ -2,10 +2,11 @@ import 'package:education_app/widgets/button.dart';
 import 'package:education_app/widgets/drawer_menu_widget.dart';
 import 'package:education_app/widgets/footer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(

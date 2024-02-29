@@ -1,4 +1,6 @@
+import 'package:education_app/blocs/catalog_bloc/catalog_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
+import 'package:education_app/screens/catalog_screen.dart';
 import 'package:education_app/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +14,22 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MultiBlocProvider(
+  runApp(
+    MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => UserBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CatalogBloc(),
         )
       ],
       child: MaterialApp(
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
-        home: const LoginScreen(),
+        home: const HomeScreen(),
         debugShowCheckedModeBanner: false,
-      ),),);
+      ),
+    ),
+  );
 }
