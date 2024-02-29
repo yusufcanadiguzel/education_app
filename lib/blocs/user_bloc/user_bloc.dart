@@ -1,34 +1,27 @@
+import 'dart:developer';
+
 import 'package:education_app/blocs/user_bloc/user_event.dart';
 import 'package:education_app/blocs/user_bloc/user_state.dart';
-import 'package:education_app/repositories/user_repository.dart';
+import 'package:education_app/repositories/abstract/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc() : super(UserInitial()) {
-    on<FetchUsers>(_onFetchUser);
+  final UserRepository _userRepository;
 
-    on<AddUser>(_onAddUser);
+  UserBloc({required UserRepository repository})
+      : _userRepository = repository,
+        super(UserInitial()) {
+    on<GetUserById>(_onGetUserById);
   }
 
-  final UserRepository _repository = UserRepository();
-
-  void _onFetchUser(FetchUsers event, Emitter<UserState> emitter) async {
-    emit(UserLoading());
-
-    try {
-      emit(UserLoaded());
+Future<void> _onGetUserById(GetUserById event, Emitter<UserState> emit) async {
+    emit(UserProcess());
+    try{
+      var user = await _userRepository.getUserById(event.id);
+      emit(UserSuccess(userModel: user));
     } catch (exception) {
-      emit(UserError());
-    }
-  }
-
-  void _onAddUser(AddUser event, Emitter<UserState> emitter) async {
-    emit(UserLoading());
-
-    try {
-      await _repository.createUser(event.user);
-    } catch (exception) {
-      emit(UserError());
+      log(exception.toString());
+      emit(UserFailure());
     }
   }
 }

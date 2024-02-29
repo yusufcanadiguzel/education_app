@@ -1,8 +1,19 @@
 import 'package:education_app/screens/catalog_screen.dart';
+import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
+import 'package:education_app/blocs/update_user_info_bloc/update_user_info_bloc.dart';
+import 'package:education_app/blocs/user_bloc/user_bloc.dart';
+import 'package:education_app/blocs/user_bloc/user_event.dart';
+import 'package:education_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/sign_in_bloc/sign_in_bloc.dart';
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({super.key});
+  const SideMenu({required this.userId, super.key});
+
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +38,37 @@ class SideMenu extends StatelessWidget {
           const ListTile(
             title: Text('Değerlendirmeler'),
           ),
-          const ListTile(
-            title: Text('Profilim'),
+          ListTile(
+            title: const Text('Profilim'),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => UserBloc(
+                          repository:
+                              context.read<AuthenticationBloc>().userRepository)
+                        ..add(
+                          GetUserById(
+                            id: context
+                                .read<AuthenticationBloc>()
+                                .state
+                                .user!
+                                .uid,
+                          ),
+                        ),
+                    ),
+                    BlocProvider(
+                      create: (context) => UpdateUserInfoBloc(
+                        repository:
+                            context.read<AuthenticationBloc>().userRepository,
+                      ),
+                    ),
+                  ],
+                  child: ProfileScreen(userId: userId),
+                ),
+              ),
+            ),
           ),
           ListTile(
             onTap: () {
@@ -53,6 +93,10 @@ class SideMenu extends StatelessWidget {
               title: Text('Username'),
               trailing: Icon(Icons.person),
             ),
+          ),
+          ListTile(
+            title: Text('Çıkış Yap'),
+            onTap: () => context.read<SignInBloc>().add(SignOut()),
           ),
           const ListTile(title: Text('\u00a9 2023 Tobeto')),
         ],
