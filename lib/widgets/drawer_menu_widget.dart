@@ -1,13 +1,13 @@
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
 import 'package:education_app/screens/catalog_screen.dart';
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:education_app/blocs/update_user_info_bloc/update_user_info_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_event.dart';
 import 'package:education_app/screens/user/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import '../blocs/sign_in_bloc/sign_in_bloc.dart';
 
 class SideMenu extends StatelessWidget {
@@ -45,7 +45,7 @@ class SideMenu extends StatelessWidget {
                 builder: (context) => MultiBlocProvider(
                   providers: [
                     BlocProvider(
-                      create: (context) => UserBloc(
+                      create: (context) => GetUserByIdBloc(
                           repository:
                               context.read<AuthenticationBloc>().userRepository)
                         ..add(

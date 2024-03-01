@@ -26,7 +26,6 @@ class CustomUserPictureCircle extends StatelessWidget {
             onTap: function,
             child: CircleAvatar(
               radius: radius,
-              backgroundColor: Colors.grey,
               backgroundImage: state.user.profilePictureUrl == null || state.user.profilePictureUrl!.isEmpty
                   ? const NetworkImage(
                       'https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png',
@@ -36,7 +35,7 @@ class CustomUserPictureCircle extends StatelessWidget {
           );
         }
 
-        return const Icon(FontAwesomeIcons.solidUser);
+        return const CircleAvatar(backgroundColor: Color(0xFF272B4D), child: Icon(FontAwesomeIcons.solidUser, color: Colors.white,),);
       },
     );
   }

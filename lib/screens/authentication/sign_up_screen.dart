@@ -26,7 +26,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
-  final _titleController = TextEditingController();
 
   bool _obscurePassword = true;
   IconData _iconPassword = CupertinoIcons.eye_fill;
@@ -52,7 +51,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             _signUpRequired = true;
           });
         } else if (state is SignUpFailure) {
-          return;
+          setState(() {
+            _signUpRequired = true;
+          });
         }
       },
       child: Scaffold(

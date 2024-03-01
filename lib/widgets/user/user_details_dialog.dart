@@ -1,3 +1,5 @@
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import 'package:education_app/blocs/update_user_info_bloc/update_user_info_event.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:education_app/widgets/custom_text_form_field.dart';
@@ -23,14 +25,14 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocBuilder<GetUserByIdBloc, GetUserByIdState>(
       builder: (context, state) {
-        if (state is UserSuccess) {
-          _firstNameController.text = state.userModel.firstName;
-          _lastNameController.text = state.userModel.lastName;
-          state.userModel.title == null
+        if (state is GetUserByIdSuccess) {
+          _firstNameController.text = state.user.firstName;
+          _lastNameController.text = state.user.lastName;
+          state.user.title == null
               ? _titleController.text = ''
-              : _titleController.text = state.userModel.title!;
+              : _titleController.text = state.user.title!;
 
           return AlertDialog(
             title: const Text('Bilgileri Düzenle'),
@@ -39,7 +41,7 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
                 CustomTextFormField(
                   labelText: 'İsim',
                   controller: _firstNameController,
-                  hintText: state.userModel.firstName,
+                  hintText: state.user.firstName,
                   iconData: FontAwesomeIcons.person,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -51,7 +53,7 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
                 CustomTextFormField(
                   labelText: 'Soy İsim',
                   controller: _lastNameController,
-                  hintText: state.userModel.lastName,
+                  hintText: state.user.lastName,
                   iconData: FontAwesomeIcons.person,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -63,9 +65,9 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
                 CustomTextFormField(
                   labelText: 'Ünvan',
                   controller: _titleController,
-                  hintText: state.userModel.title == null
+                  hintText: state.user.title == null
                       ? ''
-                      : state.userModel.title!,
+                      : state.user.title!,
                   iconData: FontAwesomeIcons.idBadge,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -81,7 +83,7 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
                 function: () {
                   context.read<UpdateUserInfoBloc>().add(
                         UpdateUserInfo(
-                          userModel: state.userModel.copyWith(
+                          userModel: state.user.copyWith(
                             firstName: _firstNameController.text,
                             lastName: _lastNameController.text,
                             title: _titleController.text,

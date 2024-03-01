@@ -1,18 +1,15 @@
-import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
-import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
-import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
-import 'package:education_app/blocs/user_bloc/user_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_event.dart';
-import 'package:education_app/blocs/user_bloc/user_state.dart';
-import 'package:education_app/widgets/custom_app_bar.dart';
-import 'package:education_app/widgets/custom_text_form_field.dart';
-import 'package:education_app/widgets/user/user_details_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../blocs/auth_bloc/auth_bloc.dart';
+import '../../blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import '../../blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
+import '../../blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import '../../blocs/update_user_info_bloc/update_user_info_bloc.dart';
 import '../../blocs/update_user_info_bloc/update_user_info_state.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/user/user_details_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String userId;
@@ -87,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     MultiBlocProvider(
                                                   providers: [
                                                     BlocProvider(
-                                                      create: (context) => UserBloc(
+                                                      create: (context) => GetUserByIdBloc(
                                                           repository: context
                                                               .read<
                                                                   AuthenticationBloc>()

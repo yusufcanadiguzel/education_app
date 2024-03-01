@@ -1,6 +1,7 @@
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
+import 'package:education_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,7 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: 40.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Theme.of(context).secondaryHeaderColor,
+              color: const Color(0xFF272B4D),
             ),
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -41,9 +42,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   Text(
                     'Arama Yapın',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
+                    style: TextStyles.kNormalTextStyle,
                   ),
                 ],
               ),
@@ -71,5 +70,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => const Size(double.infinity, 50.0);
+  Size get preferredSize => const Size(double.infinity, 60.0);
 }
