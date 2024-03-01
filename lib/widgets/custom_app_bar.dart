@@ -2,6 +2,7 @@ import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:education_app/theme/text_styles.dart';
+import 'package:education_app/widgets/main/app_bar_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,38 +18,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: leadingWidget,
-      title: BlocProvider(
-        create: (context) => GetUsersBloc(
-          repository: context.read<AuthenticationBloc>().userRepository,
-        ),
-        child: GestureDetector(
-          onTap: function,
-          child: Container(
-            height: 40.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: const Color(0xFF272B4D),
-            ),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Icon(
-                    FontAwesomeIcons.magnifyingGlass,
-                    size: 16.0,
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text(
-                    'Arama Yapın',
-                    style: TextStyles.kNormalTextStyle,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+      title: AppBarSearchBar(
+        function: function,
       ),
       actions: [
         BlocProvider(

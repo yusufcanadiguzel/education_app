@@ -1,3 +1,4 @@
+import 'package:education_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomActionButton extends StatelessWidget {
@@ -17,16 +18,14 @@ class CustomActionButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           fixedSize: Size(width, 25.0),
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xFFFF0067),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           )),
       onPressed: function,
       child: Text(
         buttonText,
-        style: const TextStyle(
-          color: Color(0xFF1D3566),
-        ),
+        style: TextStyles.kNormalTextStyle,
       ),
     );
   }

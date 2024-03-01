@@ -4,7 +4,11 @@ const Color _backgroundColor = Color(0xFF1D3566);
 
 final ThemeData lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: const Color(0xFF0F1334),
-
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Color(0xFF111639),
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Color(0xFFBDBECA),
+    ),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(
         color: Colors.white,

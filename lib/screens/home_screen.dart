@@ -1,5 +1,5 @@
-
-
+import 'package:education_app/blocs/catalog_bloc/catalog_bloc.dart';
+import 'package:education_app/screens/catalog_screen.dart';
 import 'package:education_app/screens/post/post_screen.dart';
 import 'package:education_app/screens/search_screen.dart';
 import 'package:education_app/screens/tobeto_screen.dart';
@@ -24,6 +24,7 @@ import 'message/message_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -98,7 +99,10 @@ class _HomeScreenState extends State<HomeScreen> {
           physics: const NeverScrollableScrollPhysics(),
           children: [
             TobetoScreen(),
-            FriendsScreen(),
+            BlocProvider(
+              create: (context) => CatalogBloc(),
+              child: const CatalogScreen(),
+            ),
             PostScreen(),
             MessageScreen(),
             MultiBlocProvider(
@@ -140,6 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.yellow,
           items: [
             BottomNavigationBarItem(
               icon: Icon(
@@ -150,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                FontAwesomeIcons.users,
+                FontAwesomeIcons.book,
                 color: _currentPage == 1 ? Colors.black : Colors.grey,
               ),
               label: '',
@@ -165,7 +170,6 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.message,
-                color: _currentPage == 3 ? Colors.black : Colors.grey,
               ),
               label: '',
             ),
