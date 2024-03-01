@@ -38,12 +38,42 @@ class FirebasePostRepository extends PostRepository {
   }
 
   @override
-  Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getPostStreamByCommunity(String communityId) async {
+  Future<List<Post>> getAllPosts() async {
     try {
-      return _collection.where('communityId', isEqualTo: communityId).snapshots();
+      return await _collection
+          .orderBy('createdAt', descending: true)
+          .get()
+          .then((snapshot) => snapshot.docs
+              .map((document) =>
+                  Post.fromEntity(PostEntity.fromDocument(document.data())))
+              .toList());
     } catch (exception) {
       log(exception.toString());
       rethrow;
     }
+  }
+
+  @override
+  Future<Stream<List<Post>>> getPostStream() async {
+    try {
+      return _collection
+          .orderBy('createdAt', descending: true)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs.map((document) {
+          var post = Post.fromEntity(PostEntity.fromDocument(document.data()));
+          return post;
+        }).toList();
+      });
+    } catch (exception) {
+      log(exception.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Stream<List<Post>>> getPostStreamByCommunity(String communityId) {
+    // TODO: implement getPostStreamByCommunity
+    throw UnimplementedError();
   }
 }

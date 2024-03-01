@@ -1,42 +1,44 @@
+import 'dart:developer';
 
-
-import 'package:education_app/widgets/post/post_item.dart';
+import 'package:education_app/blocs/post/get_post_stream_bloc/get_post_stream_bloc.dart';
+import 'package:education_app/blocs/post/get_post_stream_bloc/get_post_stream_state.dart';
+import 'package:education_app/theme/text_styles.dart';
+import 'package:education_app/widgets/post/custom_post_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
-import '../../blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
-import '../../blocs/post/get_posts_by_community_stream_bloc/get_posts_by_community_stream_bloc.dart';
-import '../../blocs/post/get_posts_by_community_stream_bloc/get_posts_by_community_stream_state.dart';
-import '../../repositories/concrete/firebase/firebase_user_repository.dart';
 
 class PostStream extends StatelessWidget {
-  const PostStream({super.key});
+  const PostStream({required this.communityId, super.key});
+
+  final String communityId;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetPostsByCommunityStreamBloc,
-        GetPostsByCommunityStreamState>(
+    return BlocBuilder<GetPostStreamBloc,
+        GetPostStreamState>(
       builder: (context, state) {
-        if (state is GetPostsByCommunityStreamSuccess) {
+        if (state is GetPostStreamSuccess) {
           return StreamBuilder(
             stream: state.postStream,
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Container();
-              }
-
-              var posts = snapshot.data!.docs;
-              return ListView.builder(
+              return ListView.separated(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                ),
                 shrinkWrap: true,
-                itemCount: posts.length,
+                itemCount: snapshot.data == null ? 0 : snapshot.data!.length,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
+                ),
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return BlocProvider(
-                    create: (context) => GetUserByIdBloc(repository: FirebaseUserRepository(),)..add(GetUserById(id: posts[index].data()['creatorId'])),
-                    child: PostItem(
-                      post: posts[index].data()['post'],
-                    ),
-                  );
+                  if (snapshot.data![index].communityId == communityId) {
+                    log(snapshot.data![index].toString());
+                    return CustomPostItem(post: snapshot.data![index]);
+                  }
+
+                  return const Text('deneme', style: TextStyles.kHeaderTextStyle,);
                 },
               );
             },
@@ -46,6 +48,7 @@ class PostStream extends StatelessWidget {
         return const Center(
           child: Text(
             'unknown state',
+            style: TextStyles.kHeaderTextStyle,
           ),
         );
       },

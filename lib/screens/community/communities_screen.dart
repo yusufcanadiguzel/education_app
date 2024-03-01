@@ -1,13 +1,16 @@
+import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/create_community_bloc/create_community_bloc.dart';
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_event.dart';
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_state.dart';
 import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import 'package:education_app/blocs/join_community_bloc/join_community_bloc.dart';
 import 'package:education_app/constants/decorations/container_decorations.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_community_repository.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_community_users_repository.dart';
+import 'package:education_app/repositories/concrete/firebase/firebase_user_repository.dart';
 import 'package:education_app/screens/community/create_community_screen.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/community/community_list_item.dart';
@@ -53,7 +56,7 @@ class CommunitiesScreen extends StatelessWidget {
                                         repository:
                                             FirebaseCommunityUsersRepository(),
                                       ),
-                                    )
+                                    ),
                                   ],
                                   child: CreateCommunityScreen(
                                     user: state.user,

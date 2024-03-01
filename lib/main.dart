@@ -1,8 +1,3 @@
-import 'package:education_app/blocs/catalog_bloc/catalog_bloc.dart';
-import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_bloc.dart';
-import 'package:education_app/screens/catalog_screen.dart';
-import 'package:education_app/screens/home_screen.dart';
 import 'package:education_app/app.dart';
 import 'package:education_app/custom_bloc_observer.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';

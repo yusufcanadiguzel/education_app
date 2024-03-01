@@ -101,7 +101,7 @@ class _BackgroundContainerState extends State<BackgroundContainer>
           decoration: BoxDecoration(
             gradient: RadialGradient(
               colors: const [
-                Color(0xFF1D3566),
+                Color(0xFF272A4D),
                 Color(0xFF0F1334),
               ],
               center: _bottomAlignmentAnimation.value,

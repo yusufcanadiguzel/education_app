@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/models/user/user_entity.dart';
+import 'package:education_app/models/user/user_model.dart';
 import 'package:equatable/equatable.dart';
 
 class PostEntity extends Equatable {
   String id;
   String communityId;
-  String creatorId;
+  UserModel creator;
   String post;
   DateTime createdAt;
 
   PostEntity({
     required this.id,
     required this.communityId,
-    required this.creatorId,
+    required this.creator,
     required this.post,
     required this.createdAt,
   });
@@ -20,7 +22,7 @@ class PostEntity extends Equatable {
     return {
       'id': id,
       'communityId': communityId,
-      'creatorId': creatorId,
+      'creator': creator.toEntity().toDocument(),
       'post': post,
       'createdAt': createdAt,
     };
@@ -30,12 +32,12 @@ class PostEntity extends Equatable {
     return PostEntity(
       id: document['id'] as String,
       communityId: document['communityId'] as String,
-      creatorId: document['creatorId'] as String,
+      creator: UserModel.fromEntity(UserEntity.fromDocument(document['creator'])),
       post: document['post'] as String,
       createdAt: (document['createdAt'] as Timestamp).toDate(),
     );
   }
 
   @override
-  List<Object?> get props => [id, communityId, creatorId, post, createdAt];
+  List<Object?> get props => [id, communityId, creator, post, createdAt];
 }

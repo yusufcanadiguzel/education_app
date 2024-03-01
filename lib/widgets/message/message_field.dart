@@ -54,6 +54,8 @@ class _MessageFieldState extends State<MessageField> {
               message.receiverId = widget.receiverId;
               message.message = _messageController.text;
               context.read<SendMessageBloc>().add(SendMessage(message: message));
+
+              _messageController.text = '';
             }
           },
           icon: const Icon(

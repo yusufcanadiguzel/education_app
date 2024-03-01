@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:education_app/models/user/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,5 +23,5 @@ abstract class UserRepository{
 
   Future<void> updateUserInfo(UserModel userModel);
 
-  Future<String> updatePicture(String userId, String file);
+  Future<void> updatePicture(String userId, String path, File file);
 }

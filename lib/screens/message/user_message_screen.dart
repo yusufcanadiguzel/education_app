@@ -1,3 +1,4 @@
+import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/message/message_box.dart';
 import 'package:education_app/widgets/user/custom_user_circle_avatar.dart';
 import 'package:flutter/material.dart';
@@ -39,11 +40,7 @@ class _UserMessageScreenState extends State<UserMessageScreen> {
                   ),
                   Text(
                     state.user.fullName!,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyles.kHeaderTextStyle,
                   ),
                 ],
               ),
@@ -53,11 +50,11 @@ class _UserMessageScreenState extends State<UserMessageScreen> {
                 16.0,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: SizedBox(
-                      child: MessageStreamV2(),
+                      child: MessageStreamV2(receiverId: state.user.id),
                     ),
                   ),
                   const SizedBox(height: 10.0,),
@@ -77,8 +74,10 @@ class _UserMessageScreenState extends State<UserMessageScreen> {
         }
 
         return const Center(
-          child: Text(
-            'Bir hata oluştu.',
+          child: SizedBox(
+            height: 100,
+            width: 100,
+            child: CircularProgressIndicator(color: Colors.white,),
           ),
         );
       },

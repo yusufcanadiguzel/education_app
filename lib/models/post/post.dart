@@ -1,17 +1,19 @@
 import 'package:education_app/models/post/post_entity.dart';
 import 'package:equatable/equatable.dart';
 
+import '../user/user_model.dart';
+
 class Post extends Equatable {
   String id;
   String communityId;
-  String creatorId;
+  UserModel creator;
   String post;
   DateTime createdAt;
 
   Post({
     required this.id,
     required this.communityId,
-    required this.creatorId,
+    required this.creator,
     required this.post,
     required this.createdAt,
   });
@@ -19,7 +21,7 @@ class Post extends Equatable {
   static final empty = Post(
     id: '',
     communityId: '',
-    creatorId: '',
+    creator: UserModel.empty,
     post: '',
     createdAt: DateTime.now(),
   );
@@ -27,14 +29,14 @@ class Post extends Equatable {
   Post copyWith({
     String? id,
     String? communityId,
-    String? creatorId,
+    UserModel? creator,
     String? post,
     DateTime? createdAt,
   }) {
     return Post(
       id: id ?? this.id,
       communityId: communityId ?? this.communityId,
-      creatorId: creatorId ?? this.creatorId,
+      creator: creator ?? this.creator,
       post: post ?? this.post,
       createdAt: createdAt ?? this.createdAt,
     );
@@ -48,7 +50,7 @@ class Post extends Equatable {
     return PostEntity(
       id: id,
       communityId: communityId,
-      creatorId: creatorId,
+      creator: creator,
       post: post,
       createdAt: createdAt,
     );
@@ -58,7 +60,7 @@ class Post extends Equatable {
     return Post(
       id: postEntity.id,
       communityId: postEntity.communityId,
-      creatorId: postEntity.creatorId,
+      creator: postEntity.creator,
       post: postEntity.post,
       createdAt: postEntity.createdAt,
     );
@@ -69,12 +71,12 @@ class Post extends Equatable {
     return ''' Post : { 
     id: $id,
     communityId: $communityId,
-    creatorId: $creatorId,
+    creator: $creator,
     post: $post,
     createdAt: $createdAt,
     }''';
   }
 
   @override
-  List<Object?> get props => [id, communityId, creatorId, post, createdAt];
+  List<Object?> get props => [id, communityId, creator, post, createdAt];
 }

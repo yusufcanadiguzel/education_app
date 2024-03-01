@@ -1,15 +1,20 @@
 import 'dart:developer';
 
+import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/create_community_bloc/create_community_event.dart';
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_state.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import 'package:education_app/blocs/join_community_bloc/join_community_bloc.dart';
 import 'package:education_app/blocs/join_community_bloc/join_community_event.dart';
 import 'package:education_app/models/community/community.dart';
 import 'package:education_app/models/communityUser/communityUser.dart';
 import 'package:education_app/models/user/user_model.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_community_repository.dart';
+import 'package:education_app/repositories/concrete/firebase/firebase_user_repository.dart';
 import 'package:education_app/screens/community/community_screen.dart';
+import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:education_app/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +49,10 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bir topluluk oluştur'),
+        title: const Text(
+          'Bir topluluk oluştur',
+          style: TextStyles.kHeaderTextStyle,
+        ),
       ),
       body: BlocBuilder<GetAllCommunitiesBloc, GetAllCommunitiesState>(
         builder: (context, state) {
@@ -114,14 +122,31 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => BlocProvider(
-                              create: (context) => GetCommunityByIdBloc(
-                                repository: FirebaseCommunityRepository(),
-                              )..add(
-                                  GetCommunityById(
-                                    id: community.id,
-                                  ),
+                            builder: (context) => MultiBlocProvider(
+                              providers: [
+                                BlocProvider(
+                                  create: (context) => GetCommunityByIdBloc(
+                                    repository: FirebaseCommunityRepository(),
+                                  )..add(
+                                      GetCommunityById(
+                                        id: community.id,
+                                      ),
+                                    ),
                                 ),
+                                BlocProvider(
+                                  create: (context) => GetUserByIdBloc(
+                                      repository: FirebaseUserRepository())
+                                    ..add(
+                                      GetUserById(
+                                        id: context
+                                            .read<AuthenticationBloc>()
+                                            .state
+                                            .user!
+                                            .uid,
+                                      ),
+                                    ),
+                                )
+                              ],
                               child: const CommunityScreen(),
                             ),
                           ),

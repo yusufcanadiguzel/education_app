@@ -8,8 +8,8 @@ class CustomTextFormField extends StatelessWidget {
     this.textInputType,
     required this.controller,
     this.isObscure = false,
-    required this.hintText,
-    required this.iconData,
+    this.hintText,
+    this.iconData,
     this.function,
     this.suffixIcon,
     required this.validator,
@@ -17,14 +17,16 @@ class CustomTextFormField extends StatelessWidget {
     this.textColor = Colors.white,
     this.hintTextColor = Colors.white,
     this.labelText,
+    this.maxLines,
+    this.maxLength,
     super.key,
   });
 
   final TextInputType? textInputType;
   final TextEditingController controller;
   final bool isObscure;
-  final String hintText;
-  final IconData iconData;
+  final String? hintText;
+  final IconData? iconData;
   final dynamic Function()? function;
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
@@ -32,12 +34,16 @@ class CustomTextFormField extends StatelessWidget {
   final Color? textColor;
   final Color? hintTextColor;
   final String? labelText;
+  final int? maxLines;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
       child: TextFormField(
+        maxLines: maxLines,
+        maxLength: maxLength,
         keyboardType: textInputType,
         controller: controller,
         obscureText: isObscure,

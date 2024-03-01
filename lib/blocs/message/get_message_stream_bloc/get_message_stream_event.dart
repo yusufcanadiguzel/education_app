@@ -1,4 +1,3 @@
-import 'package:education_app/models/message/message.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class GetMessageStreamEvent extends Equatable{

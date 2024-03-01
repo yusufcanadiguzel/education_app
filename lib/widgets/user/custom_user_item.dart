@@ -1,4 +1,6 @@
+import 'package:education_app/constants/decorations/container_decorations.dart';
 import 'package:education_app/models/user/user_model.dart';
+import 'package:education_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,68 +23,64 @@ class CustomUserItem extends StatefulWidget {
 class _CustomUserItemState extends State<CustomUserItem> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: widget.user.profilePictureUrl!.isEmpty
-          ? Padding(
-              padding: const EdgeInsets.only(
-                bottom: 10.0,
-              ),
-              child: CircleAvatar(
-                radius: 30.0,
-                child: Text(
-                  '${widget.user.firstName[0]}${widget.user.lastName[0]}',
+    return Container(
+      decoration: ContainerDecorations.listTileContainerDecoration,
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(5.0,),
+        leading: widget.user.profilePictureUrl!.isEmpty
+            ? Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 10.0,
                 ),
-              ),
-            )
-          : Padding(
-              padding: const EdgeInsets.only(
-                bottom: 10.0,
-              ),
-              child: CircleAvatar(
-                radius: 30.0,
-                backgroundImage: NetworkImage(widget.user.profilePictureUrl!),
-              ),
-            ),
-      title: Text(
-        widget.user.fullName!,
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 18.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      subtitle: Text(
-        widget.user.title!,
-        style: const TextStyle(
-          fontSize: 15.0,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
-      dense: true,
-      tileColor: Colors.white,
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => GetUserByIdBloc(
-                    repository:
-                        context.read<AuthenticationBloc>().userRepository)
-                  ..add(
-                    GetUserById(id: widget.user.id),
+                child: CircleAvatar(
+                  radius: 30.0,
+                  child: Text(
+                    '${widget.user.firstName[0]}${widget.user.lastName[0]}',
                   ),
-              ),
-              BlocProvider(
-                create: (context) => UpdateUserInfoBloc(
-                  repository: context.read<AuthenticationBloc>().userRepository,
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 10.0,
+                ),
+                child: CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: NetworkImage(widget.user.profilePictureUrl!),
                 ),
               ),
-            ],
-            child: widget.user.id ==
-                    context.read<AuthenticationBloc>().state.user!.uid
-                ? ProfileScreen(userId: widget.user.id)
-                : const UserDetailsScreen()),
-      )),
+        title: Text(
+          widget.user.fullName!,
+          style: TextStyles.kListTileHeaderTextStyle,
+        ),
+        subtitle: Text(
+          widget.user.title!,
+          style: TextStyles.kListTileDescriptionTextStyle,
+        ),
+        dense: true,
+        tileColor: Colors.white,
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => GetUserByIdBloc(
+                      repository:
+                          context.read<AuthenticationBloc>().userRepository)
+                    ..add(
+                      GetUserById(id: widget.user.id),
+                    ),
+                ),
+                BlocProvider(
+                  create: (context) => UpdateUserInfoBloc(
+                    repository: context.read<AuthenticationBloc>().userRepository,
+                  ),
+                ),
+              ],
+              child: widget.user.id ==
+                      context.read<AuthenticationBloc>().state.user!.uid
+                  ? ProfileScreen(userId: widget.user.id)
+                  : const UserDetailsScreen()),
+        )),
+      ),
     );
   }
 }

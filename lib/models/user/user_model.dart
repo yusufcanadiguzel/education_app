@@ -9,15 +9,18 @@ class UserModel extends Equatable {
   final String? title;
   final String? profilePictureUrl;
   final String? fullName;
+  final String? aboutMe;
 
-  const UserModel(
-      {required this.id,
-      required this.firstName,
-      required this.lastName,
-      required this.email,
-      this.title,
-      this.profilePictureUrl,
-      this.fullName});
+  const UserModel({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    this.title,
+    this.profilePictureUrl,
+    this.fullName,
+    this.aboutMe,
+  });
 
   static const empty = UserModel(
     id: '',
@@ -27,6 +30,7 @@ class UserModel extends Equatable {
     title: '',
     profilePictureUrl: '',
     fullName: '',
+    aboutMe: '',
   );
 
   UserModel copyWith({
@@ -37,6 +41,7 @@ class UserModel extends Equatable {
     String? title,
     String? profilePictureUrl,
     String? fullName,
+    String? aboutMe,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -46,6 +51,7 @@ class UserModel extends Equatable {
       title: title ?? this.title,
       profilePictureUrl: profilePictureUrl ?? this.profilePictureUrl,
       fullName: fullName ?? this.fullName,
+      aboutMe: aboutMe ?? this.aboutMe,
     );
   }
 
@@ -62,6 +68,7 @@ class UserModel extends Equatable {
       title: title,
       profilePictureUrl: profilePictureUrl,
       fullName: fullName,
+      aboutMe: aboutMe,
     );
   }
 
@@ -74,6 +81,7 @@ class UserModel extends Equatable {
       title: userEntity.title,
       profilePictureUrl: userEntity.profilePictureUrl,
       fullName: userEntity.fullName,
+      aboutMe: userEntity.aboutMe,
     );
   }
 
@@ -86,11 +94,12 @@ class UserModel extends Equatable {
       email: $email,
       title: $title,
       profilePictureUrl: $profilePictureUrl,
-      fullName: $fullName
+      fullName: $fullName,
+      aboutMe: $aboutMe,
     }''';
   }
 
   @override
   List<Object?> get props =>
-      [id, firstName, lastName, email, title, profilePictureUrl, fullName];
+      [id, firstName, lastName, email, title, profilePictureUrl, fullName, aboutMe,];
 }

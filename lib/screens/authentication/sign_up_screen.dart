@@ -1,6 +1,7 @@
 import 'package:education_app/blocs/sign_up_bloc/sign_up_event.dart';
 import 'package:education_app/blocs/sign_up_bloc/sign_up_state.dart';
 import 'package:education_app/models/user/user_model.dart';
+import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:education_app/widgets/custom_connection_button.dart';
 import 'package:education_app/widgets/custom_divider.dart';
@@ -71,14 +72,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     width: 150,
                   ),
                   const SizedBox(
+                    height: 20.0,
+                  ),
+                  const Divider(height: 0.5, indent: 100.0, endIndent: 100.0),
+                  const SizedBox(
                     height: 10.0,
                   ),
                   const Text(
                     'Kayıt Ol!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                    ),
+                    style: TextStyles.kListTileHeaderTextStyle,
                   ),
                   Form(
                     key: _formKey,

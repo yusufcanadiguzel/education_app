@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/models/post/post.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class GetPostsByCommunityStreamState extends Equatable{
@@ -13,7 +13,7 @@ class GetPostsByCommunityStreamInitial extends GetPostsByCommunityStreamState{}
 class GetPostsByCommunityStreamProcess extends GetPostsByCommunityStreamState{}
 
 class GetPostsByCommunityStreamSuccess extends GetPostsByCommunityStreamState{
-  final Stream<QuerySnapshot<Map<String, dynamic>>> postStream;
+  final Stream<List<Post>> postStream;
 
   const GetPostsByCommunityStreamSuccess({required this.postStream});
 }

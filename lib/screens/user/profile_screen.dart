@@ -1,3 +1,7 @@
+import 'package:education_app/constants/decorations/container_decorations.dart';
+import 'package:education_app/repositories/concrete/firebase/firebase_user_repository.dart';
+import 'package:education_app/theme/text_styles.dart';
+import 'package:education_app/widgets/user/user_about_me_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,6 +12,7 @@ import '../../blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import '../../blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import '../../blocs/update_user_info_bloc/update_user_info_bloc.dart';
 import '../../blocs/update_user_info_bloc/update_user_info_state.dart';
+import '../../blocs/user/update_user_picture_bloc/update_user_picture_bloc.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/user/user_details_dialog.dart';
 
@@ -30,8 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return BlocListener<UpdateUserInfoBloc, UpdateUserInfoState>(
       listener: (context, state) {
-        if(state is UpdateUserInfoSuccess){
-        }
+        if (state is UpdateUserInfoSuccess) {}
       },
       child: Scaffold(
         appBar: const CustomAppBar(),
@@ -49,12 +53,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           //Kullanıcı Bilgileri
                           Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                            ),
+                            decoration:
+                                ContainerDecorations.listContainerDecoration,
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -67,12 +67,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     children: [
                                       CircleAvatar(
                                         radius: 50.0,
-                                        backgroundImage:
-                                            state.user.profilePictureUrl ==
-                                                    ''
-                                                ? const NetworkImage('https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png')
-                                                : NetworkImage(state.user
-                                                    .profilePictureUrl!),
+                                        backgroundImage: state
+                                                    .user.profilePictureUrl ==
+                                                ''
+                                            ? const NetworkImage(
+                                                'https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png')
+                                            : NetworkImage(
+                                                state.user.profilePictureUrl!),
                                       ),
                                       Column(
                                         children: [
@@ -84,21 +85,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     MultiBlocProvider(
                                                   providers: [
                                                     BlocProvider(
-                                                      create: (context) => GetUserByIdBloc(
-                                                          repository: context
-                                                              .read<
-                                                                  AuthenticationBloc>()
-                                                              .userRepository)
-                                                        ..add(
-                                                          GetUserById(
-                                                            id: context
-                                                                .read<
-                                                                    AuthenticationBloc>()
-                                                                .state
-                                                                .user!
-                                                                .uid,
-                                                          ),
-                                                        ),
+                                                      create: (context) =>
+                                                          GetUserByIdBloc(
+                                                              repository: context
+                                                                  .read<
+                                                                      AuthenticationBloc>()
+                                                                  .userRepository)
+                                                            ..add(
+                                                              GetUserById(
+                                                                id: context
+                                                                    .read<
+                                                                        AuthenticationBloc>()
+                                                                    .state
+                                                                    .user!
+                                                                    .uid,
+                                                              ),
+                                                            ),
                                                     ),
                                                     BlocProvider(
                                                       create: (context) =>
@@ -115,7 +117,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               );
                                             },
                                             icon: const Icon(
-                                                FontAwesomeIcons.pen),
+                                              FontAwesomeIcons.pen,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                           const SizedBox(height: 50, width: 50),
                                         ],
@@ -128,16 +132,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                   //Ad ve Soyad
                                   Text(
-                                    '${state.user.firstName} ${state.user.lastName}',
-                                    style: const TextStyle(
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    state.user.fullName!,
+                                    style: TextStyles.kHeaderTextStyle,
                                   ),
 
                                   //Ünvan
                                   Text(
                                     '${state.user.title}',
+                                    style: TextStyles
+                                        .kListTileDescriptionTextStyle,
                                   ),
                                 ],
                               ),
@@ -147,34 +150,89 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(height: 10.0),
 
                           Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                            ),
+                            decoration:
+                                ContainerDecorations.listContainerDecoration,
                             width: double.infinity,
-                            child: const Padding(
+                            child: Padding(
                               padding: EdgeInsets.all(10.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Hakkında',
-                                    style: TextStyle(
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        'Hakkında',
+                                        style: TextStyles.kHeaderTextStyle,
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                MultiBlocProvider(
+                                              providers: [
+                                                BlocProvider(
+                                                  create: (context) =>
+                                                      GetUserByIdBloc(
+                                                          repository: context
+                                                              .read<
+                                                                  AuthenticationBloc>()
+                                                              .userRepository)
+                                                        ..add(
+                                                          GetUserById(
+                                                            id: context
+                                                                .read<
+                                                                    AuthenticationBloc>()
+                                                                .state
+                                                                .user!
+                                                                .uid,
+                                                          ),
+                                                        ),
+                                                ),
+                                                BlocProvider(
+                                                  create: (context) =>
+                                                      UpdateUserInfoBloc(
+                                                          repository: context
+                                                              .read<
+                                                                  AuthenticationBloc>()
+                                                              .userRepository),
+                                                ),
+                                                BlocProvider(
+                                                  create: (context) =>
+                                                      UpdateUserPictureBloc(
+                                                    repository:
+                                                        FirebaseUserRepository(),
+                                                  ),
+                                                )
+                                              ],
+                                              child: const UserAboutMeDialog(),
+                                            ),
+                                          );
+                                        },
+                                        icon: const Icon(
+                                          FontAwesomeIcons.pen,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
+                                  ),
+                                  Text(
+                                    state.user.aboutMe == null
+                                        ? ''
+                                        : state.user.aboutMe!,
+                                    style: TextStyles.kNormalTextStyle,
                                   ),
                                 ],
                               ),
                             ),
                           ),
 
-                          SizedBox(
+                          const SizedBox(
                             height: 10.0,
                           ),
 

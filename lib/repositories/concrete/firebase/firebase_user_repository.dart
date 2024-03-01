@@ -135,16 +135,14 @@ class FirebaseUserRepository extends UserRepository {
 
   //Kullanıcının profil fotoğrafını günceller.
   @override
-  Future<String> updatePicture(String userId, String file) async {
+  Future<void> updatePicture(String userId, String path, File file) async {
     try {
-      File imageFile = File(file);
       var firebaseStorageRef =
-      FirebaseStorage.instance.ref().child('$userId/PP/${userId}_lead');
-      firebaseStorageRef.putFile(imageFile);
+      FirebaseStorage.instance.ref().child(path);
+      firebaseStorageRef.putFile(file);
 
       String imageUrl = await firebaseStorageRef.getDownloadURL();
       await _userCollection.doc(userId).update({'profilePictureUrl': imageUrl});
-      return imageUrl;
     } catch (exception) {
       log(exception.toString());
       rethrow;

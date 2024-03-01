@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 id: context.read<AuthenticationBloc>().state.user!.uid,
               ),
             ),
-          child: const CustomUserDrawer(),
+          child: CustomUserDrawer(pushCommunity: () => onPageChanged(4),),
         ),
         key: _key,
         appBar: CustomAppBar(

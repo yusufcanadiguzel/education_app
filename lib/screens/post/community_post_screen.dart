@@ -5,12 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/post/create_post_bloc/create_post_bloc.dart';
 import '../../blocs/post/create_post_bloc/create_post_event.dart';
 import '../../blocs/post/create_post_bloc/create_post_state.dart';
+import '../../models/user/user_model.dart';
 
 class CommunityPostScreen extends StatefulWidget {
-  final String userId;
+  final UserModel user;
   final String communityId;
 
-  const CommunityPostScreen({required this.userId, required this.communityId, super.key});
+  const CommunityPostScreen({required this.user, required this.communityId, super.key});
 
   @override
   State<CommunityPostScreen> createState() => _CommunityPostScreenState();
@@ -25,7 +26,7 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
   void initState() {
     super.initState();
     post = Post.empty;
-    post.creatorId = widget.userId;
+    post.creator = widget.user;
     post.communityId = widget.communityId;
   }
 

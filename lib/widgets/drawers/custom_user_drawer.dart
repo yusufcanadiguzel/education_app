@@ -1,6 +1,11 @@
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_event.dart';
+import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
+import 'package:education_app/constants/decorations/container_decorations.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_community_repository.dart';
+import 'package:education_app/theme/text_styles.dart';
+import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,7 +20,9 @@ import '../../screens/user/profile_screen.dart';
 import '../user/custom_user_circle_avatar.dart';
 
 class CustomUserDrawer extends StatelessWidget {
-  const CustomUserDrawer({super.key});
+  const CustomUserDrawer({required this.pushCommunity, super.key});
+
+  final Function()? pushCommunity;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +35,9 @@ class CustomUserDrawer extends StatelessWidget {
                 builder: (context, state) {
                   if (state is GetUserByIdSuccess) {
                     return Container(
+                      decoration: ContainerDecorations.listContainerDecoration,
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 6,
-                      color: Colors.blueGrey,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -38,7 +45,8 @@ class CustomUserDrawer extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text('${state.user.fullName}'),
+                          Text('${state.user.fullName}',
+                              style: TextStyles.kListTileHeaderTextStyle),
                         ],
                       ),
                     );
@@ -47,78 +55,62 @@ class CustomUserDrawer extends StatelessWidget {
                   return const CircularProgressIndicator();
                 },
               ),
-              ListTile(
-                leading: const Icon(FontAwesomeIcons.solidUser),
-                title: const Text('Profil'),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => MultiBlocProvider(
-                      providers: [
-                        BlocProvider(
-                          create: (context) => GetUserByIdBloc(
-                            repository: context
-                                .read<AuthenticationBloc>()
-                                .userRepository,
-                          )..add(
-                              GetUserById(
-                                id: context
-                                    .read<AuthenticationBloc>()
-                                    .state
-                                    .user!
-                                    .uid,
+              Container(
+                decoration: ContainerDecorations.listTileContainerDecoration,
+                child: ListTile(
+                  leading: const Icon(
+                    FontAwesomeIcons.solidUser,
+                    color: Colors.white,
+                  ),
+                  title: const Text(
+                    'Profil',
+                    style: TextStyles.kListTileHeaderTextStyle,
+                  ),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) => GetUserByIdBloc(
+                              repository: context
+                                  .read<AuthenticationBloc>()
+                                  .userRepository,
+                            )..add(
+                                GetUserById(
+                                  id: context
+                                      .read<AuthenticationBloc>()
+                                      .state
+                                      .user!
+                                      .uid,
+                                ),
                               ),
-                            ),
-                        ),
-                        BlocProvider(
-                          create: (context) => UpdateUserInfoBloc(
-                            repository: context
-                                .read<AuthenticationBloc>()
-                                .userRepository,
                           ),
+                          BlocProvider(
+                            create: (context) => UpdateUserInfoBloc(
+                              repository: context
+                                  .read<AuthenticationBloc>()
+                                  .userRepository,
+                            ),
+                          ),
+                        ],
+                        child: ProfileScreen(
+                          userId: context
+                              .read<AuthenticationBloc>()
+                              .state
+                              .user!
+                              .uid,
                         ),
-                      ],
-                      child: ProfileScreen(
-                        userId:
-                            context.read<AuthenticationBloc>().state.user!.uid,
                       ),
                     ),
                   ),
                 ),
               ),
-              ListTile(
-                leading: const Icon(FontAwesomeIcons.peopleRoof),
-                title: const Text('Topluluklar'),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => MultiBlocProvider(
-                      providers: [
-                        BlocProvider(
-                          create: (context) => GetUserByIdBloc(
-                              repository: context
-                                  .read<AuthenticationBloc>()
-                                  .userRepository)
-                            ..add(
-                              GetUserById(
-                                id: context
-                                    .read<AuthenticationBloc>()
-                                    .state
-                                    .user!
-                                    .uid,
-                              ),
-                            ),
-                        ),
-                        BlocProvider(
-                          create: (context) => GetAllCommunitiesBloc(
-                            repository: FirebaseCommunityRepository(),
-                          )..add(
-                              GetAllCommunities(),
-                            ),
-                        )
-                      ],
-                      child: const CommunitiesScreen(),
-                    ),
-                  ),
-                ),
+              const SizedBox(height: 10.0,),
+              CustomActionButton(
+                function: () {
+                  context.read<SignInBloc>().add(SignOut());
+                },
+                buttonText: 'Çıkış Yap',
               ),
             ],
           ),

@@ -1,3 +1,5 @@
+import 'package:education_app/theme/text_styles.dart';
+import 'package:education_app/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomChatTextField extends StatelessWidget {
@@ -14,16 +16,8 @@ class CustomChatTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      decoration: InputDecoration(
-        hintText: hintText,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(color: Colors.blue),
-        ),
-      ),
+      style: TextStyles.kNormalTextStyle,
+      decoration: kTextFormFieldDecoration,
     );
   }
 }

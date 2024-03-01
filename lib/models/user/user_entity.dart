@@ -8,6 +8,7 @@ class UserEntity extends Equatable {
   final String? title;
   final String? profilePictureUrl;
   final String? fullName;
+  final String? aboutMe;
 
   const UserEntity({
     required this.id,
@@ -17,6 +18,7 @@ class UserEntity extends Equatable {
     this.title,
     this.profilePictureUrl,
     this.fullName,
+    this.aboutMe,
   });
 
   Map<String, Object?> toDocument() {
@@ -28,6 +30,7 @@ class UserEntity extends Equatable {
       'title': title,
       'profilePictureUrl': profilePictureUrl,
       'fullName': fullName,
+      'aboutMe': aboutMe,
     };
   }
 
@@ -40,10 +43,11 @@ class UserEntity extends Equatable {
       title: document['title'] as String?,
       profilePictureUrl: document['profilePictureUrl'] as String?,
       fullName: document['fullName'] as String?,
+      aboutMe: document['aboutMe'] as String?,
     );
   }
 
   @override
   List<Object?> get props =>
-      [id, firstName, lastName, email, title, profilePictureUrl, fullName];
+      [id, firstName, lastName, email, title, profilePictureUrl, fullName, aboutMe,];
 }

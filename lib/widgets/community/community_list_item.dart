@@ -1,9 +1,13 @@
+import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/get_community_by_id_bloc/get_community_by_id_event.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import 'package:education_app/blocs/post/get_posts_by_community_stream_bloc/get_posts_by_community_stream_bloc.dart';
 import 'package:education_app/constants/decorations/container_decorations.dart';
 import 'package:education_app/models/community/community.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_community_repository.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_post_repository.dart';
+import 'package:education_app/repositories/concrete/firebase/firebase_user_repository.dart';
 import 'package:education_app/screens/community/community_screen.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +66,15 @@ class _CommunityListItem extends State<CommunityListItem> {
                 )..add(
                     GetPostByCommunityStream(
                       communityId: widget.community.id,
+                    ),
+                  ),
+              ),
+              BlocProvider(
+                create: (context) => GetUserByIdBloc(
+                    repository: FirebaseUserRepository())
+                  ..add(
+                    GetUserById(
+                      id: context.read<AuthenticationBloc>().state.user!.uid,
                     ),
                   ),
               )

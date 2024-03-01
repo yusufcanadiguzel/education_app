@@ -4,6 +4,9 @@ const Color _backgroundColor = Color(0xFF1D3566);
 
 final ThemeData lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: const Color(0xFF0F1334),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: Color(0xFF272A4D),
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Color(0xFF111639),
       selectedItemColor: Colors.white,
@@ -40,16 +43,14 @@ final ThemeData darkTheme = ThemeData.dark().copyWith(
 final InputDecoration kTextFormFieldDecoration = InputDecoration(
   labelStyle: const TextStyle(color: Colors.white),
   hintStyle: const TextStyle(color: Colors.white),
+  filled: true,
+  fillColor: const Color(0xFF272A4D),
   focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10.0),
-      borderSide: const BorderSide(
-        color: Colors.white,
-        width: 3.0,
-      )),
-  enabledBorder: const OutlineInputBorder(
-    borderSide: BorderSide(
-      color: Colors.grey,
+    borderRadius: BorderRadius.circular(10.0),
+    borderSide: const BorderSide(
+      color: Colors.white,
       width: 3.0,
     ),
   ),
+
 );

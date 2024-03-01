@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MessageStreamV2 extends StatelessWidget {
-  const MessageStreamV2({super.key});
+  const MessageStreamV2({required this.receiverId, super.key});
+
+  final String receiverId;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,8 @@ class MessageStreamV2 extends StatelessWidget {
                 ),
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  if (snapshot.data![index].senderId == userId ||
-                      snapshot.data![index].receiverId == userId) {
+                  if ((snapshot.data![index].senderId == userId && snapshot.data![index].receiverId == receiverId) ||
+                      snapshot.data![index].receiverId == userId && snapshot.data![index].senderId == receiverId) {
                     return MessageBox(
                         isSender: snapshot.data![index].senderId == userId,
                         text: snapshot.data == null

@@ -58,6 +58,22 @@ class FirebaseCommunityRepository extends CommunityRepository {
   }
 
   @override
+  Future<List<Community>> getAllCommunitiesByName(String name) async {
+    try {
+      return await _communityCollection
+          .where('name', isLessThanOrEqualTo: name)
+          .get()
+          .then((snapshot) => snapshot.docs
+              .map((document) => Community.fromEntity(
+                  CommunityEntity.fromDocument(document.data())))
+              .toList());
+    } catch (exception) {
+      log(exception.toString());
+      rethrow;
+    }
+  }
+
+  @override
   Future<void> joinCommunity(String communityId, String userId) {
     // TODO: implement joinCommunity
     throw UnimplementedError();
