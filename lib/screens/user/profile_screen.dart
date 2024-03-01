@@ -238,12 +238,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           //Kurslar
                           Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                            ),
+                            decoration: ContainerDecorations.listContainerDecoration,
                             width: double.infinity,
                             height: 200,
                             child: Padding(
@@ -253,10 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   const Text(
                                     'Kurslarım',
-                                    style: TextStyle(
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: TextStyles.kHeaderTextStyle,
                                   ),
                                   const SizedBox(
                                     height: 10,

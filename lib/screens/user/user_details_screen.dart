@@ -129,12 +129,7 @@ class UserDetailsScreen extends StatelessWidget {
 
                   //Kurslar
                   Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                    ),
+                    decoration: ContainerDecorations.listContainerDecoration,
                     width: double.infinity,
                     height: 200,
                     child: Padding(
@@ -144,10 +139,7 @@ class UserDetailsScreen extends StatelessWidget {
                         children: [
                           const Text(
                             'Kurslarım',
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: TextStyles.kHeaderTextStyle,
                           ),
                           const SizedBox(
                             height: 10,

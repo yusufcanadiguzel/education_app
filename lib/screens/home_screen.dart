@@ -72,7 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 id: context.read<AuthenticationBloc>().state.user!.uid,
               ),
             ),
-          child: CustomUserDrawer(pushCommunity: () => onPageChanged(4),),
+          child: CustomUserDrawer(
+            pushCommunity: () => onPageChanged(4),
+          ),
         ),
         key: _key,
         appBar: CustomAppBar(
@@ -99,12 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
           onPageChanged: onPageChanged,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            TobetoScreen(),
-            BlocProvider(
-              create: (context) => CatalogBloc(),
-              child: const CatalogScreen(),
-            ),
-            ReviewsScreen(),
             MultiBlocProvider(
               providers: [
                 BlocProvider(
@@ -119,6 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
               child: const SearchScreen(),
             ),
+            BlocProvider(
+              create: (context) => CatalogBloc(),
+              child: const CatalogScreen(),
+            ),
+            ReviewsScreen(),
+            PostScreen(),
             MultiBlocProvider(
               providers: [
                 BlocProvider(
@@ -170,6 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.squarePlus,
+                color: _currentPage == 3 ? Colors.black : Colors.grey,
               ),
               label: '',
             ),
