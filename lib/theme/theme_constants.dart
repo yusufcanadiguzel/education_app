@@ -52,5 +52,7 @@ final InputDecoration kTextFormFieldDecoration = InputDecoration(
       width: 3.0,
     ),
   ),
-
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.0),
+  ),
 );

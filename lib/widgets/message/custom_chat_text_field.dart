@@ -17,7 +17,9 @@ class CustomChatTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       style: TextStyles.kNormalTextStyle,
-      decoration: kTextFormFieldDecoration,
+      decoration: kTextFormFieldDecoration.copyWith(
+        hintText: hintText,
+      ),
     );
   }
 }

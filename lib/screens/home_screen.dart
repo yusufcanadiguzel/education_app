@@ -104,7 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const CatalogScreen(),
             ),
             PostScreen(),
-            MessageScreen(),
             MultiBlocProvider(
               providers: [
                 BlocProvider(
@@ -169,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                FontAwesomeIcons.message,
+                FontAwesomeIcons.flaskVial,
               ),
               label: '',
             ),
