@@ -108,8 +108,8 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                                   end: Alignment.bottomLeft,
                                   stops: [0.005, 1.0],
                                   colors: [
-                                    Color(0xFF0E0B93),
-                                    Color(0xFF5EB6CA),
+                                    Color.fromARGB(255, 124, 17, 177),
+                                    Color.fromARGB(255, 148, 110, 209),
                                   ],
                                 ),
                                 borderRadius: BorderRadius.circular(32),
@@ -139,7 +139,8 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                                 child: Text("Eğitime Git"),
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Colors.white,
-                                  backgroundColor: Colors.transparent,
+                                  backgroundColor:
+                                      Color.fromARGB(0, 95, 20, 200),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(32.0),
                                   ),
