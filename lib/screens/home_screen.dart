@@ -108,6 +108,20 @@ class _HomeScreenState extends State<HomeScreen> {
             MultiBlocProvider(
               providers: [
                 BlocProvider(
+                  create: (context) => GetUsersByNameBloc(
+                    repository: FirebaseUserRepository(),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => GetAllCommunitiesBloc(
+                      repository: FirebaseCommunityRepository()),
+                ),
+              ],
+              child: const SearchScreen(),
+            ),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
                   create: (context) => GetUserByIdBloc(
                       repository:
                           context.read<AuthenticationBloc>().userRepository)
@@ -126,20 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
               child: const CommunitiesScreen(),
-            ),
-            MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => GetUsersByNameBloc(
-                    repository: FirebaseUserRepository(),
-                  ),
-                ),
-                BlocProvider(
-                  create: (context) => GetAllCommunitiesBloc(
-                      repository: FirebaseCommunityRepository()),
-                ),
-              ],
-              child: const SearchScreen(),
             ),
           ],
         ),
