@@ -60,7 +60,7 @@ class _CatalogVideosState extends State<CatalogVideos> {
                       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(192, 175, 175, 175)
+                          color: Color.fromARGB(192, 166, 114, 226)
                               .withOpacity(0.5),
                         ),
                         child: Padding(
@@ -129,7 +129,7 @@ class _CatalogVideosState extends State<CatalogVideos> {
                       onPressed: () {},
                       icon: Icon(
                         Icons.play_circle,
-                        color: const Color.fromARGB(255, 185, 46, 210),
+                        color: Color.fromARGB(255, 201, 24, 232),
                         size: 40,
                       ))),
             ],
