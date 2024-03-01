@@ -121,7 +121,7 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (ctx) => const LessonVideo(
                                             videoUrl:
-                                                "assets/video/tobeto_video.mp4")));
+                                                "https://firebasestorage.googleapis.com/v0/b/educationappdb.appspot.com/o/course_video%2Ftobeto_video.mp4?alt=media&token=03e79f02-57bb-46ab-ac46-94ef071b4339")));
                                   }
                                   if (currentImage ==
                                       "assets/images/tobeto_2.jpg") {
@@ -227,7 +227,7 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
 
   _launchURL() async {
     const url =
-        'https://lms.tobeto.com/tobeto/eep/content/cdn-enocta/8702/start.html?project_path=https://lms.tobeto.com/tobeto/eep/content/cdn-enocta/8702/&compability=AICC&config_path=&AICC_URL=https://lms.tobeto.com/tobeto/eep/aicc2.aspx&pageID=&secParamLMS=C6S9SWH4r3LwryhSUcz6CZlioAAYKcdsLdpj1KZDxQQ%3d&AICC_SID=1826820&isSubtitle=0';
+        'https://firebasestorage.googleapis.com/v0/b/educationappdb.appspot.com/o/course_video%2Ftobeto_video.mp4?alt=media&token=03e79f02-57bb-46ab-ac46-94ef071b4339';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -259,7 +259,7 @@ class _MyAccordionTileState extends State<MyAccordionTile> {
       child: Theme(
         // ExpansionTile'ın temasını değiştirmek için
         data: ThemeData(
-          dividerColor: Colors.white,
+          dividerColor: const Color.fromRGBO(255, 255, 255, 1),
           unselectedWidgetColor: Colors.transparent,
         ),
         child: ExpansionTile(
@@ -267,9 +267,9 @@ class _MyAccordionTileState extends State<MyAccordionTile> {
             widget.title,
             style: TextStyle(fontFamily: "Raleway"),
           ),
-          collapsedTextColor: Colors.black, // Açılmamış durumdaki metin rengi
-          textColor: Colors.black, // Açık durumdaki metin rengi
-          iconColor: Colors.black, // Açılmamış durumdaki simge rengi
+          collapsedTextColor: Colors.black,
+          textColor: Colors.black,
+          iconColor: Colors.black,
           collapsedIconColor: Colors.black,
           onExpansionChanged: (isExpanded) {
             setState(() {
