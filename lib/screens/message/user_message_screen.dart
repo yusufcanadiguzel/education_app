@@ -50,7 +50,6 @@ class _UserMessageScreenState extends State<UserMessageScreen> {
                 16.0,
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: SizedBox(

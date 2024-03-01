@@ -17,18 +17,18 @@ class ReviewsScreen extends StatelessWidget {
           const ReviewsCard(
             title: 'Tobeto İşte başarı Modeli',
             subtitle: '80 soru ile yetkinliklerini ölç,',
-            description: 'önerilen eğitimleri tamamla,',
-            disclaimer: 'rozetini kazan.',
+            description: 'önerilen eğitimleri tamamla, \nrozetini kazan.',
             cardType: CardType.description,
             height: 165,
+            isActive: false,
           ),
           const ReviewsCard(
             title: 'Yazılımda Başarı Testi',
             subtitle: 'Çoktan seçmeli',
-            description: 'sorular ile teknik bilgini',
-            disclaimer: 'test et',
+            description: 'sorular ile teknik bilgini \ntest et',
             cardType: CardType.description,
             height: 165,
+            isActive: false,
           ),
           ReviewsCard(
             title: 'Front End',

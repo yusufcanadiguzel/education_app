@@ -134,6 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         //Password field
                         CustomTextFormField(
                           textInputType: TextInputType.visiblePassword,
+                          maxLines: 1,
                           isObscure: _obscurePassword,
                           controller: _passwordController,
                           hintText: 'Şifre',

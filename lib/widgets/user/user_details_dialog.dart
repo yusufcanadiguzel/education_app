@@ -4,6 +4,7 @@ import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_state.dar
 import 'package:education_app/blocs/update_user_info_bloc/update_user_info_event.dart';
 import 'package:education_app/blocs/user/update_user_picture_bloc/update_user_picture_bloc.dart';
 import 'package:education_app/blocs/user/update_user_picture_bloc/update_user_picture_event.dart';
+import 'package:education_app/screens/user/profile_screen.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:education_app/widgets/custom_text_form_field.dart';
@@ -170,6 +171,39 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
                       uploadFile(state.user.id);
 
                       Navigator.pop(context);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                create: (context) => GetUserByIdBloc(
+                                    repository: context
+                                        .read<AuthenticationBloc>()
+                                        .userRepository)
+                                  ..add(
+                                    GetUserById(
+                                      id: context
+                                          .read<AuthenticationBloc>()
+                                          .state
+                                          .user!
+                                          .uid,
+                                    ),
+                                  ),
+                              ),
+                              BlocProvider(
+                                create: (context) => UpdateUserInfoBloc(
+                                  repository: context
+                                      .read<AuthenticationBloc>()
+                                      .userRepository,
+                                ),
+                              ),
+                            ],
+                            child: ProfileScreen(userId: state.user.id),
+                          ),
+                        ),
+                      );
                     },
                     buttonText: 'Kaydet',
                   ),

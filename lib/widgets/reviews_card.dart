@@ -19,6 +19,8 @@ class ReviewsCard extends StatelessWidget {
   final CardType cardType;
   final int height;
   final void Function()? onStartButtonPressed;
+  final Widget? buttonWidget;
+  final bool isActive;
 
   const ReviewsCard({
     Key? key,
@@ -29,6 +31,8 @@ class ReviewsCard extends StatelessWidget {
     required this.cardType,
     required this.height,
     this.onStartButtonPressed,
+    this.buttonWidget,
+    this.isActive = true,
   }) : super(key: key);
 
   @override
@@ -82,10 +86,13 @@ class ReviewsCard extends StatelessWidget {
                       : Colors.white,
                 ),
               ),
-              ElevatedButton(
-                onPressed: onStartButtonPressed, // Atanan geri çağırma işlevi
-                child: Text('Başla'), // Buton için metin
-              ),
+              isActive
+                  ? ElevatedButton(
+                      onPressed:
+                          onStartButtonPressed, // Atanan geri çağırma işlevi
+                      child: Text('Başla'), // Buton için metin
+                    )
+                  : Container(),
             ],
           ),
         ),

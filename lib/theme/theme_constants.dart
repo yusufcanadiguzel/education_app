@@ -3,32 +3,33 @@ import 'package:flutter/material.dart';
 const Color _backgroundColor = Color(0xFF1D3566);
 
 final ThemeData lightTheme = ThemeData.light().copyWith(
-    scaffoldBackgroundColor: const Color(0xFF0F1334),
-    drawerTheme: const DrawerThemeData(
-      backgroundColor: Color(0xFF272A4D),
+  scaffoldBackgroundColor: const Color(0xFF0F1334),
+  drawerTheme: const DrawerThemeData(
+    backgroundColor: Color(0xFF272A4D),
+  ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Color(0xFF111639),
+    selectedItemColor: Colors.white,
+    unselectedItemColor: Color(0xFFBDBECA),
+  ),
+  appBarTheme: const AppBarTheme(
+    iconTheme: IconThemeData(
+      color: Colors.white,
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Color(0xFF111639),
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Color(0xFFBDBECA),
+    actionsIconTheme: IconThemeData(
+      color: Colors.white,
     ),
-    appBarTheme: const AppBarTheme(
-      iconTheme: IconThemeData(
-        color: Colors.white,
-      ),
-      actionsIconTheme: IconThemeData(
-        color: Colors.white,
-      ),
-      color: Color(0xFF12163A),
-    ),
-    buttonTheme: const ButtonThemeData(
-      shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.all(
-        Radius.circular(1.0),
-      )),
-      buttonColor: _backgroundColor,
-      textTheme: ButtonTextTheme.primary,
-    ));
+    color: Color(0xFF12163A),
+  ),
+  buttonTheme: const ButtonThemeData(
+    shape: BeveledRectangleBorder(
+        borderRadius: BorderRadius.all(
+      Radius.circular(1.0),
+    )),
+    buttonColor: _backgroundColor,
+    textTheme: ButtonTextTheme.primary,
+  ),
+);
 
 final ThemeData darkTheme = ThemeData.dark().copyWith(
     buttonTheme: const ButtonThemeData(

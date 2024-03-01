@@ -27,9 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               userRepository:
                   context.read<AuthenticationBloc>().userRepository),
           child: IconButton(
-            onPressed: () {
-              context.read<SignInBloc>().add(SignOut());
-            },
+            onPressed: () {},
             icon: const Icon(
               FontAwesomeIcons.gear,
             ),
