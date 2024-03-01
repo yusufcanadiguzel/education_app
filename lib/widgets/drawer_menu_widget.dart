@@ -1,3 +1,4 @@
+import 'package:education_app/screens/catalog_screen.dart';
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:education_app/blocs/update_user_info_bloc/update_user_info_bloc.dart';
@@ -69,7 +70,14 @@ class SideMenu extends StatelessWidget {
               ),
             ),
           ),
-          const ListTile(
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CatalogScreen(),
+                  ));
+            },
             title: Text('Katalog'),
           ),
           const ListTile(
