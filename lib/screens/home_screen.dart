@@ -1,6 +1,7 @@
 import 'package:education_app/blocs/catalog_bloc/catalog_bloc.dart';
 import 'package:education_app/screens/catalog_screen.dart';
 import 'package:education_app/screens/post/post_screen.dart';
+import 'package:education_app/screens/reviews_screen.dart';
 import 'package:education_app/screens/search_screen.dart';
 import 'package:education_app/screens/tobeto_screen.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
               create: (context) => CatalogBloc(),
               child: const CatalogScreen(),
             ),
-            PostScreen(),
+            ReviewsScreen(),
             MultiBlocProvider(
               providers: [
                 BlocProvider(
@@ -161,14 +162,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                FontAwesomeIcons.squarePlus,
+                FontAwesomeIcons.flaskVial,
                 color: _currentPage == 2 ? Colors.black : Colors.grey,
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                FontAwesomeIcons.flaskVial,
+                FontAwesomeIcons.squarePlus,
               ),
               label: '',
             ),
