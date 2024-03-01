@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:education_app/blocs/get_users_bloc/get_users_event.dart';
 import 'package:education_app/models/user/user_entity.dart';
 import 'package:education_app/models/user/user_model.dart';
 import 'package:education_app/repositories/abstract/user_repository.dart';
@@ -69,11 +68,13 @@ class FirebaseUserRepository extends UserRepository {
 
   //Db üzerinde bir kullanıcı oluşturur.
   @override
-  Future<void> createUser(UserModel userModel) async {
+  Future<UserModel> createUser(UserModel userModel) async {
     try {
       await _userCollection
           .doc(userModel.id)
           .set(userModel.toEntity().toDocument());
+
+      return userModel;
     } catch (exception) {
       log(exception.toString());
       rethrow;
@@ -107,9 +108,9 @@ class FirebaseUserRepository extends UserRepository {
 
   //Kullanıcıları isimlerine göre getirir.
   @override
-  Future<List<UserModel>> getUsersByName() async {
+  Future<List<UserModel>> getUsersByName(String name) async {
     try {
-      return _userCollection.orderBy('fullName').get().then(
+      return await _userCollection.where('fullName', isGreaterThanOrEqualTo: name).get().then(
             (value) =>
             value.docs
                 .map((e) =>

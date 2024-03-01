@@ -1,17 +1,23 @@
-import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_event.dart';
+import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
+import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_event.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
+import 'package:education_app/screens/post/post_screen.dart';
 import 'package:education_app/screens/search_screen.dart';
-import 'package:education_app/widgets/announcement_card.dart';
-import 'package:education_app/widgets/button.dart';
-import 'package:education_app/widgets/custom_app_bar.dart';
-import 'package:education_app/widgets/user/custom_user_circle_avatar.dart';
-import 'package:education_app/widgets/drawer_menu_widget.dart';
-import 'package:education_app/widgets/footer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:education_app/screens/tobeto_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../blocs/auth_bloc/auth_bloc.dart';
+import '../blocs/get_users_by_name_bloc/get_users_by_name_bloc.dart';
+import '../repositories/concrete/firebase/firebase_community_repository.dart';
+import '../repositories/concrete/firebase/firebase_user_repository.dart';
+import '../widgets/custom_app_bar.dart';
+import '../widgets/drawers/custom_user_drawer.dart';
+import '../widgets/user/custom_user_circle_avatar.dart';
+import 'community/communities_screen.dart';
+import 'friend/friends_screen.dart';
+import 'message/message_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,132 +27,154 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _searchController = TextEditingController();
+  final _key = GlobalKey<ScaffoldState>();
+
+  late PageController _pageController;
+
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
+  void navigationTapped(int page) {
+    _pageController.jumpToPage(page);
+  }
+
+  void onPageChanged(int page) {
+    setState(() {
+      _currentPage = page;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
+    return SafeArea(
+      child: Scaffold(
+        drawer: BlocProvider(
+          create: (context) => GetUserByIdBloc(
+              repository: context.read<AuthenticationBloc>().userRepository)
+            ..add(
+              GetUserById(
+                id: context.read<AuthenticationBloc>().state.user!.uid,
+              ),
+            ),
+          child: const CustomUserDrawer(),
+        ),
+        key: _key,
+        appBar: CustomAppBar(
+          function: () => navigationTapped(5),
           leadingWidget: BlocProvider(
-        create: (context) => UserBloc(
-          repository: context.read<AuthenticationBloc>().userRepository,
-        )..add(
-          GetUserById(
-            id: context.read<AuthenticationBloc>().state.user!.uid,
+            create: (context) => GetUserByIdBloc(
+              repository: context.read<AuthenticationBloc>().userRepository,
+            )..add(
+                GetUserById(
+                  id: context.read<AuthenticationBloc>().state.user!.uid,
+                ),
+              ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomUserPictureCircle(
+                radius: 20.0,
+                function: () => _key.currentState!.openDrawer(),
+              ),
+            ),
           ),
         ),
-        child: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CustomUserPictureCircle(),
-        ),
-      )),
-      body: SingleChildScrollView(
-        child: Column(
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: onPageChanged,
+          physics: const NeverScrollableScrollPhysics(),
           children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 75.0,
-                    ),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
-                          text: 'TOBETO',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF9B33FF),
-                              fontSize: 26.4),
-                          children: [
-                            TextSpan(
-                                text: '\'ya hoş geldin',
-                                style: TextStyle(
-                                    color: Color(0xFF4D4D4D), fontSize: 26.4)),
-                            TextSpan(
-                              text: '\nUsername',
-                              style: TextStyle(
-                                  color: Color(0xFF4D4D4D), fontSize: 26.4),
-                            )
-                          ]),
-                    ),
-                    const SizedBox(
-                      height: 30.0,
-                    ),
-                    const Text(
-                      'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18.0),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            AnnouncementCard(),
-            Center(
-              child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Image.asset(
-                          'assets/images/istanbul_kodluyor_logo.png',
-                          width: 200.0),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(16.0),
-                      child: const Text(
-                          'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al.',
-                          style:
-                              TextStyle(fontSize: 18.0, fontFamily: 'Poppins'),
-                          textAlign: TextAlign.center),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(16.0),
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: const TextSpan(
-                            text: 'Aradığın ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF282828),
-                                fontSize: 26.4,
-                                wordSpacing: 4.0),
-                            children: [
-                              TextSpan(
-                                  text: '"',
-                                  style: TextStyle(
-                                      color: Color(0xFF00d29b),
-                                      fontSize: 26.4)),
-                              TextSpan(
-                                  text: 'İş',
-                                  style: TextStyle(
-                                      fontSize: 26.4,
-                                      color: Color(0xFF282828))),
-                              TextSpan(
-                                  text: '" ',
-                                  style: TextStyle(
-                                      color: Color(0xFF00d29b),
-                                      fontSize: 26.4)),
-                              TextSpan(
-                                text: '\nBurada!',
-                                style: TextStyle(
-                                    fontSize: 26.4, color: Color(0xFF282828)),
-                              )
-                            ]),
+            TobetoScreen(),
+            FriendsScreen(),
+            PostScreen(),
+            MessageScreen(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => GetUserByIdBloc(
+                      repository:
+                          context.read<AuthenticationBloc>().userRepository)
+                    ..add(
+                      GetUserById(
+                        id: context.read<AuthenticationBloc>().state.user!.uid,
                       ),
                     ),
-                  ],
                 ),
-              ),
+                BlocProvider(
+                  create: (context) => GetAllCommunitiesBloc(
+                    repository: FirebaseCommunityRepository(),
+                  )..add(
+                      GetAllCommunities(),
+                    ),
+                )
+              ],
+              child: const CommunitiesScreen(),
             ),
-            const MyButton(),
-            const Footer(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => GetUsersByNameBloc(
+                    repository: FirebaseUserRepository(),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => GetAllCommunitiesBloc(
+                      repository: FirebaseCommunityRepository()),
+                ),
+              ],
+              child: const SearchScreen(),
+            ),
           ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.house,
+                color: _currentPage == 0 ? Colors.black : Colors.grey,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.users,
+                color: _currentPage == 1 ? Colors.black : Colors.grey,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.squarePlus,
+                color: _currentPage == 2 ? Colors.black : Colors.grey,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.message,
+                color: _currentPage == 3 ? Colors.black : Colors.grey,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.peopleRoof,
+                color: _currentPage == 4 ? Colors.black : Colors.grey,
+              ),
+              label: '',
+            ),
+          ],
+          onTap: navigationTapped,
         ),
       ),
     );

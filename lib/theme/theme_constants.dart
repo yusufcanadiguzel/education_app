@@ -4,7 +4,6 @@ import 'package:education_app/constants/colors.dart' as kcolors;
 const Color _backgroundColor = Color(0xFF1D3566);
 
 final ThemeData lightTheme = ThemeData.light().copyWith(
-  scaffoldBackgroundColor: _backgroundColor,
   buttonTheme: const ButtonThemeData(
     shape: BeveledRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(1.0),)
@@ -15,7 +14,6 @@ final ThemeData lightTheme = ThemeData.light().copyWith(
 );
 
 final ThemeData darkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: _backgroundColor,
     buttonTheme: const ButtonThemeData(
       shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(1000.0),)

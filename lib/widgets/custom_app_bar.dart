@@ -1,14 +1,16 @@
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../blocs/get_users_bloc/get_users_bloc.dart';
-import '../screens/search_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({this.leadingWidget, super.key});
+  const CustomAppBar({this.leadingWidget, this.function, super.key});
 
   final Widget? leadingWidget;
+  final Function()? function;
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           repository: context.read<AuthenticationBloc>().userRepository,
         ),
         child: GestureDetector(
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => BlocProvider(
-                create: (context) => GetUsersBloc(
-                  repository: context.read<AuthenticationBloc>().userRepository,
-                ),
-                child: const SearchScreen(),
-              ),
-            ),
-          ),
+          onTap: function,
           child: Container(
             height: 40.0,
             decoration: BoxDecoration(
@@ -59,10 +52,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            FontAwesomeIcons.gear,
+        BlocProvider(
+          create: (context) => SignInBloc(
+              userRepository:
+                  context.read<AuthenticationBloc>().userRepository),
+          child: IconButton(
+            onPressed: () {
+              context.read<SignInBloc>().add(SignOut());
+            },
+            icon: const Icon(
+              FontAwesomeIcons.gear,
+            ),
           ),
         ),
       ],

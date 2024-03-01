@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomActionButton extends StatelessWidget {
-  const CustomActionButton({required this.function, required this.buttonText, this.width = 200, super.key});
+  const CustomActionButton({
+    required this.function,
+    required this.buttonText,
+    this.width = 200,
+    super.key,
+  });
 
   final Function()? function;
   final String buttonText;
@@ -14,8 +19,7 @@ class CustomActionButton extends StatelessWidget {
           fixedSize: Size(width, 25.0),
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius:
-            BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(10.0),
           )),
       onPressed: function,
       child: Text(

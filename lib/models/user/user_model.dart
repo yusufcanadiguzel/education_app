@@ -2,15 +2,15 @@ import 'package:education_app/models/user/user_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class UserModel extends Equatable {
-  String id;
-  String firstName;
-  String lastName;
-  String email;
-  String? title;
-  String? profilePictureUrl;
-  String? fullName;
+  final String id;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String? title;
+  final String? profilePictureUrl;
+  final String? fullName;
 
-  UserModel(
+  const UserModel(
       {required this.id,
       required this.firstName,
       required this.lastName,
@@ -19,7 +19,7 @@ class UserModel extends Equatable {
       this.profilePictureUrl,
       this.fullName});
 
-  static final empty = UserModel(
+  static const empty = UserModel(
     id: '',
     firstName: '',
     lastName: '',
