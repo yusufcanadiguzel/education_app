@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/auth_bloc/auth_state.dart';
-import 'package:education_app/blocs/create_community_bloc/create_community_bloc.dart';
 import 'package:education_app/blocs/get_users_bloc/get_users_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:education_app/screens/authentication/welcome_screen.dart';

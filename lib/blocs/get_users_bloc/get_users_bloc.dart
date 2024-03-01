@@ -14,8 +14,8 @@ class GetUsersBloc extends Bloc<GetUsersEvent, GetUsersState>{
   Future<void> _onGetUsersByName(GetUsersByName event, Emitter<GetUsersState> emit) async {
     emit(GetUsersProcess());
     try{
-      var users = await _userRepository.getUsersByName();
-      emit(GetUsersSuccess(users: users));
+      //users = await _userRepository.getUsersByName();
+      //emit(GetUsersSuccess(users: users));
     } catch (exception) {
       log(exception.toString());
       emit(GetUsersFailure());

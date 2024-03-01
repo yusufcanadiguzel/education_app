@@ -6,6 +6,7 @@ import '../user/user_model.dart';
 class Community extends Equatable{
   String id;
   String name;
+  String description;
   int memberCount;
   DateTime createdAt;
   UserModel creator;
@@ -13,6 +14,7 @@ class Community extends Equatable{
   Community({
     required this.id,
     required this.name,
+    required this.description,
     this.memberCount = 0,
     required this.createdAt,
     required this.creator,
@@ -21,6 +23,7 @@ class Community extends Equatable{
   static final empty = Community(
     id: '',
     name: '',
+    description: '',
     memberCount: 0,
     createdAt: DateTime.now(),
     creator: UserModel.empty,
@@ -29,6 +32,7 @@ class Community extends Equatable{
   Community copyWith({
     String? id,
     String? name,
+    String? description,
     int? memberCount,
     DateTime? createdAt,
     UserModel? creator,
@@ -36,6 +40,7 @@ class Community extends Equatable{
     return Community(
       id: id ?? this.id,
       name: name ?? this.name,
+      description: description ?? this.description,
       memberCount: memberCount ?? this.memberCount,
       createdAt: createdAt ?? this.createdAt,
       creator: creator ?? this.creator,
@@ -50,6 +55,7 @@ class Community extends Equatable{
     return CommunityEntity(
       id: id,
       name: name,
+      description: description,
       memberCount: memberCount,
       createdAt: createdAt,
       creator: creator,
@@ -60,6 +66,7 @@ class Community extends Equatable{
     return Community(
       id: communityEntity.id,
       name: communityEntity.name,
+      description: communityEntity.description,
       memberCount: communityEntity.memberCount,
       createdAt: communityEntity.createdAt,
       creator: communityEntity.creator,
@@ -71,6 +78,7 @@ class Community extends Equatable{
     return ''' Community : {
     id: $id,
     name: $name,
+    description: $description,
     memberCount: $memberCount,
     createdAt: $createdAt,
     creator: $creator,
@@ -78,5 +86,5 @@ class Community extends Equatable{
   }
 
   @override
-  List<Object?> get props => [id, name, memberCount, createdAt, creator];
+  List<Object?> get props => [id, name, description, memberCount, createdAt, creator];
 }

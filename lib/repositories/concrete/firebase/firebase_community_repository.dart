@@ -45,10 +45,9 @@ class FirebaseCommunityRepository extends CommunityRepository {
   }
 
   @override
-  Future<List<Community>> getAllCommunitiesByName() {
+  Future<List<Community>> getAllCommunities() async {
     try {
-      return _communityCollection.orderBy('name').get().then((value) => value
-          .docs
+      return await _communityCollection.get().then((value) => value.docs
           .map((e) =>
               Community.fromEntity(CommunityEntity.fromDocument(e.data())))
           .toList());

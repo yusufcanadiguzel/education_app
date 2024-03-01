@@ -1,15 +1,18 @@
-import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_state.dart';
-import 'package:education_app/screens/community/communities_screen.dart';
-import 'package:education_app/screens/user/profile_screen.dart';
-import 'package:education_app/widgets/user/custom_user_circle_avatar.dart';
+import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
+import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_event.dart';
+import 'package:education_app/repositories/concrete/firebase/firebase_community_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../blocs/auth_bloc/auth_bloc.dart';
+import '../../blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import '../../blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
+import '../../blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import '../../blocs/update_user_info_bloc/update_user_info_bloc.dart';
-import '../../blocs/user_bloc/user_bloc.dart';
-import '../../blocs/user_bloc/user_event.dart';
+import '../../screens/community/communities_screen.dart';
+import '../../screens/user/profile_screen.dart';
+import '../user/custom_user_circle_avatar.dart';
 
 class CustomUserDrawer extends StatelessWidget {
   const CustomUserDrawer({super.key});
@@ -21,9 +24,9 @@ class CustomUserDrawer extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              BlocBuilder<UserBloc, UserState>(
+              BlocBuilder<GetUserByIdBloc, GetUserByIdState>(
                 builder: (context, state) {
-                  if (state is UserSuccess) {
+                  if (state is GetUserByIdSuccess) {
                     return Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 6,
@@ -35,7 +38,7 @@ class CustomUserDrawer extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text('${state.userModel.fullName}'),
+                          Text('${state.user.fullName}'),
                         ],
                       ),
                     );
@@ -52,7 +55,7 @@ class CustomUserDrawer extends StatelessWidget {
                     builder: (context) => MultiBlocProvider(
                       providers: [
                         BlocProvider(
-                          create: (context) => UserBloc(
+                          create: (context) => GetUserByIdBloc(
                             repository: context
                                 .read<AuthenticationBloc>()
                                 .userRepository,
@@ -87,19 +90,31 @@ class CustomUserDrawer extends StatelessWidget {
                 title: const Text('Topluluklar'),
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => BlocProvider(
-                      create: (context) => UserBloc(
-                          repository:
-                              context.read<AuthenticationBloc>().userRepository)
-                        ..add(
-                          GetUserById(
-                            id: context
-                                .read<AuthenticationBloc>()
-                                .state
-                                .user!
-                                .uid,
-                          ),
+                    builder: (context) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (context) => GetUserByIdBloc(
+                              repository: context
+                                  .read<AuthenticationBloc>()
+                                  .userRepository)
+                            ..add(
+                              GetUserById(
+                                id: context
+                                    .read<AuthenticationBloc>()
+                                    .state
+                                    .user!
+                                    .uid,
+                              ),
+                            ),
                         ),
+                        BlocProvider(
+                          create: (context) => GetAllCommunitiesBloc(
+                            repository: FirebaseCommunityRepository(),
+                          )..add(
+                              GetAllCommunities(),
+                            ),
+                        )
+                      ],
                       child: const CommunitiesScreen(),
                     ),
                   ),

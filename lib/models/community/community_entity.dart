@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 class CommunityEntity extends Equatable {
   final String id;
   final String name;
+  final String description;
   final int memberCount;
   final DateTime createdAt;
   final UserModel creator;
@@ -13,6 +14,7 @@ class CommunityEntity extends Equatable {
   const CommunityEntity({
     required this.id,
     required this.name,
+    required this.description,
     this.memberCount = 0,
     required this.createdAt,
     required this.creator,
@@ -22,6 +24,7 @@ class CommunityEntity extends Equatable {
     return {
       'id': id,
       'name': name,
+      'description': description,
       'memberCount': memberCount,
       'createdAt': createdAt,
       'creator': creator.toEntity().toDocument(),
@@ -32,6 +35,7 @@ class CommunityEntity extends Equatable {
     return CommunityEntity(
       id: document['id'] as String,
       name: document['name'] as String,
+      description: document['description'] as String,
       memberCount: document['memberCount'] as int,
       createdAt: (document['createdAt'] as Timestamp).toDate(),
       creator:
@@ -44,6 +48,7 @@ class CommunityEntity extends Equatable {
     return ''' CommunityEntity : { 
     id: $id,
     name: $name,
+    description: $description,
     memberCount: $memberCount,
     createdAt: $createdAt,
     creator: $creator,
@@ -51,5 +56,5 @@ class CommunityEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name, memberCount, createdAt, creator];
+  List<Object?> get props => [id, name, description, memberCount, createdAt, creator];
 }

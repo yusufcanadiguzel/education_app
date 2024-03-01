@@ -1,22 +1,23 @@
-import 'dart:developer';
-
-import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_bloc.dart';
-import 'package:education_app/blocs/user_bloc/user_event.dart';
-import 'package:education_app/screens/community/communities_screen.dart';
-import 'package:education_app/screens/friend/friends_screen.dart';
-import 'package:education_app/screens/message/message_screen.dart';
+import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
+import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_event.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import 'package:education_app/screens/post/post_screen.dart';
+import 'package:education_app/screens/search_screen.dart';
 import 'package:education_app/screens/tobeto_screen.dart';
-import 'package:education_app/widgets/announcement_card.dart';
-import 'package:education_app/widgets/button.dart';
-import 'package:education_app/widgets/custom_app_bar.dart';
-import 'package:education_app/widgets/drawers/custom_user_drawer.dart';
-import 'package:education_app/widgets/user/custom_user_circle_avatar.dart';
-import 'package:education_app/widgets/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../blocs/auth_bloc/auth_bloc.dart';
+import '../blocs/get_users_by_name_bloc/get_users_by_name_bloc.dart';
+import '../repositories/concrete/firebase/firebase_community_repository.dart';
+import '../repositories/concrete/firebase/firebase_user_repository.dart';
+import '../widgets/custom_app_bar.dart';
+import '../widgets/drawers/custom_user_drawer.dart';
+import '../widgets/user/custom_user_circle_avatar.dart';
+import 'community/communities_screen.dart';
+import 'friend/friends_screen.dart';
+import 'message/message_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -56,96 +57,125 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: BlocProvider(
-        create: (context) => UserBloc(
-            repository: context.read<AuthenticationBloc>().userRepository)
-          ..add(
-            GetUserById(
-              id: context.read<AuthenticationBloc>().state.user!.uid,
-            ),
-          ),
-        child: const CustomUserDrawer(),
-      ),
-      key: _key,
-      appBar: CustomAppBar(
-        leadingWidget: BlocProvider(
-          create: (context) => UserBloc(
-            repository: context.read<AuthenticationBloc>().userRepository,
-          )..add(
+    return SafeArea(
+      child: Scaffold(
+        drawer: BlocProvider(
+          create: (context) => GetUserByIdBloc(
+              repository: context.read<AuthenticationBloc>().userRepository)
+            ..add(
               GetUserById(
                 id: context.read<AuthenticationBloc>().state.user!.uid,
               ),
             ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomUserPictureCircle(
-              radius: 20.0,
-              function: () => _key.currentState!.openDrawer(),
-            ),
-          ),
+          child: const CustomUserDrawer(),
         ),
-      ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: onPageChanged,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          TobetoScreen(),
-          FriendsScreen(),
-          PostScreen(),
-          MessageScreen(),
-          BlocProvider(
-            create: (context) => UserBloc(
-                repository: context.read<AuthenticationBloc>().userRepository)
-              ..add(
+        key: _key,
+        appBar: CustomAppBar(
+          function: () => navigationTapped(5),
+          leadingWidget: BlocProvider(
+            create: (context) => GetUserByIdBloc(
+              repository: context.read<AuthenticationBloc>().userRepository,
+            )..add(
                 GetUserById(
                   id: context.read<AuthenticationBloc>().state.user!.uid,
                 ),
               ),
-            child: const CommunitiesScreen(),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.house,
-              color: _currentPage == 0 ? Colors.black : Colors.grey,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomUserPictureCircle(
+                radius: 20.0,
+                function: () => _key.currentState!.openDrawer(),
+              ),
             ),
-            label: '',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.users,
-              color: _currentPage == 1 ? Colors.black : Colors.grey,
+        ),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: onPageChanged,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            TobetoScreen(),
+            FriendsScreen(),
+            PostScreen(),
+            MessageScreen(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => GetUserByIdBloc(
+                      repository:
+                          context.read<AuthenticationBloc>().userRepository)
+                    ..add(
+                      GetUserById(
+                        id: context.read<AuthenticationBloc>().state.user!.uid,
+                      ),
+                    ),
+                ),
+                BlocProvider(
+                  create: (context) => GetAllCommunitiesBloc(
+                    repository: FirebaseCommunityRepository(),
+                  )..add(
+                      GetAllCommunities(),
+                    ),
+                )
+              ],
+              child: const CommunitiesScreen(),
             ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.squarePlus,
-              color: _currentPage == 2 ? Colors.black : Colors.grey,
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => GetUsersByNameBloc(
+                    repository: FirebaseUserRepository(),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => GetAllCommunitiesBloc(
+                      repository: FirebaseCommunityRepository()),
+                ),
+              ],
+              child: const SearchScreen(),
             ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.message,
-              color: _currentPage == 3 ? Colors.black : Colors.grey,
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.house,
+                color: _currentPage == 0 ? Colors.black : Colors.grey,
+              ),
+              label: '',
             ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.peopleRoof,
-              color: _currentPage == 4 ? Colors.black : Colors.grey,
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.users,
+                color: _currentPage == 1 ? Colors.black : Colors.grey,
+              ),
+              label: '',
             ),
-            label: '',
-          ),
-        ],
-        onTap: navigationTapped,
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.squarePlus,
+                color: _currentPage == 2 ? Colors.black : Colors.grey,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.message,
+                color: _currentPage == 3 ? Colors.black : Colors.grey,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.peopleRoof,
+                color: _currentPage == 4 ? Colors.black : Colors.grey,
+              ),
+              label: '',
+            ),
+          ],
+          onTap: navigationTapped,
+        ),
       ),
     );
   }

@@ -1,12 +1,14 @@
 import 'dart:developer';
 
 import 'package:education_app/blocs/create_community_bloc/create_community_event.dart';
-import 'package:education_app/blocs/get_communities_bloc/get_communities_bloc.dart';
+import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
+import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_state.dart';
 import 'package:education_app/blocs/join_community_bloc/join_community_bloc.dart';
 import 'package:education_app/blocs/join_community_bloc/join_community_event.dart';
 import 'package:education_app/models/community/community.dart';
 import 'package:education_app/models/communityUser/communityUser.dart';
 import 'package:education_app/models/user/user_model.dart';
+import 'package:education_app/repositories/concrete/firebase/firebase_community_repository.dart';
 import 'package:education_app/screens/community/community_screen.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:education_app/widgets/custom_text_form_field.dart';
@@ -15,7 +17,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../blocs/create_community_bloc/create_community_bloc.dart';
-import '../../blocs/get_communities_bloc/get_communities_state.dart';
+import '../../blocs/get_community_by_id_bloc/get_community_by_id_bloc.dart';
+import '../../blocs/get_community_by_id_bloc/get_community_by_id_event.dart';
 
 class CreateCommunityScreen extends StatefulWidget {
   const CreateCommunityScreen({required this.user, super.key});
@@ -43,9 +46,9 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
       appBar: AppBar(
         title: const Text('Bir topluluk oluştur'),
       ),
-      body: BlocBuilder<GetCommunitiesBloc, GetCommunitiesState>(
+      body: BlocBuilder<GetAllCommunitiesBloc, GetAllCommunitiesState>(
         builder: (context, state) {
-          if (state is GetCommunitiesSuccess) {
+          if (state is GetAllCommunitiesSuccess) {
             return Container(
               child: Column(
                 children: [
@@ -62,7 +65,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                               searchText = value;
 
                               for (var element in state.communities) {
-                                if(element.name == searchText){
+                                if (element.name == searchText) {
                                   isAvailable = false;
                                 }
                               }
@@ -87,15 +90,8 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                       ],
                     ),
                   ),
-
                   CustomActionButton(
                     function: () {
-                      log(isAvailable.toString());
-
-
-
-                      log(isAvailable.toString());
-
                       if (isAvailable) {
                         if (_formKey.currentState!.validate()) {
                           community = Community.empty;
@@ -104,8 +100,8 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                         }
 
                         context.read<CreateCommunityBloc>().add(
-                          CreateCommunity(community: community),
-                        );
+                              CreateCommunity(community: community),
+                            );
 
                         communityUser = CommunityUser.empty;
                         communityUser.communityId = community.id;
@@ -116,7 +112,20 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                             );
 
                         Navigator.pop(context);
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CommunityScreen(),),);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => GetCommunityByIdBloc(
+                                repository: FirebaseCommunityRepository(),
+                              )..add(
+                                  GetCommunityById(
+                                    id: community.id,
+                                  ),
+                                ),
+                              child: const CommunityScreen(),
+                            ),
+                          ),
+                        );
                       }
                     },
                     buttonText: 'Topluluğu Oluştur',

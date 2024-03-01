@@ -1,4 +1,6 @@
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import 'package:education_app/blocs/user_bloc/user_bloc.dart';
 import 'package:education_app/blocs/user_bloc/user_event.dart';
 import 'package:education_app/blocs/user_bloc/user_state.dart';
@@ -43,9 +45,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                BlocBuilder<UserBloc, UserState>(
+                BlocBuilder<GetUserByIdBloc, GetUserByIdState>(
                   builder: (context, state) {
-                    if (state is UserSuccess) {
+                    if (state is GetUserByIdSuccess) {
                       return Column(
                         children: [
                           //Kullanıcı Bilgileri
@@ -69,10 +71,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       CircleAvatar(
                                         radius: 50.0,
                                         backgroundImage:
-                                            state.userModel.profilePictureUrl ==
+                                            state.user.profilePictureUrl ==
                                                     ''
                                                 ? const NetworkImage('https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png')
-                                                : NetworkImage(state.userModel
+                                                : NetworkImage(state.user
                                                     .profilePictureUrl!),
                                       ),
                                       Column(
@@ -129,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                   //Ad ve Soyad
                                   Text(
-                                    '${state.userModel.firstName} ${state.userModel.lastName}',
+                                    '${state.user.firstName} ${state.user.lastName}',
                                     style: const TextStyle(
                                       fontSize: 24.0,
                                       fontWeight: FontWeight.bold,
@@ -138,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                   //Ünvan
                                   Text(
-                                    '${state.userModel.title}',
+                                    '${state.user.title}',
                                   ),
                                 ],
                               ),

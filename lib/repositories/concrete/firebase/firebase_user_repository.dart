@@ -108,9 +108,9 @@ class FirebaseUserRepository extends UserRepository {
 
   //Kullanıcıları isimlerine göre getirir.
   @override
-  Future<List<UserModel>> getUsersByName() async {
+  Future<List<UserModel>> getUsersByName(String name) async {
     try {
-      return _userCollection.orderBy('fullName').get().then(
+      return await _userCollection.where('fullName', isGreaterThanOrEqualTo: name).get().then(
             (value) =>
             value.docs
                 .map((e) =>
