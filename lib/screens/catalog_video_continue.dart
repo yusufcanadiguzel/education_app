@@ -1,5 +1,6 @@
 import 'package:education_app/models/course.dart';
 import 'package:education_app/screens/video_play.dart';
+import 'package:education_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -22,7 +23,7 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.catalogCard.coursesName),
+        title: Text(widget.catalogCard.coursesName, style: TextStyles.kHeaderTextStyle),
       ),
       body: SingleChildScrollView(
         child: Align(
