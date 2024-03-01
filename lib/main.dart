@@ -16,21 +16,22 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MultiBlocProvider(
+  runApp(
+    MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => UserBloc(),
         ),
         BlocProvider(
-            create: (context) => AuthBloc(),
+          create: (context) => AuthBloc(),
         ),
       ],
       child: MaterialApp(
-        home: const WelcomeScreen(),
+        home: const HomeScreen(),
         theme: lightTheme,
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
       ),
-  ),
+    ),
   );
 }

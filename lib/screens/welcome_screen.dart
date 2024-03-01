@@ -18,14 +18,26 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final user_model.User _user = user_model.User(firstName: 'Yusufcan', lastName: 'Adıgüzel', email: 'ya@gmail.com', password: '123456');
+  final user_model.User _user = user_model.User(
+      firstName: 'Yusufcan',
+      lastName: 'Adıgüzel',
+      email: 'ya@gmail.com',
+      password: '123456');
 
-  User? checkUser(){
-    if(_auth.currentUser == null){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen(),));
+  User? checkUser() {
+    if (_auth.currentUser == null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const RegisterScreen(),
+          ));
       return null;
-    }else{
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen(),));
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ));
       return _auth.currentUser;
     }
   }
@@ -35,13 +47,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
-    checkUser();
+      checkUser();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color(0xFF1D3566),
       body: Center(
@@ -57,7 +68,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image.asset('assets/images/education-app-blue-logo.png',
+                  Image.asset(
+                    'assets/images/education-app-blue-logo.png',
                   ),
                   const CircularProgressIndicator(
                     color: Color(0xFF1D3566),
@@ -70,6 +82,5 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
       ),
     );
-
   }
 }
