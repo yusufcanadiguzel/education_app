@@ -1,4 +1,5 @@
 import 'package:education_app/blocs/catalog_bloc/catalog_bloc.dart';
+import 'package:education_app/constants/decorations/container_decorations.dart';
 import 'package:education_app/screens/catalog_screen.dart';
 import 'package:education_app/screens/post/post_screen.dart';
 import 'package:education_app/screens/reviews_screen.dart';
@@ -146,40 +147,44 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.yellow,
           items: [
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.house,
-                color: _currentPage == 0 ? Colors.black : Colors.grey,
+                color:
+                    _currentPage == 0 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.book,
-                color: _currentPage == 1 ? Colors.black : Colors.grey,
+                color:
+                    _currentPage == 1 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.flaskVial,
-                color: _currentPage == 2 ? Colors.black : Colors.grey,
+                color:
+                    _currentPage == 2 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.squarePlus,
-                color: _currentPage == 3 ? Colors.black : Colors.grey,
+                color:
+                    _currentPage == 3 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.peopleRoof,
-                color: _currentPage == 4 ? Colors.black : Colors.grey,
+                color:
+                    _currentPage == 4 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),

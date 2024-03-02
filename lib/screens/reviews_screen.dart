@@ -1,3 +1,4 @@
+import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/test_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:education_app/widgets/reviews_card.dart';
@@ -10,7 +11,10 @@ class ReviewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Değerlendirmeler'),
+        title: const Text(
+          'Değerlendirmeler',
+          style: TextStyles.kHeaderTextStyle,
+        ),
       ),
       body: ListView(
         children: [
@@ -102,7 +106,6 @@ class ReviewsScreen extends StatelessWidget {
           ),
           CustomSectionWidget(),
           const LastTwoCards(),
-          const Footer(),
         ],
       ),
     );

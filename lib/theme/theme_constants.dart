@@ -7,6 +7,9 @@ final ThemeData lightTheme = ThemeData.light().copyWith(
   drawerTheme: const DrawerThemeData(
     backgroundColor: Color(0xFF272A4D),
   ),
+  navigationBarTheme: const NavigationBarThemeData(
+    backgroundColor: Color(0xFF111639),
+  ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Color(0xFF111639),
     selectedItemColor: Colors.white,

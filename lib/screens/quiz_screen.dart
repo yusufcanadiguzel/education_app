@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:education_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -55,7 +56,10 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Değerlendirme Sayfası'),
+        title: const Text(
+          'Değerlendirme Sayfası',
+          style: TextStyles.kListTileHeaderTextStyle,
+        ),
       ),
       body: Container(
         color: Colors.white,

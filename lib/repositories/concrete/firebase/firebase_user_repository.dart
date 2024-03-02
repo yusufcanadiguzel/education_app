@@ -110,16 +110,18 @@ class FirebaseUserRepository extends UserRepository {
   @override
   Future<List<UserModel>> getUsersByName(String name) async {
     try {
-      return await _userCollection.where('fullName', isGreaterThanOrEqualTo: name).get().then(
-            (value) =>
-            value.docs
+      return await _userCollection
+          .where('fullName', isGreaterThanOrEqualTo: name)
+          .get()
+          .then(
+            (value) => value.docs
                 .map((e) =>
-                UserModel.fromEntity(UserEntity.fromDocument(e.data())))
+                    UserModel.fromEntity(UserEntity.fromDocument(e.data())))
                 .toList(),
-      );
+          );
     } catch (exception) {
-    log(exception.toString());
-    rethrow;
+      log(exception.toString());
+      rethrow;
     }
   }
 
@@ -137,8 +139,7 @@ class FirebaseUserRepository extends UserRepository {
   @override
   Future<void> updatePicture(String userId, String path, File file) async {
     try {
-      var firebaseStorageRef =
-      FirebaseStorage.instance.ref().child(path);
+      var firebaseStorageRef = FirebaseStorage.instance.ref().child(path);
       firebaseStorageRef.putFile(file);
 
       String imageUrl = await firebaseStorageRef.getDownloadURL();

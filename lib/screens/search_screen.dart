@@ -76,21 +76,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     const SizedBox(
                       height: 10.0,
                     ),
-
-                    MultiBlocProvider(
-                      providers: [
-                        BlocProvider(
-                          create: (context) => GetCommunityByIdBloc(
-                              repository: FirebaseCommunityRepository()),
-                        ),
-                        BlocProvider(
-                          create: (context) => GetAllCommunitiesByNameBloc(
-                            repository: FirebaseCommunityRepository(),
-                          ),
-                        )
-                      ],
-                      child: const CustomContainerGetCommunities(),
-                    ),
                   ],
                 ),
               ],
