@@ -38,7 +38,6 @@
 /dev/docs/api_docs.zip
 /dev/docs/flutter.docs.zip
 /dev/docs/lib/
-/dev/docs/pubspec.yaml
 /dev/integration_tests/**/xcuserdata
 /dev/integration_tests/**/Pods
 /packages/flutter/coverage/
@@ -136,3 +135,17 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
+
+# Custom ignore
+**/lib/services
+education_app/lib/firebase_options.dart
+**/ios/Runner/GoogleService-Info.plist
+lib/constants/strings/FirebaseOptionsStrings.dart
+android/app/google-services.json
+macos/Runner/GoogleService-Info.plist
+ios/firebase_app_id_file.json
+ios/Runner/GoogleService-Info.plist
+lib/firebase_options.dart
+lib/services/firebase/cloud_messaging/notification_service.dart
+macos/firebase_app_id_file.json
+macos/Runner/GoogleService-Info.plist
