@@ -140,3 +140,4 @@ app.*.symbols
 **/lib/services
 education_app/lib/firebase_options.dart
 **/ios/Runner/GoogleService-Info.plist
+lib/constants/strings/FirebaseOptionsStrings.dart
