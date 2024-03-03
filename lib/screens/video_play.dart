@@ -1,6 +1,5 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 /// Stateful widget to fetch and then display video content.
 class LessonVideo extends StatefulWidget {

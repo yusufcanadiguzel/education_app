@@ -1,6 +1,7 @@
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/message/get_message_stream_bloc/get_message_stream_bloc.dart';
 import 'package:education_app/blocs/message/get_message_stream_bloc/get_message_stream_state.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/widgets/message/message_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,18 +37,18 @@ class MessageStreamV2 extends StatelessWidget {
                     return MessageBox(
                         isSender: snapshot.data![index].senderId == userId,
                         text: snapshot.data == null
-                            ? ''
+                            ? MagicStrings.empty
                             : snapshot.data![index].message);
                   }
 
-                  return const Text('');
+                  return Text(MagicStrings.empty);
                 },
               );
             },
           );
         }
 
-        return const Text('MessageStreamV2 unknown state.');
+        return Text(MagicStrings.unknownState);
       },
     );
   }

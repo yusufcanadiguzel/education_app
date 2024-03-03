@@ -2,7 +2,11 @@ import 'package:education_app/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 
 class KFormInput extends StatelessWidget {
-  const KFormInput({required this.iconData, required this.labelText, this.isObscure = false, super.key});
+  const KFormInput(
+      {required this.iconData,
+      required this.labelText,
+      this.isObscure = false,
+      super.key});
 
   final String labelText;
   final IconData iconData;

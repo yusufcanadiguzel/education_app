@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/create_community_bloc/create_community_event.dart';
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
@@ -8,6 +6,7 @@ import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart
 import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import 'package:education_app/blocs/join_community_bloc/join_community_bloc.dart';
 import 'package:education_app/blocs/join_community_bloc/join_community_event.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/community/community.dart';
 import 'package:education_app/models/communityUser/communityUser.dart';
 import 'package:education_app/models/user/user_model.dart';
@@ -49,8 +48,8 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Bir topluluk oluştur',
+        title: Text(
+          MagicStrings.createACommunity,
           style: TextStyles.kHeaderTextStyle,
         ),
       ),
@@ -66,7 +65,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                       children: [
                         CustomTextFormField(
                           controller: _communityNameController,
-                          hintText: 'Topluluk ismi',
+                          hintText: MagicStrings.communityName,
                           iconData: FontAwesomeIcons.peopleRoof,
                           onChanged: (value) {
                             setState(() {
@@ -81,15 +80,15 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                           },
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Lütfen alanı doldurunuz.';
+                              return MagicStrings.pleaseFillThisField;
                             }
 
                             if (isAvailable == false) {
-                              return 'Bu isim kullanılmaktadır.';
+                              return MagicStrings.nameTaken;
                             }
 
                             if (value.length < 3 || value.length > 21) {
-                              return 'Lütfen 3 ile 21 karakter arasında bir isim giriniz.';
+                              return MagicStrings.characterLimit;
                             }
 
                             return null;
@@ -153,7 +152,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                         );
                       }
                     },
-                    buttonText: 'Topluluğu Oluştur',
+                    buttonText: MagicStrings.createThisCommunity,
                   ),
                 ],
               ),

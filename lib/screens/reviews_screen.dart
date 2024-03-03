@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/test_dialog.dart';
 import 'package:flutter/material.dart';
@@ -11,32 +12,32 @@ class ReviewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Değerlendirmeler',
+        title: Text(
+          MagicStrings.reviews,
           style: TextStyles.kHeaderTextStyle,
         ),
       ),
       body: ListView(
         children: [
-          const ReviewsCard(
-            title: 'Tobeto İşte başarı Modeli',
-            subtitle: '80 soru ile yetkinliklerini ölç,',
-            description: 'önerilen eğitimleri tamamla, \nrozetini kazan.',
-            cardType: CardType.description,
-            height: 165,
-            isActive: false,
-          ),
-          const ReviewsCard(
-            title: 'Yazılımda Başarı Testi',
-            subtitle: 'Çoktan seçmeli',
-            description: 'sorular ile teknik bilgini \ntest et',
+          ReviewsCard(
+            title: MagicStrings.tobetoSuccessModel,
+            subtitle: MagicStrings.eightyQuestion,
+            description: MagicStrings.suggestedEducations,
             cardType: CardType.description,
             height: 165,
             isActive: false,
           ),
           ReviewsCard(
-            title: 'Front End',
-            description: 'Front End kartının açıklaması',
+            title: MagicStrings.developmentSuccess,
+            subtitle: MagicStrings.multipleChoice,
+            description: MagicStrings.checkYourTechnic,
+            cardType: CardType.description,
+            height: 165,
+            isActive: false,
+          ),
+          ReviewsCard(
+            title: MagicStrings.frontEnd,
+            description: MagicStrings.frontEndCardExplain,
             cardType: CardType.description,
             height: 170,
             onStartButtonPressed: () {
@@ -49,8 +50,8 @@ class ReviewsScreen extends StatelessWidget {
             },
           ),
           ReviewsCard(
-            title: 'Full Stack',
-            description: 'Full Stack kartının açıklaması',
+            title: MagicStrings.fullStack,
+            description: MagicStrings.fullStackCardExplain,
             cardType: CardType.description,
             height: 170,
             onStartButtonPressed: () {
@@ -63,8 +64,8 @@ class ReviewsScreen extends StatelessWidget {
             },
           ),
           ReviewsCard(
-            title: 'Back End',
-            description: 'Back End kartının açıklaması',
+            title: MagicStrings.backEnd,
+            description: MagicStrings.backEndCardExplain,
             cardType: CardType.description,
             height: 170,
             onStartButtonPressed: () {
@@ -77,8 +78,8 @@ class ReviewsScreen extends StatelessWidget {
             },
           ),
           ReviewsCard(
-            title: 'Microsoft SQL Server',
-            description: 'Microsoft SQL Server kartının açıklaması',
+            title: MagicStrings.msSqlServer,
+            description: MagicStrings.msqSqlServerCardExplain,
             cardType: CardType.description,
             height: 170,
             onStartButtonPressed: () {
@@ -91,8 +92,8 @@ class ReviewsScreen extends StatelessWidget {
             },
           ),
           ReviewsCard(
-            title: 'Masaüstü Programlama',
-            description: 'Masaüstü Programlama kartının açıklaması',
+            title: MagicStrings.dekstopProgramming,
+            description: MagicStrings.desktopProgrammingCardExplain,
             cardType: CardType.description,
             height: 170,
             onStartButtonPressed: () {

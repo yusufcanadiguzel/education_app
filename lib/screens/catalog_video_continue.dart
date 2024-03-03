@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/course.dart';
 import 'package:education_app/screens/video_play.dart';
 import 'package:education_app/theme/text_styles.dart';
@@ -13,7 +14,7 @@ class CatalogVideoContinue extends StatefulWidget {
 }
 
 class _CatalogContinueState extends State<CatalogVideoContinue> {
-  String currentImage = "assets/images/tobeto.jpg";
+  String currentImage = MagicStrings.tobetoLogoPath;
   String currentText = "";
 
   @override
@@ -32,7 +33,7 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
             width: phoneWidth / 1.1,
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Color.fromRGBO(0, 0, 0, 0.13),
                   blurRadius: 29.0,
@@ -52,7 +53,7 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                     width: phoneWidth / 1.2,
                     height: phoneHeight / 3,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 246, 246, 246),
+                      color: const Color.fromARGB(255, 246, 246, 246),
                       boxShadow: const [
                         BoxShadow(
                           color: Color.fromRGBO(0, 0, 0, 0.218),
@@ -118,14 +119,14 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if (currentText ==
-                                      "Dinle,Anla,İfade Et: Etkili Gelişim Yolculuğu") {
+                                      MagicStrings.listenUnderstand) {
                                     Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (ctx) => const LessonVideo(
+                                        builder: (ctx) => LessonVideo(
                                             videoUrl:
-                                                "https://firebasestorage.googleapis.com/v0/b/educationappdb.appspot.com/o/course_video%2Ftobeto_video.mp4?alt=media&token=03e79f02-57bb-46ab-ac46-94ef071b4339")));
+                                                MagicStrings.videoUrl)));
                                   }
                                   if (currentImage ==
-                                      "assets/images/tobeto_2.jpg") {
+                                      MagicStrings.tobeto2LogoPath) {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (ctx) => LessonVideo(
@@ -133,15 +134,14 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                                                     .catalogCard.videoUrl)));
                                   }
                                   if (currentText ==
-                                      "İletişimin Temelleri ve İletişim Tipleri") {
+                                      MagicStrings.communicationBasics) {
                                     _launchURL();
                                   }
                                 },
-                                child: Text("Eğitime Git"),
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Colors.white,
                                   backgroundColor:
-                                      Color.fromARGB(0, 95, 20, 200),
+                                      const Color.fromARGB(0, 95, 20, 200),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(32.0),
                                   ),
@@ -150,6 +150,7 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                                     30,
                                   ), //////// HERE
                                 ),
+                                child: Text(MagicStrings.goEducation),
                               ),
                             ),
                           ),
@@ -161,12 +162,12 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                     height: phoneHeight / 40,
                   ),
                   MyAccordionTile(
-                    title: 'Başlamadan Önce',
+                    title: MagicStrings.beforeStart,
                     content: [
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            currentImage = "assets/images/tobeto.jpg";
+                            currentImage = MagicStrings.tobetoLogoPath;
                             currentText = widget.catalogCard.coursesName;
                           });
                         },
@@ -175,45 +176,45 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
                     ],
                   ),
                   MyAccordionTile(
-                    title: '1. Modül: Bilgilen',
+                    title: MagicStrings.firstModule,
                     content: [
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            currentImage = "assets/images/tobeto.jpg";
+                            currentImage = MagicStrings.tobetoLogoPath;
                             currentText =
-                                "İletişimin Temelleri ve İletişim Tipleri";
+                                MagicStrings.communicationBasics;
                           });
                         },
                         child: Text(
-                          'İletişimin Temelleri ve İletişim Tipleri',
+                          MagicStrings.communicationBasics,
                         ),
                       ),
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            currentImage = "assets/images/tobeto.jpg";
+                            currentImage = MagicStrings.tobetoLogoPath;
                             currentText =
-                                "İletişim Engelleri Sizi Engellemesin";
+                                MagicStrings.communicationBasics;
                           });
                         },
-                        child: Text('İletişim Engelleri Sizi Engellemesin'),
+                        child: Text(MagicStrings.communicationBasics),
                       ),
                     ],
                   ),
                   MyAccordionTile(
-                    title: '2. Modül: Uzmanına Kulak Ver',
+                    title: MagicStrings.secondModule,
                     content: [
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            currentImage = "assets/images/tobeto_2.jpg";
+                            currentImage = MagicStrings.tobeto2LogoPath;
                             currentText =
-                                "İletişimde Sorun Çıkartmanın Garantili Yolları";
+                                MagicStrings.communicationProblems;
                           });
                         },
                         child: Text(
-                          'İletişimde Sorun Çıkartmanın Garantili Yolları',
+                          MagicStrings.communicationProblems,
                         ),
                       ),
                     ],
@@ -228,12 +229,12 @@ class _CatalogContinueState extends State<CatalogVideoContinue> {
   }
 
   _launchURL() async {
-    const url =
-        'https://firebasestorage.googleapis.com/v0/b/educationappdb.appspot.com/o/course_video%2Ftobeto_video.mp4?alt=media&token=03e79f02-57bb-46ab-ac46-94ef071b4339';
+    String url =
+        MagicStrings.videoUrl2;
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      throw MagicStrings.couldNotLaunch + url;
     }
   }
 }
@@ -267,7 +268,7 @@ class _MyAccordionTileState extends State<MyAccordionTile> {
         child: ExpansionTile(
           title: Text(
             widget.title,
-            style: TextStyle(fontFamily: "Raleway"),
+            style: TextStyle(fontFamily: MagicStrings.raleway),
           ),
           collapsedTextColor: Colors.black,
           textColor: Colors.black,

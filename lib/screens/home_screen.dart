@@ -1,14 +1,11 @@
 import 'package:education_app/blocs/catalog_bloc/catalog_bloc.dart';
-import 'package:education_app/constants/decorations/container_decorations.dart';
 import 'package:education_app/screens/catalog_screen.dart';
 import 'package:education_app/screens/post/post_screen.dart';
 import 'package:education_app/screens/reviews_screen.dart';
 import 'package:education_app/screens/search_screen.dart';
-import 'package:education_app/screens/tobeto_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../blocs/auth_bloc/auth_bloc.dart';
 import '../blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
 import '../blocs/get_all_communities_bloc/get_all_communities_event.dart';
@@ -21,13 +18,10 @@ import '../widgets/custom_app_bar.dart';
 import '../widgets/drawers/custom_user_drawer.dart';
 import '../widgets/user/custom_user_circle_avatar.dart';
 import 'community/communities_screen.dart';
-import 'friend/friends_screen.dart';
-import 'message/message_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  @override
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }

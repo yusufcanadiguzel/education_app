@@ -12,7 +12,6 @@ import 'package:education_app/screens/community/community_screen.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../blocs/get_community_by_id_bloc/get_community_by_id_bloc.dart';
 import '../../blocs/post/get_posts_by_community_stream_bloc/get_posts_by_community_stream_event.dart';
 

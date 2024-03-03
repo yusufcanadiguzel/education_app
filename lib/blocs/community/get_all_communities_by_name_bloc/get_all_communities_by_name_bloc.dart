@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:education_app/blocs/community/get_all_communities_by_name_bloc/get_all_communities_by_name_event.dart';
 import 'package:education_app/blocs/community/get_all_communities_by_name_bloc/get_all_communities_by_name_state.dart';
 import 'package:education_app/repositories/abstract/community_repository.dart';

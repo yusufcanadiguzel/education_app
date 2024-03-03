@@ -1,9 +1,7 @@
 import 'dart:developer';
-
 import 'package:education_app/blocs/get_community_by_id_bloc/get_community_by_id_state.dart';
 import 'package:education_app/repositories/abstract/community_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'get_community_by_id_event.dart';
 
 class GetCommunityByIdBloc extends Bloc<GetCommunityByIdEvent, GetCommunityByIdState>{

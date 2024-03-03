@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
@@ -32,12 +33,12 @@ class MyButton extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: Stack(
                   children: [
-                    const Positioned(
+                    Positioned(
                       left: 60,
                       top: 50,
                       child: Text(
-                        'Profilini oluştur',
-                        style: TextStyle(
+                        MagicStrings.createYourProfile,
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
                             color: Colors.white),
@@ -52,9 +53,9 @@ class MyButton extends StatelessWidget {
                                 backgroundColor: MaterialStatePropertyAll(
                                     Color(0xFF9933FF))),
                             onPressed: () {},
-                            child: const Text(
-                              'Başla',
-                              style: TextStyle(
+                            child: Text(
+                              MagicStrings.start,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                   color: Colors.white),
@@ -90,12 +91,12 @@ class MyButton extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: Stack(
                   children: [
-                    const Positioned(
+                    Positioned(
                       left: 40,
                       top: 50,
                       child: Text(
-                        'Kendini değerlendir',
-                        style: TextStyle(
+                        MagicStrings.reviewYourself,
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
                             color: Colors.white),
@@ -110,9 +111,9 @@ class MyButton extends StatelessWidget {
                                 backgroundColor: MaterialStatePropertyAll(
                                     Color(0xFF9933FF))),
                             onPressed: () {},
-                            child: const Text(
-                              'Başla',
-                              style: TextStyle(
+                            child: Text(
+                              MagicStrings.start,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                   color: Colors.white),
@@ -148,12 +149,12 @@ class MyButton extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: Stack(
                   children: [
-                    const Positioned(
+                    Positioned(
                       left: 50,
                       top: 50,
                       child: Text(
-                        'Öğrenmeye başla ',
-                        style: TextStyle(
+                        MagicStrings.startLearning,
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
                             color: Colors.white),
@@ -168,9 +169,9 @@ class MyButton extends StatelessWidget {
                                 backgroundColor: MaterialStatePropertyAll(
                                     Color(0xFF9933FF))),
                             onPressed: () {},
-                            child: const Text(
-                              'Başla',
-                              style: TextStyle(
+                            child: Text(
+                              MagicStrings.start,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                   color: Colors.white),

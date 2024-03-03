@@ -1,6 +1,7 @@
 import 'package:education_app/blocs/post/get_post_stream_bloc/get_post_stream_bloc.dart';
 import 'package:education_app/blocs/post/get_post_stream_bloc/get_post_stream_state.dart';
 import 'package:education_app/constants/decorations/container_decorations.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/post/custom_post_item.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +26,13 @@ class _CustomContainerPostStreamState extends State<CustomContainerPostStream> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Gönderiler',
+                    MagicStrings.posts,
                     style: TextStyles.kHeaderTextStyle,
                   ),
                 ],
@@ -59,7 +60,7 @@ class _CustomContainerPostStreamState extends State<CustomContainerPostStream> {
                             return CustomPostItem(post: snapshot.data![index]);
                           }
 
-                          return const Text('');
+                          return Text(MagicStrings.empty);
                         },
                       );
                     },

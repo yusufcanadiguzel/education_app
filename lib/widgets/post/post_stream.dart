@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:education_app/blocs/post/get_post_stream_bloc/get_post_stream_bloc.dart';
 import 'package:education_app/blocs/post/get_post_stream_bloc/get_post_stream_state.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/post/custom_post_item.dart';
 import 'package:flutter/material.dart';
@@ -38,16 +39,16 @@ class PostStream extends StatelessWidget {
                     return CustomPostItem(post: snapshot.data![index]);
                   }
 
-                  return const Text('deneme', style: TextStyles.kHeaderTextStyle,);
+                  return Text(MagicStrings.attemp, style: TextStyles.kHeaderTextStyle,);
                 },
               );
             },
           );
         }
 
-        return const Center(
+        return Center(
           child: Text(
-            'unknown state',
+            MagicStrings.unknownState,
             style: TextStyles.kHeaderTextStyle,
           ),
         );

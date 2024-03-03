@@ -5,7 +5,6 @@ import 'package:education_app/repositories/concrete/firebase/firebase_community_
 import 'package:education_app/screens/community/community_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../constants/decorations/container_decorations.dart';
 import '../../theme/text_styles.dart';
 

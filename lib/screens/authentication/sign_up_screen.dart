@@ -1,5 +1,6 @@
 import 'package:education_app/blocs/sign_up_bloc/sign_up_event.dart';
 import 'package:education_app/blocs/sign_up_bloc/sign_up_state.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/user/user_model.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
@@ -68,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/images/education_app_white_logo.png',
+                    MagicStrings.whiteLogoPath,
                     width: 150,
                   ),
                   const SizedBox(
@@ -78,8 +79,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const Text(
-                    'Kayıt Ol!',
+                  Text(
+                    MagicStrings.signUp,
                     style: TextStyles.kListTileHeaderTextStyle,
                   ),
                   Form(
@@ -93,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         CustomTextFormField(
                           textInputType: TextInputType.name,
                           controller: _firstNameController,
-                          hintText: 'İsim',
+                          hintText: MagicStrings.name,
                           iconData: FontAwesomeIcons.solidUser,
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -111,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           iconData: FontAwesomeIcons.solidUser,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Lütfen alanı doldurunuz.';
+                              return MagicStrings.pleaseFillThisField;
                             }
                           },
                         ),
@@ -124,9 +125,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             iconData: FontAwesomeIcons.solidEnvelope,
                             validator: (val) {
                               if (val!.isEmpty) {
-                                return 'Lütfen alanı doldurunuz.';
+                                return MagicStrings.pleaseFillThisField;
                               } else if (!emailRexExp.hasMatch(val)) {
-                                return 'Lütfen geçerli bir email giriniz.';
+                                return MagicStrings.pleaseEnterAValidMail;
                               }
                               return null;
                             }),
@@ -137,7 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           maxLines: 1,
                           isObscure: _obscurePassword,
                           controller: _passwordController,
-                          hintText: 'Şifre',
+                          hintText: MagicStrings.password,
                           iconData: FontAwesomeIcons.lock,
                           suffixIcon: IconButton(
                             color: Colors.white,
@@ -203,9 +204,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                           validator: (val) {
                             if (val!.isEmpty) {
-                              return 'Lütfen alanı doldurunuz.';
+                              return MagicStrings.pleaseFillThisField;
                             } else if (!passwordRexExp.hasMatch(val)) {
-                              return 'Lütfen geçerli bir şifre giriniz.';
+                              return MagicStrings.pleaseEnterAValidPassword;
                             }
                             return null;
                           },
@@ -222,21 +223,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "⚈  1 Büyük harf",
+                                      MagicStrings.upperCase,
                                       style: TextStyle(
                                           color: containsUpperCase
                                               ? Colors.green
                                               : Colors.white),
                                     ),
                                     Text(
-                                      "⚈  1 Küçük harf",
+                                      MagicStrings.lowerCase,
                                       style: TextStyle(
                                           color: containsLowerCase
                                               ? Colors.green
                                               : Colors.white),
                                     ),
                                     Text(
-                                      "⚈  1 Sayı",
+                                      MagicStrings.oneNumber,
                                       style: TextStyle(
                                           color: containsNumber
                                               ? Colors.green
@@ -251,14 +252,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "⚈  1 Özel karakter",
+                                      MagicStrings.specialLetter,
                                       style: TextStyle(
                                           color: containsSpecialChar
                                               ? Colors.green
                                               : Colors.white),
                                     ),
                                     Text(
-                                      "⚈  8 Minimum karakter",
+                                      MagicStrings.minimumCharacters,
                                       style: TextStyle(
                                           color: contains8Length
                                               ? Colors.green
@@ -296,7 +297,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     });
                                   }
                                 },
-                                buttonText: 'Kayıt Ol',
+                                buttonText: MagicStrings.signUp,
                               )
                             : const CircularProgressIndicator(
                                 color: Colors.white,
@@ -304,7 +305,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ],
                     ),
                   ),
-                  const CustomDivider(dividerText: 'ya da'),
+                  CustomDivider(dividerText: MagicStrings.or),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

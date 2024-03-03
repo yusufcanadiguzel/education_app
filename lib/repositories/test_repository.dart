@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/test/test.dart';
 
 class TestRepository {
   final CollectionReference testCollection =
-      FirebaseFirestore.instance.collection('tests');
+      FirebaseFirestore.instance.collection(MagicStrings.testCollectionName);
 
   Future<void> addTest(Test test) async {
     try {
       await testCollection.add(test.toJson());
     } catch (e) {
-      print('Hata: $e');
+      print(MagicStrings.error + e.toString());
     }
   }
 
@@ -24,10 +25,10 @@ class TestRepository {
         // Dönüştürülen veriyi Test nesnesine çevir
         return Test.fromJson(data);
       } else {
-        throw Exception('Belirtilen test bulunamadı.');
+        throw Exception(MagicStrings.cantFindObject);
       }
     } catch (e) {
-      throw Exception('Test getirilirken bir hata oluştu: $e');
+      throw Exception(MagicStrings.cantReceiveObject + e.toString());
     }
   }
 }

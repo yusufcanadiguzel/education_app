@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 
 class MessageScreen extends StatelessWidget {
@@ -5,9 +6,9 @@ class MessageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('Message Screen'),
+        child: Text(MagicStrings.messageScreen),
       ),
     );
   }

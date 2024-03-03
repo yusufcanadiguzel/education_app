@@ -1,4 +1,5 @@
 import 'package:education_app/constants/decorations/container_decorations.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_user_repository.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/user/user_about_me_dialog.dart';
@@ -70,8 +71,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         backgroundImage: state
                                                     .user.profilePictureUrl ==
                                                 ''
-                                            ? const NetworkImage(
-                                                'https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png')
+                                            ? NetworkImage(
+                                               MagicStrings.defaultProfilePictureUrl )
                                             : NetworkImage(
                                                 state.user.profilePictureUrl!),
                                       ),
@@ -162,8 +163,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        'Hakkında',
+                                      Text(
+                                        MagicStrings.aboutIt,
                                         style: TextStyles.kHeaderTextStyle,
                                       ),
                                       IconButton(
@@ -246,8 +247,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Kurslarım',
+                                  Text(
+                                    MagicStrings.myCourses,
                                     style: TextStyles.kHeaderTextStyle,
                                   ),
                                   const SizedBox(

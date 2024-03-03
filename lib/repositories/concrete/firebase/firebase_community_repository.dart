@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/community/community.dart';
 import 'package:education_app/models/community/community_entity.dart';
 import 'package:education_app/repositories/abstract/community_repository.dart';
@@ -8,7 +9,7 @@ import 'package:uuid/uuid.dart';
 
 class FirebaseCommunityRepository extends CommunityRepository {
   final _communityCollection =
-      FirebaseFirestore.instance.collection('communities');
+      FirebaseFirestore.instance.collection(MagicStrings.communitiesCollectionName);
 
   //Bir topluluk oluşturur
   @override
@@ -29,7 +30,6 @@ class FirebaseCommunityRepository extends CommunityRepository {
   //Bir topluluk siler
   @override
   Future<void> deleteCommunity(int id) {
-    // TODO: implement deleteCommunity
     throw UnimplementedError();
   }
 
@@ -61,7 +61,7 @@ class FirebaseCommunityRepository extends CommunityRepository {
   Future<List<Community>> getAllCommunitiesByName(String name) async {
     try {
       return await _communityCollection
-          .where('name', isLessThanOrEqualTo: name)
+          .where(MagicStrings.communitiesNameFieldName, isLessThanOrEqualTo: name)
           .get()
           .then((snapshot) => snapshot.docs
               .map((document) => Community.fromEntity(
@@ -75,13 +75,11 @@ class FirebaseCommunityRepository extends CommunityRepository {
 
   @override
   Future<void> joinCommunity(String communityId, String userId) {
-    // TODO: implement joinCommunity
     throw UnimplementedError();
   }
 
   @override
   Future<void> leaveCommunity(String docId) {
-    // TODO: implement leaveCommunity
     throw UnimplementedError();
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/user/user_entity.dart';
 import 'package:education_app/models/user/user_model.dart';
 import 'package:education_app/repositories/abstract/user_repository.dart';
@@ -12,7 +13,7 @@ class FirebaseUserRepository extends UserRepository {
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   final FirebaseAuth _firebaseAuth;
-  final _userCollection = FirebaseFirestore.instance.collection('users');
+  final _userCollection = FirebaseFirestore.instance.collection(MagicStrings.usersCollectionName);
 
   //Kullanıcı sisteme kayıt olur.
   @override
@@ -111,7 +112,7 @@ class FirebaseUserRepository extends UserRepository {
   Future<List<UserModel>> getUsersByName(String name) async {
     try {
       return await _userCollection
-          .where('fullName', isGreaterThanOrEqualTo: name)
+          .where(MagicStrings.usersFullNameFieldName, isGreaterThanOrEqualTo: name)
           .get()
           .then(
             (value) => value.docs
@@ -143,7 +144,7 @@ class FirebaseUserRepository extends UserRepository {
       firebaseStorageRef.putFile(file);
 
       String imageUrl = await firebaseStorageRef.getDownloadURL();
-      await _userCollection.doc(userId).update({'profilePictureUrl': imageUrl});
+      await _userCollection.doc(userId).update({MagicStrings.usersProfilePictureUrlFieldName: imageUrl});
     } catch (exception) {
       log(exception.toString());
       rethrow;

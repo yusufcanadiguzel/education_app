@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,17 +13,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Başvuru Durumu'),
+          title: Text(MagicStrings.applicationStatus),
         ),
-        body: const Padding(
-          padding: EdgeInsets.all(16.0),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Align(
             alignment: Alignment.topCenter,
             child: ApplicationStatusCard(
-              formName: 'İstanbul Kodluyor',
+              formName: MagicStrings.istanbulCoding,
               statuses: [
-                'İstanbul Kodluyor Başvuru Formu onaylandı.',
-                'İstanbul Kodluyor Belge Yükleme Formu onaylandı.',
+                MagicStrings.istanbulCodingApplicationAccept,
+                MagicStrings.istanbulCodingFilesAccept,
               ],
             ),
           ),
@@ -88,9 +89,9 @@ class ApplicationStatusCard extends StatelessWidget {
                           bottomLeft: Radius.circular(10.0),
                         ),
                       ),
-                      child: const Text(
-                        'Kabul Edildi',
-                        style: TextStyle(
+                      child: Text(
+                        MagicStrings.accepted,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),

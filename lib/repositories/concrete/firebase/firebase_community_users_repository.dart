@@ -1,11 +1,12 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/communityUser/communityUser.dart';
 import 'package:education_app/repositories/abstract/community_users.repository.dart';
 import 'package:uuid/uuid.dart';
 
 class FirebaseCommunityUsersRepository extends CommunityUsersRepository{
-  final _collection = FirebaseFirestore.instance.collection('communityUsers');
+  final _collection = FirebaseFirestore.instance.collection(MagicStrings.communityUsersCollectionName);
 
   @override
   Future<void> joinCommunity(CommunityUser communityUser) async {
