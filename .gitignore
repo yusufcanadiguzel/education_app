@@ -137,6 +137,6 @@ app.*.symbols
 !.vscode/settings.json
 
 # Custom ignore
-lib/services
-lib/firebase_options.dart
-ios/Runner/GoogleService-Info.plist
+**/lib/services
+**/lib/firebase_options.dart
+**/ios/Runner/GoogleService-Info.plist
