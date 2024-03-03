@@ -138,5 +138,5 @@ app.*.symbols
 
 # Custom ignore
 **/lib/services
-**/lib/firebase_options.dart
+education_app/lib/firebase_options.dart
 **/ios/Runner/GoogleService-Info.plist
