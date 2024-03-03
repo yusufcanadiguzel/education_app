@@ -21,7 +21,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  late String searchText;
+  String searchText = MagicStrings.empty;
 
   @override
   Widget build(BuildContext context) {
