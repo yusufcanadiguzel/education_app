@@ -1,8 +1,8 @@
 import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_state.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/widgets/community/community_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
 
 class ContainerGetCommunities extends StatefulWidget {
@@ -20,14 +20,14 @@ class _ContainerGetCommunitiesState extends State<ContainerGetCommunities> {
       color: Colors.white,
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Kişiler',
-                  style: TextStyle(
+                  MagicStrings.people,
+                  style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -50,7 +50,7 @@ class _ContainerGetCommunitiesState extends State<ContainerGetCommunities> {
                 );
               }
 
-              return const Text('sonuç yok');
+              return Text(MagicStrings.cantFindAnything);
             },
           ),
         ],

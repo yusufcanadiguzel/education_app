@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/message/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +40,7 @@ class _MessageFieldState extends State<MessageField> {
         Expanded(
           child: CustomChatTextField(
             controller: _messageController,
-            hintText: 'Mesaj',
+            hintText: MagicStrings.message,
           ),
         ),
         const SizedBox(
@@ -55,7 +55,7 @@ class _MessageFieldState extends State<MessageField> {
               message.message = _messageController.text;
               context.read<SendMessageBloc>().add(SendMessage(message: message));
 
-              _messageController.text = '';
+              _messageController.text = MagicStrings.empty;
             }
           },
           icon: const Icon(

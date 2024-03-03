@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/screens/quiz_screen.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
@@ -22,29 +23,27 @@ class _TestDialogState extends State<TestDialog> {
     return AlertDialog(
       backgroundColor: const Color(0xFF151A3C),
       title: Text(
-        'Test Başlama Ekranı',
+        MagicStrings.testStartScreen,
         style: TextStyles.kHeaderTextStyle,
       ),
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Text(
-              'Bu sınav 25 sorudan oluşmakta olup sınav süresi 30 dakikadır. '
-              'Sınav çoktan seçmeli test şeklinde olup sınavı yarıda bıraktığınız takdirde '
-              'çözdüğünüz kısım kadarıyla değerlendirileceksiniz.',
+              MagicStrings.huaweiTestInfo,
               style: TextStyles.kListTileDescriptionTextStyle,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
-              'Sınav Süresi: 30 Dakika',
-              style: TextStyles.kListTileDescriptionTextStyle,
-            ),
-            Text(
-              'Soru Sayısı: 25',
+              MagicStrings.testLenght,
               style: TextStyles.kListTileDescriptionTextStyle,
             ),
             Text(
-              'Soru Tipi: Çoktan Seçmeli',
+              MagicStrings.testQuestionLenght,
+              style: TextStyles.kListTileDescriptionTextStyle,
+            ),
+            Text(
+              MagicStrings.testQuestionType,
               style: TextStyles.kListTileDescriptionTextStyle,
             ),
           ],
@@ -55,11 +54,14 @@ class _TestDialogState extends State<TestDialog> {
           onPressed: () {
             Navigator.of(context).pop(); // Dialogu kapat
           },
-          child: Text('İptal', style: TextStyles.kListTileHeaderTextStyle),
+          child: Text(
+            MagicStrings.cancel,
+            style: TextStyles.kListTileHeaderTextStyle,
+          ),
         ),
         CustomActionButton(
           function: _startTest,
-          buttonText: 'Teste Başla',
+          buttonText: MagicStrings.startTest,
           width: 150.0,
         ),
       ],

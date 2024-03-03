@@ -1,4 +1,5 @@
 import 'package:education_app/app.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/custom_bloc_observer.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,7 +17,7 @@ Future<void> main() async {
   await FirebaseAppCheck.instance.activate(
     androidProvider: AndroidProvider.playIntegrity,
     appleProvider: AppleProvider.appAttest,
-    webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+    webProvider: ReCaptchaV3Provider(MagicStrings.webProviderType),
   );
 
   Bloc.observer = CustomBlocObserver();

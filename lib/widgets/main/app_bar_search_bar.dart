@@ -1,8 +1,8 @@
 import 'package:education_app/blocs/community/get_all_communities_by_name_bloc/get_all_communities_by_name_bloc.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../blocs/auth_bloc/auth_bloc.dart';
 import '../../blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
 import '../../blocs/get_users_bloc/get_users_bloc.dart';
@@ -55,19 +55,19 @@ class AppBarSearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             color: const Color(0xFF272B4D),
           ),
-          child: const Padding(
-            padding: EdgeInsets.all(8.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   FontAwesomeIcons.magnifyingGlass,
                   size: 16.0,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10.0,
                 ),
                 Text(
-                  'Arama Yapın',
+                  MagicStrings.search,
                   style: TextStyles.kNormalTextStyle,
                 ),
               ],

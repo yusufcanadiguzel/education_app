@@ -15,6 +15,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../blocs/auth_bloc/auth_bloc.dart';
 import '../../blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import '../../blocs/update_user_info_bloc/update_user_info_bloc.dart';
+import '../../constants/strings/magic_strings.dart';
 import 'custom_user_circle_avatar.dart';
 
 class UserDetailsDialog extends StatefulWidget {
@@ -42,7 +43,7 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
   }
 
   Future uploadFile(String userId) async {
-    final String path = '$userId/PP/${userId}_lead';
+    final String path = MagicStrings.getPpFilePath(key: userId);
     final File file = File(pickedFile!.path!);
 
     context
@@ -59,7 +60,7 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
             _firstNameController.text = state.user.firstName;
             _lastNameController.text = state.user.lastName;
             state.user.title == null
-                ? _titleController.text = ''
+                ? _titleController.text = MagicStrings.empty
                 : _titleController.text = state.user.title!;
 
             return AlertDialog(
@@ -67,8 +68,8 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Bilgileri Düzenle',
+                  Text(
+                    MagicStrings.editInformation,
                     style: TextStyles.kHeaderTextStyle,
                   ),
                   IconButton(
@@ -117,37 +118,37 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
                     height: 25.0,
                   ),
                   CustomTextFormField(
-                    labelText: 'İsim',
+                    labelText: MagicStrings.name,
                     controller: _firstNameController,
                     hintText: state.user.firstName,
                     iconData: FontAwesomeIcons.person,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Lütfen alanı doldurunuz.';
+                        return MagicStrings.pleaseFillThisField;
                       }
                       return null;
                     },
                   ),
                   CustomTextFormField(
-                    labelText: 'Soy İsim',
+                    labelText: MagicStrings.lastName,
                     controller: _lastNameController,
                     hintText: state.user.lastName,
                     iconData: FontAwesomeIcons.person,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Lütfen alanı doldurunuz.';
+                        return MagicStrings.pleaseFillThisField;
                       }
                       return null;
                     },
                   ),
                   CustomTextFormField(
-                    labelText: 'Ünvan',
+                    labelText: MagicStrings.title,
                     controller: _titleController,
-                    hintText: state.user.title == null ? '' : state.user.title!,
+                    hintText: state.user.title == null ? MagicStrings.empty : state.user.title!,
                     iconData: FontAwesomeIcons.idBadge,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Lütfen alanı doldurunuz.';
+                        return MagicStrings.pleaseFillThisField;
                       }
                       return null;
                     },
@@ -205,7 +206,7 @@ class _UserDetailsDialogState extends State<UserDetailsDialog> {
                         ),
                       );
                     },
-                    buttonText: 'Kaydet',
+                    buttonText: MagicStrings.save,
                   ),
                 ),
               ],

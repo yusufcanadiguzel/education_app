@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 
 class EducationCard extends StatelessWidget {
@@ -16,9 +17,9 @@ class EducationCard extends StatelessWidget {
 
   static final List<EducationData> educations = [
     EducationData(
-      title: 'Mobil Geliştirici (Flutter)-1A',
-      imageUrl: 'assets/images/Paragraf_metniniz_5_ee4ce53c20.png',
-      date: '23 Ekim 2023 03:00',
+      title: MagicStrings.educationCardTitle,
+      imageUrl: MagicStrings.educationCardImageUrl,
+      date: MagicStrings.educationCardDate,
     ),
     // Diğer eğitim örnekleri...
   ];
@@ -90,7 +91,7 @@ class EducationCard extends StatelessWidget {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: onPressed,
-                                child: const Text('Eğitime Git'),
+                                child: Text(MagicStrings.goEducation),
                               ),
                             ),
                           ],

@@ -18,7 +18,6 @@ class GetAllPostsByCommunityIdSuccess extends GetAllPostsByCommunityIdState{
   const GetAllPostsByCommunityIdSuccess({required this.posts});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [posts];
 }
 

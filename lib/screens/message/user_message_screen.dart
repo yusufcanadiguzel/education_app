@@ -1,5 +1,4 @@
 import 'package:education_app/theme/text_styles.dart';
-import 'package:education_app/widgets/message/message_box.dart';
 import 'package:education_app/widgets/user/custom_user_circle_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

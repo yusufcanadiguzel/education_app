@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/post/post.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -53,9 +54,9 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
           appBar: AppBar(
             elevation: 0,
             foregroundColor: Colors.white,
-            title: const Center(
+            title: Center(
                 child: Text(
-              'Bir şeyler paylaş...',
+              MagicStrings.shareSomething,
             )),
           ),
           body: SingleChildScrollView(
@@ -69,7 +70,7 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
                 decoration: InputDecoration(
                     labelStyle: TextStyles.kHeaderTextStyle,
                     hintStyle: TextStyles.kListTileHeaderTextStyle,
-                    hintText: 'Ne düşünüyorsun...',
+                    hintText: MagicStrings.whatAreYouThinking,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(color: Colors.grey),

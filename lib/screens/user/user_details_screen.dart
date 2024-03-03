@@ -2,6 +2,7 @@ import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import 'package:education_app/blocs/message/get_message_stream_bloc/get_message_stream_event.dart';
 import 'package:education_app/constants/decorations/container_decorations.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_message_repository.dart';
 import 'package:education_app/screens/message/user_message_screen.dart';
 import 'package:education_app/theme/text_styles.dart';
@@ -43,8 +44,8 @@ class UserDetailsScreen extends StatelessWidget {
                                 radius: 50.0,
                                 backgroundImage: state.user.profilePictureUrl ==
                                         ''
-                                    ? const NetworkImage(
-                                        'https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png')
+                                    ? NetworkImage(
+                                        MagicStrings.defaultProfilePictureUrl)
                                     : NetworkImage(
                                         state.user.profilePictureUrl!),
                               ),
@@ -94,7 +95,7 @@ class UserDetailsScreen extends StatelessWidget {
                                 child: const UserMessageScreen(),
                               ),
                             )),
-                            buttonText: 'Mesaj Gönder',
+                            buttonText: MagicStrings.sendMessage,
                           ),
                         ],
                       ),
@@ -106,16 +107,16 @@ class UserDetailsScreen extends StatelessWidget {
                   Container(
                     decoration: ContainerDecorations.listContainerDecoration,
                     width: double.infinity,
-                    child: const Padding(
-                      padding: EdgeInsets.all(10.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Hakkında',
+                            MagicStrings.aboutIt,
                             style: TextStyles.kHeaderTextStyle,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                         ],
@@ -137,8 +138,8 @@ class UserDetailsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Kurslarım',
+                          Text(
+                            MagicStrings.myCourses,
                             style: TextStyles.kHeaderTextStyle,
                           ),
                           const SizedBox(
@@ -184,7 +185,7 @@ class UserDetailsScreen extends StatelessWidget {
               );
             }
 
-            return const Text('unknown state');
+            return Text(MagicStrings.unknownState);
           },
         ),
       ),

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import 'package:education_app/repositories/abstract/user_repository.dart';

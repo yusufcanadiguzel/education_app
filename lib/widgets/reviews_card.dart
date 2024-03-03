@@ -1,4 +1,5 @@
 import 'package:education_app/constants/decorations/container_decorations.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,7 @@ class ReviewsCard extends StatelessWidget {
                 ),
                 isActive
                     ? CustomActionButton(
-                        function: onStartButtonPressed, buttonText: 'Başla')
+                        function: onStartButtonPressed, buttonText: MagicStrings.start,)
                     : Container(),
               ],
             ),
@@ -85,10 +86,10 @@ class CustomSectionWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       padding: const EdgeInsets.all(16),
       decoration: ContainerDecorations.listContainerDecoration,
-      child: const Column(
+      child: Column(
         children: [
           Text(
-            'Aboneliğe özel değerlendirme araçları için',
+            MagicStrings.specialForSubscription,
             style: TextStyles.kNormalTextStyle,
           ),
         ],
@@ -106,42 +107,42 @@ class LastTwoCards extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       padding: const EdgeInsets.all(16),
       decoration: ContainerDecorations.listContainerDecoration,
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Huawei Talent Interview',
+            MagicStrings.huaweiTalentInterview,
             style: TextStyles.kHeaderTextStyle,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
-            'Teknik Bilgi Sınavı*',
-            style: TextStyle(
+            MagicStrings.technicalTest,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
-            'Sertifika alabilmen için, eğitim yolculuğunun sonunda teknik yetkinliklerin ve kod bilgin ölçülür.',
-            style: TextStyle(
+            MagicStrings.certificateInfo,
+            style: const TextStyle(
               fontSize: 12,
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
-            '4400+  soru | 30+ programlama dili | 4 zorluk seviyesi',
-            style: TextStyle(
+            MagicStrings.huaweiTestInfo,
+            style: const TextStyle(
               fontSize: 12,
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
-            '*Türkiye Ar-Ge Merkezi tarafından tasarlanmıştır.',
-            style: TextStyle(
+            MagicStrings.testDesigner,
+            style: const TextStyle(
               fontSize: 10,
               color: Colors.white,
             ),

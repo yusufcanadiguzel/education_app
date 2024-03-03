@@ -1,4 +1,5 @@
 import 'package:education_app/constants/decorations/container_decorations.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/user/custom_user_item.dart';
 import 'package:flutter/material.dart';
@@ -21,16 +22,18 @@ class _CustomContainerGetUsersState extends State<CustomContainerGetUsers> {
     return Container(
       decoration: ContainerDecorations.listContainerDecoration,
       child: Padding(
-        padding: const EdgeInsets.all(10.0,),
+        padding: const EdgeInsets.all(
+          10.0,
+        ),
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Kişiler',
+                    MagicStrings.people,
                     style: TextStyles.kHeaderTextStyle,
                   ),
                 ],
@@ -40,10 +43,14 @@ class _CustomContainerGetUsersState extends State<CustomContainerGetUsers> {
               builder: (context, state) {
                 if (state is GetUsersByNameSuccess) {
                   return ListView.separated(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0,),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                    ),
                     shrinkWrap: true,
                     itemCount: state.users.length,
-                    separatorBuilder: (context, index) => const SizedBox(height: 10,),
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 10,
+                    ),
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return CustomUserItem(user: state.users[index]);
@@ -51,13 +58,13 @@ class _CustomContainerGetUsersState extends State<CustomContainerGetUsers> {
                   );
                 }
 
-                if(state is GetUsersByNameProcess){
+                if (state is GetUsersByNameProcess) {
                   return const Center(
                     child: CircularProgressIndicator(color: Colors.white),
                   );
                 }
 
-                return const Text('');
+                return Text(MagicStrings.empty);
               },
             ),
           ],

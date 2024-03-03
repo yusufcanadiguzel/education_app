@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/course.dart';
 import 'package:education_app/screens/catalog_video_continue.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _CatalogVideosState extends State<CatalogVideos> {
         borderRadius: BorderRadius.circular(15.0),
         child: InkWell(
           onTap: () {
-            if (widget.courseCard.releaseDate == '4s 14dk') {
+            if (widget.courseCard.releaseDate == MagicStrings.courseLenght) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -60,7 +61,7 @@ class _CatalogVideosState extends State<CatalogVideos> {
                       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(192, 166, 114, 226)
+                          color: const Color.fromARGB(192, 166, 114, 226)
                               .withOpacity(0.5),
                         ),
                         child: Padding(
@@ -69,7 +70,7 @@ class _CatalogVideosState extends State<CatalogVideos> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: Row(
                                   children: [
                                     const Icon(
@@ -94,7 +95,7 @@ class _CatalogVideosState extends State<CatalogVideos> {
                                     SizedBox(width: phoneWidth / 90),
                                     Text(
                                       widget.courseCard.releaseDate,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 13.0,
                                       ),
@@ -103,11 +104,11 @@ class _CatalogVideosState extends State<CatalogVideos> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 10, bottom: 10),
+                                padding: const EdgeInsets.only(left: 10, bottom: 10),
                                 width: phoneWidth / 1.3,
                                 child: Text(
                                   widget.courseCard.coursesName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -127,7 +128,7 @@ class _CatalogVideosState extends State<CatalogVideos> {
                   right: 15.0,
                   child: IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.play_circle,
                         color: Color.fromARGB(255, 201, 24, 232),
                         size: 40,

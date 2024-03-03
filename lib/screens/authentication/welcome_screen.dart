@@ -1,10 +1,10 @@
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/screens/authentication/sign_in_screen.dart';
 import 'package:education_app/screens/authentication/sign_up_screen.dart';
 import 'package:education_app/widgets/background_container.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/sign_up_bloc/sign_up_bloc.dart';
@@ -38,13 +38,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Image.asset('assets/images/education_app_white_logo.png'),
+                Image.asset(MagicStrings.whiteLogoPath),
                 const SizedBox(
                   height: 20.0,
                 ),
-                const Text(
-                  'Öğren, Paylaş ve Haberleş',
-                  style: TextStyle(
+                Text(
+                  MagicStrings.slogan,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
@@ -73,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           ),
                         );
                       },
-                      buttonText: 'Giriş Yap',
+                      buttonText: MagicStrings.signIn,
                       width: 150.0,
                     ),
                     const SizedBox(
@@ -96,7 +96,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             ),
                           );
                         },
-                        buttonText: 'Kayıt Ol',
+                        buttonText: MagicStrings.signUp,
                         width: 150.0),
                   ],
                 ),

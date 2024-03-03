@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,11 +18,17 @@ class UserRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetUserByIdBloc, GetUserByIdState>(
       builder: (context, state) {
-        if(state is GetUserByIdSuccess){
+        if (state is GetUserByIdSuccess) {
           return Row(
             children: [
               BlocProvider(
-                create: (context) => GetUserByIdBloc(repository: FirebaseUserRepository())..add(GetUserById(id: userId),),
+                create: (context) =>
+                    GetUserByIdBloc(repository: FirebaseUserRepository())
+                      ..add(
+                        GetUserById(
+                          id: userId,
+                        ),
+                      ),
                 child: const CustomUserPictureCircle(radius: 30),
               ),
               const SizedBox(
@@ -32,8 +39,8 @@ class UserRow extends StatelessWidget {
                 children: [
                   Text(
                     state.user.fullName!,
-                    style:
-                    const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 5.0,
@@ -44,7 +51,7 @@ class UserRow extends StatelessWidget {
           );
         }
 
-        return const Text('UserRow error');
+        return Text(MagicStrings.userRowError);
       },
     );
   }

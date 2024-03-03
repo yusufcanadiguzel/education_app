@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:education_app/blocs/post/get_all_posts_bloc/get_all_posts_bloc.dart';
 import 'package:education_app/blocs/post/get_all_posts_bloc/get_all_posts_state.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/widgets/post/custom_post_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,16 +20,18 @@ class PostContainer extends StatelessWidget {
     return Container(
       decoration: ContainerDecorations.listContainerDecoration,
       child: Padding(
-        padding: const EdgeInsets.all(10.0,),
+        padding: const EdgeInsets.all(
+          10.0,
+        ),
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Paylaşımlar',
+                    MagicStrings.posts,
                     style: TextStyles.kHeaderTextStyle,
                   ),
                 ],
@@ -38,29 +41,41 @@ class PostContainer extends StatelessWidget {
               builder: (context, state) {
                 if (state is GetAllPostsStateSuccess) {
                   log(state.posts.length.toString());
-                  if(state.posts.isEmpty){
-                    return const Text('Paylaşım bulunamadı...', style: TextStyles.kListTileHeaderTextStyle,);
+                  if (state.posts.isEmpty) {
+                    return Text(
+                      MagicStrings.cantFindPost,
+                      style: TextStyles.kListTileHeaderTextStyle,
+                    );
                   }
 
                   return ListView.separated(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0,),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                    ),
                     shrinkWrap: true,
                     itemCount: state.posts.length,
-                    separatorBuilder: (context, index) => const SizedBox(height: 10,),
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 10,
+                    ),
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      if(communityId == state.posts[index].communityId){
-                        return CustomPostItem(post: state.posts[index],);
+                      if (communityId == state.posts[index].communityId) {
+                        return CustomPostItem(
+                          post: state.posts[index],
+                        );
                       }
                     },
                   );
                 }
 
-                if(state is GetAllPostsStateFailure){
-                  return const Text('getAllPostsFailure', style: TextStyles.kHeaderTextStyle,);
+                if (state is GetAllPostsStateFailure) {
+                  return Text(
+                    MagicStrings.stateFailure,
+                    style: TextStyles.kHeaderTextStyle,
+                  );
                 }
 
-                return const Text('');
+                return Text(MagicStrings.empty);
               },
             ),
           ],

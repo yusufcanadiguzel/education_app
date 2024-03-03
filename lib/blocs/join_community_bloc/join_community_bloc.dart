@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:education_app/blocs/join_community_bloc/join_community_event.dart';
 import 'package:education_app/blocs/join_community_bloc/join_community_state.dart';
 import 'package:education_app/repositories/abstract/community_users.repository.dart';

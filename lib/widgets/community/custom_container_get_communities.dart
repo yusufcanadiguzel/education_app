@@ -1,4 +1,5 @@
 import 'package:education_app/blocs/community/get_all_communities_by_name_bloc/get_all_communities_by_name_bloc.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/widgets/community/custom_community_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,13 +23,13 @@ class _CustomContainerGetCommunitiesState extends State<CustomContainerGetCommun
         padding: const EdgeInsets.all(10.0,),
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Topluluklar',
+                    MagicStrings.communities,
                     style: TextStyles.kHeaderTextStyle,
                   ),
                 ],
@@ -50,7 +51,7 @@ class _CustomContainerGetCommunitiesState extends State<CustomContainerGetCommun
 
                 }
 
-                return const Text('unknown state');
+                return Text(MagicStrings.unknownState);
               },
             ),
           ],

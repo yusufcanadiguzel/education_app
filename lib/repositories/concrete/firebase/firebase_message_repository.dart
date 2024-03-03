@@ -1,18 +1,19 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/message/message.dart';
 import 'package:education_app/models/message/message_entity.dart';
 import 'package:education_app/repositories/abstract/message_repository.dart';
 import 'package:uuid/uuid.dart';
 
 class FirebaseMessageRepository extends MessageRepository {
-  final _collection = FirebaseFirestore.instance.collection('messages');
+  final _collection = FirebaseFirestore.instance.collection(MagicStrings.messagesCollectionName);
 
   @override
   Future<List<Message>> getMessagesByReceiverId(String id) async {
     try {
-      return await _collection.orderBy('sendedAt')
-          .where('receiverId', isGreaterThanOrEqualTo: id)
+      return await _collection.orderBy(MagicStrings.messagesSendedAtFieldName)
+          .where(MagicStrings.messagesReceiverIdFieldName, isGreaterThanOrEqualTo: id)
           .get()
           .then((value) =>
           value.docs
@@ -29,7 +30,7 @@ class FirebaseMessageRepository extends MessageRepository {
   Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getMessagesStreamByUser(
       String receiverId) async {
     try {
-      return _collection.where('receiverId', isEqualTo: receiverId).snapshots();
+      return _collection.where(MagicStrings.messagesReceiverIdFieldName, isEqualTo: receiverId).snapshots();
     } catch (exception) {
       log(exception.toString());
       rethrow;
@@ -38,7 +39,6 @@ class FirebaseMessageRepository extends MessageRepository {
 
   @override
   Future<List<Message>> getMessages() {
-    // TODO: implement getMessages
     throw UnimplementedError();
   }
 
@@ -57,14 +57,13 @@ class FirebaseMessageRepository extends MessageRepository {
 
   @override
   Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getAllMessages(String) {
-    // TODO: implement getAllMessages
     throw UnimplementedError();
   }
 
   @override
   Future<Stream<List<Message>>> getMessageStream() async {
     try {
-      return _collection.orderBy('sendedAt').snapshots().map((snapshot) {
+      return _collection.orderBy(MagicStrings.messagesSendedAtFieldName).snapshots().map((snapshot) {
         return snapshot.docs.map((document) {
           var message = Message.fromEntity(MessageEntity.fromDocument(document.data()));
 

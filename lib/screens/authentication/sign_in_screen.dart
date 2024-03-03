@@ -1,6 +1,7 @@
 import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_state.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/constants/strings/value_regexes.dart';
 import 'package:education_app/screens/authentication/sign_up_screen.dart';
 import 'package:education_app/theme/text_styles.dart';
@@ -65,7 +66,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/images/education_app_white_logo.png',
+                    MagicStrings.whiteLogoPath,
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -74,8 +75,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const Text(
-                    'Hoşgeldin!',
+                  Text(
+                    MagicStrings.welcome,
                     style: TextStyles.kListTileHeaderTextStyle,
                   ),
                   Form(
@@ -90,13 +91,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         CustomTextFormField(
                           textInputType: TextInputType.emailAddress,
                           controller: _emailController,
-                          hintText: 'Email',
+                          hintText: MagicStrings.email,
                           iconData: Icons.mail,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Lütfen alanı doldurunuz.';
+                              return MagicStrings.pleaseFillThisField;
                             } else if (!emailRexExp.hasMatch(value)) {
-                              return 'Lütfen geçerli bir email giriniz.';
+                              return MagicStrings.pleaseEnterAValidMail;
                             }
                             return null;
                           },
@@ -108,7 +109,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           maxLines: 1,
                           isObscure: _isObscure,
                           controller: _passwordController,
-                          hintText: 'Şifre',
+                          hintText: MagicStrings.password,
                           iconData: Icons.lock,
                           suffixIcon: IconButton(
                             color: Colors.white,
@@ -126,9 +127,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Lütfen alanı doldurunuz.';
+                              return MagicStrings.pleaseFillThisField;
                             } else if (!passwordRexExp.hasMatch(value)) {
-                              return 'Lütfen geçerli bir email giriniz.';
+                              return MagicStrings.pleaseEnterAValidPassword;
                             }
                             return null;
                           },
@@ -149,7 +150,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                         );
                                   }
                                 },
-                                buttonText: 'Giriş Yap')
+                                buttonText: MagicStrings.signIn
+                        )
                             : const CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -158,7 +160,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
 
                   //Divider
-                  const CustomDivider(dividerText: 'ya da'),
+                  CustomDivider(dividerText: MagicStrings.or),
 
                   //Connection Buttons
                   const Padding(
@@ -195,12 +197,12 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Hesabın yok mu?', style: TextStyles.kNormalTextStyle,),
-                        SizedBox(width: 10.0,),
-                        Text('Kayıt Ol!', style: TextStyles.kHeaderTextStyle,),
+                        Text(MagicStrings.dontHaveAccount, style: TextStyles.kNormalTextStyle,),
+                        const SizedBox(width: 10.0,),
+                        Text(MagicStrings.signUp, style: TextStyles.kHeaderTextStyle,),
                       ],
                     ),
                   ),

@@ -1,24 +1,18 @@
-import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/get_community_by_id_bloc/get_community_by_id_bloc.dart';
 import 'package:education_app/blocs/post/get_all_posts_bloc/get_all_posts_event.dart';
-import 'package:education_app/blocs/post/get_post_stream_bloc/get_post_stream_bloc.dart';
-import 'package:education_app/blocs/post/get_post_stream_bloc/get_post_stream_event.dart';
 import 'package:education_app/constants/decorations/container_decorations.dart';
-import 'package:education_app/models/user/user_model.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/repositories/concrete/firebase/firebase_post_repository.dart';
-import 'package:education_app/repositories/concrete/firebase/firebase_user_repository.dart';
 import 'package:education_app/screens/post/community_post_screen.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:education_app/widgets/main/app_bar_search_bar.dart';
 import 'package:education_app/widgets/post/post_container.dart';
-import 'package:education_app/widgets/post/post_stream.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/get_community_by_id_bloc/get_community_by_id_state.dart';
 import '../../blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
-import '../../blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import '../../blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import '../../blocs/post/create_post_bloc/create_post_bloc.dart';
 import '../../blocs/post/get_all_posts_bloc/get_all_posts_bloc.dart';
@@ -107,7 +101,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                     ),
                                   ),
                                 ),
-                                buttonText: 'Bir Şeyler Paylaş',
+                                buttonText: MagicStrings.shareSomething,
                               );
                             }
 

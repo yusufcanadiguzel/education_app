@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/models/post/post.dart';
 import 'package:education_app/widgets/user/user_row.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class PostItem extends StatelessWidget {
           );
         }
 
-        return const Text('PostItem error');
+        return Text(MagicStrings.postItemError);
       },
     );
   }

@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatelessWidget {
@@ -20,7 +21,7 @@ class Footer extends StatelessWidget {
               Container(
                 width: 100,
                 child: Image.asset(
-                  'assets/images/tobeto_white_logo.png',
+                  MagicStrings.tobetoLogoPath,
                 ),
               ),
               Container(
@@ -32,9 +33,9 @@ class Footer extends StatelessWidget {
                 ),
                 child: TextButton(
                   onPressed: () {},
-                  child: const Text(
-                    "Bize Ulaşın",
-                    style: TextStyle(
+                  child: Text(
+                    MagicStrings.contactUs,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -43,10 +44,10 @@ class Footer extends StatelessWidget {
               )
             ],
           ),
-          const Center(
+          Center(
             child: Text(
-              "© 2022 Tobeto",
-              style: TextStyle(color: Colors.white, fontSize: 12),
+              MagicStrings.tobetoFooter,
+              style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
           ),
         ],

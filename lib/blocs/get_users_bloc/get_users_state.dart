@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import '../../models/user/user_model.dart';
 
 class GetUsersState extends Equatable{

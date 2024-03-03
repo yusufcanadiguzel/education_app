@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,8 +33,8 @@ class _UserAboutMeDialogState extends State<UserAboutMeDialog> {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Hakkımdayı Düzenle',
+                  Text(
+                    MagicStrings.editAboutMe,
                     style: TextStyles.kHeaderTextStyle,
                   ),
                   IconButton(
@@ -50,11 +51,11 @@ class _UserAboutMeDialogState extends State<UserAboutMeDialog> {
                   CustomTextFormField(
                     maxLength: 500,
                     maxLines: 10,
-                    labelText: 'Hakkımda',
+                    labelText: MagicStrings.aboutMe,
                     controller: aboutMeController,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Lütfen alanı doldurunuz.';
+                        return MagicStrings.pleaseFillThisField;
                       }
                       return null;
                     },
@@ -75,7 +76,7 @@ class _UserAboutMeDialogState extends State<UserAboutMeDialog> {
       
                       Navigator.pop(context);
                     },
-                    buttonText: 'Kaydet',
+                    buttonText: MagicStrings.save,
                   ),
                 ),
               ],

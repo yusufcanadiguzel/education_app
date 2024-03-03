@@ -2,6 +2,7 @@ import 'package:education_app/models/post/post.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/decorations/container_decorations.dart';
+import '../../constants/strings/magic_strings.dart';
 import '../../theme/text_styles.dart';
 
 class CustomPostItem extends StatefulWidget {
@@ -35,7 +36,9 @@ class _CustomPostItemState extends State<CustomPostItem> {
                           child: CircleAvatar(
                             radius: 30.0,
                             child: Text(
-                              '${widget.post.creator.firstName[0]}${widget.post.creator.lastName[0]}',
+                              MagicStrings.getUserLetters(
+                                  firstName: widget.post.creator.firstName,
+                                  lastName: widget.post.creator.lastName),
                             ),
                           ),
                         )
@@ -46,10 +49,13 @@ class _CustomPostItemState extends State<CustomPostItem> {
                           child: CircleAvatar(
                             radius: 30.0,
                             backgroundImage: NetworkImage(
-                                widget.post.creator.profilePictureUrl!),
+                              widget.post.creator.profilePictureUrl!,
+                            ),
                           ),
                         ),
-                  const SizedBox(width: 10.0,),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

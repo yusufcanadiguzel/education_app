@@ -1,4 +1,5 @@
 import 'package:education_app/blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/screens/catalog_screen.dart';
 import 'package:education_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
@@ -27,19 +28,19 @@ class SideMenu extends StatelessWidget {
               SizedBox(
                 height: 100,
                 child: DrawerHeader(
-                  child: Image.asset('assets/images/tobeto-logo.png'),
+                  child: Image.asset(MagicStrings.tobetoLogoPath),
                 ),
               ),
             ],
           ),
-          const ListTile(
-            title: Text('Anasayfa'),
-          ),
-          const ListTile(
-            title: Text('Değerlendirmeler'),
+          ListTile(
+            title: Text(MagicStrings.homeScreen),
           ),
           ListTile(
-            title: const Text('Profilim'),
+            title: Text(MagicStrings.reviews),
+          ),
+          ListTile(
+            title: Text(MagicStrings.myProfile),
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => MultiBlocProvider(
@@ -78,27 +79,27 @@ class SideMenu extends StatelessWidget {
                     builder: (context) => const CatalogScreen(),
                   ));
             },
-            title: Text('Katalog'),
+            title: Text(MagicStrings.catalog),
           ),
-          const ListTile(
-            title: Text('Takvim'),
+          ListTile(
+            title: Text(MagicStrings.calender),
           ),
           const Divider(),
-          const ListTile(
-            title: Text('Tobeto'),
-            leading: Icon(Icons.home),
+          ListTile(
+            title: Text(MagicStrings.tobeto),
+            leading: const Icon(Icons.home),
           ),
-          const Card(
+          Card(
             child: ListTile(
-              title: Text('Username'),
-              trailing: Icon(Icons.person),
+              title: Text(MagicStrings.lastName),
+              trailing: const Icon(Icons.person),
             ),
           ),
           ListTile(
-            title: Text('Çıkış Yap'),
+            title: Text(MagicStrings.signOut),
             onTap: () => context.read<SignInBloc>().add(SignOut()),
           ),
-          const ListTile(title: Text('\u00a9 2023 Tobeto')),
+          ListTile(title: Text(MagicStrings.tobetoFooter,),),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,13 +23,13 @@ class MessageStream extends StatelessWidget {
               shrinkWrap: true,
               itemCount: messages.length,
               itemBuilder: (context, index) {
-              return Text(messages[index].data()['message']);
+              return Text(messages[index].data()[MagicStrings.messageFieldName]);
             },);
           },);
         }
 
-        return const Center(
-          child: Text('unknown state',),
+        return Center(
+          child: Text(MagicStrings.unknownState),
         );
       },
     );

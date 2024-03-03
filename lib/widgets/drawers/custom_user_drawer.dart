@@ -1,9 +1,7 @@
-import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_bloc.dart';
-import 'package:education_app/blocs/get_all_communities_bloc/get_all_communities_event.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:education_app/blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:education_app/constants/decorations/container_decorations.dart';
-import 'package:education_app/repositories/concrete/firebase/firebase_community_repository.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +13,6 @@ import '../../blocs/get_user_by_id_bloc/get_user_by_id_bloc.dart';
 import '../../blocs/get_user_by_id_bloc/get_user_by_id_event.dart';
 import '../../blocs/get_user_by_id_bloc/get_user_by_id_state.dart';
 import '../../blocs/update_user_info_bloc/update_user_info_bloc.dart';
-import '../../screens/community/communities_screen.dart';
 import '../../screens/user/profile_screen.dart';
 import '../user/custom_user_circle_avatar.dart';
 
@@ -45,7 +42,7 @@ class CustomUserDrawer extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text('${state.user.fullName}',
+                          Text(state.user.fullName!,
                               style: TextStyles.kListTileHeaderTextStyle),
                         ],
                       ),
@@ -62,8 +59,8 @@ class CustomUserDrawer extends StatelessWidget {
                     FontAwesomeIcons.solidUser,
                     color: Colors.white,
                   ),
-                  title: const Text(
-                    'Profil',
+                  title: Text(
+                    MagicStrings.profile,
                     style: TextStyles.kListTileHeaderTextStyle,
                   ),
                   onTap: () => Navigator.of(context).push(
@@ -110,7 +107,7 @@ class CustomUserDrawer extends StatelessWidget {
                 function: () {
                   context.read<SignInBloc>().add(SignOut());
                 },
-                buttonText: 'Çıkış Yap',
+                buttonText: MagicStrings.signOut,
               ),
             ],
           ),
