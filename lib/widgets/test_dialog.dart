@@ -1,21 +1,26 @@
 import 'package:education_app/constants/strings/magic_strings.dart';
-import 'package:education_app/screens/quiz_screen.dart';
-import 'package:education_app/theme/text_styles.dart';
-import 'package:education_app/widgets/custom_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class TestDialog extends StatefulWidget {
-  const TestDialog({Key? key}) : super(key: key);
+class TestDialog extends StatelessWidget {
+  final String testUrl;
 
-  @override
-  _TestDialogState createState() => _TestDialogState();
-}
+  const TestDialog({Key? key, required this.testUrl}) : super(key: key);
 
-class _TestDialogState extends State<TestDialog> {
-  void _startTest() {
+  void _startTest(BuildContext context) async {
     Navigator.of(context).pop(); // Dialogu kapat
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => QuizScreen())); // QuizScreen'e git
+    await _launchTestUrl(testUrl); // Testi başlat
+  }
+
+  Future<void> _launchTestUrl(String url) async {
+    Uri uri = Uri.parse(url);
+    // ignore: deprecated_member_use
+    if (await canLaunch(uri.toString())) {
+      // ignore: deprecated_member_use
+      await launch(uri.toString());
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -24,27 +29,28 @@ class _TestDialogState extends State<TestDialog> {
       backgroundColor: const Color(0xFF151A3C),
       title: Text(
         MagicStrings.testStartScreen,
-        style: TextStyles.kHeaderTextStyle,
+        style: TextStyle(color: Colors.white), // Başlık rengi değiştirildi
       ),
       content: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               MagicStrings.huaweiTestInfo,
-              style: TextStyles.kListTileDescriptionTextStyle,
+              style: TextStyle(color: Colors.white), // Metin rengi değiştirildi
             ),
             const SizedBox(height: 20),
             Text(
               MagicStrings.testLenght,
-              style: TextStyles.kListTileDescriptionTextStyle,
+              style: TextStyle(color: Colors.white), // Metin rengi değiştirildi
             ),
             Text(
               MagicStrings.testQuestionLenght,
-              style: TextStyles.kListTileDescriptionTextStyle,
+              style: TextStyle(color: Colors.white), // Metin rengi değiştirildi
             ),
             Text(
               MagicStrings.testQuestionType,
-              style: TextStyles.kListTileDescriptionTextStyle,
+              style: TextStyle(color: Colors.white), // Metin rengi değiştirildi
             ),
           ],
         ),
@@ -56,13 +62,17 @@ class _TestDialogState extends State<TestDialog> {
           },
           child: Text(
             MagicStrings.cancel,
-            style: TextStyles.kListTileHeaderTextStyle,
+            style: TextStyle(color: Colors.white), // Metin rengi değiştirildi
           ),
         ),
-        CustomActionButton(
-          function: _startTest,
-          buttonText: MagicStrings.startTest,
-          width: 150.0,
+        ElevatedButton(
+          onPressed: () {
+            _startTest(context); // Testi başlat
+          },
+          child: Text(
+            MagicStrings.startTest,
+            style: TextStyle(color: Colors.white), // Metin rengi değiştirildi
+          ),
         ),
       ],
     );

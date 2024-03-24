@@ -80,16 +80,14 @@ class _TobetoScreenState extends State<TobetoScreen>
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Image.asset(
-                          MagicStrings.istanbulCodingLogoPath,
+                      child: Image.asset(MagicStrings.istanbulCodingLogoPath,
                           width: 200.0),
                     ),
                     Container(
                       margin: const EdgeInsets.all(16.0),
-                      child: Text(
-                          MagicStrings.freeEducationSlogan,
-                          style:
-                              TextStyle(fontSize: 18.0, fontFamily: MagicStrings.poppins),
+                      child: Text(MagicStrings.freeEducationSlogan,
+                          style: TextStyle(
+                              fontSize: 18.0, fontFamily: MagicStrings.poppins),
                           textAlign: TextAlign.center),
                     ),
                     Container(
@@ -123,7 +121,8 @@ class _TobetoScreenState extends State<TobetoScreen>
                                 child: ApplicationStatusCard(
                                   formName: MagicStrings.istanbulCoding,
                                   statuses: [
-                                    MagicStrings.istanbulCodingApplicationAccept,
+                                    MagicStrings
+                                        .istanbulCodingApplicationAccept,
                                     MagicStrings.istanbulCodingFilesAccept,
                                   ],
                                 ),

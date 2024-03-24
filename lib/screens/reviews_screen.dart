@@ -3,10 +3,9 @@ import 'package:education_app/theme/text_styles.dart';
 import 'package:education_app/widgets/test_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:education_app/widgets/reviews_card.dart';
-import 'package:education_app/widgets/footer.dart';
 
 class ReviewsScreen extends StatelessWidget {
-  const ReviewsScreen({super.key});
+  const ReviewsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class ReviewsScreen extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const TestDialog();
+                  return TestDialog(testUrl: 'https://form.jotform.com/240632453174957');
                 },
               );
             },
@@ -58,7 +57,7 @@ class ReviewsScreen extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const TestDialog();
+                  return TestDialog(testUrl: 'https://form.jotform.com/240814435117956');
                 },
               );
             },
@@ -72,7 +71,7 @@ class ReviewsScreen extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const TestDialog();
+                  return TestDialog(testUrl: 'https://form.jotform.com/240814713652959');
                 },
               );
             },
@@ -86,7 +85,7 @@ class ReviewsScreen extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const TestDialog(); // TestDialog widget'ını göster
+                  return TestDialog(testUrl: 'https://form.jotform.com/240813867281966');
                 },
               );
             },
@@ -100,7 +99,7 @@ class ReviewsScreen extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const TestDialog(); // TestDialog widget'ını göster
+                  return TestDialog(testUrl: 'https://form.jotform.com/240814577673970');
                 },
               );
             },
