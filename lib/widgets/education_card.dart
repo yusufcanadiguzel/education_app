@@ -1,5 +1,5 @@
-import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 
 class EducationCard extends StatelessWidget {
   final String title;
@@ -21,86 +21,102 @@ class EducationCard extends StatelessWidget {
       imageUrl: MagicStrings.educationCardImageUrl,
       date: MagicStrings.educationCardDate,
     ),
-    // Diğer eğitim örnekleri...
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: SizedBox(
-        width: double.infinity,
-        height: 310.0, // Kartın yüksekliğini ayarla
-        child: Card(
-          elevation: 4.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              border: const Border(
-                left: BorderSide(
-                  width: 0.01, // Border kalınlığını ayarla
-                  color: Colors.green,
-                ),
+    return Scaffold(
+      backgroundColor: const Color(0xFF151A3C),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop(); // Geri dönüş işlemi
+          },
+        ),
+      ),
+      body: Align(
+        alignment: Alignment.topCenter, // Kartı ekranın en üstünde hizala
+        child: Padding(
+          padding: const EdgeInsets.only(top: 70.0), // Kartı biraz aşağıya al
+          child: SizedBox(
+            width: double.infinity,
+            height: 320.0,
+            child: Card(
+              color: const Color(0xFF151A3C),
+              elevation: 4.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 184.0, // Resmin yüksekliğini ayarla
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(educations[0].imageUrl),
-                      fit: BoxFit.cover, // Resmin nasıl sığdırılacağını belirle
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10.0),
-                      topRight: Radius.circular(10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: const Border(
+                    left: BorderSide(
+                      width: 0.01,
+                      color: Colors.green,
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          educations[0].title,
-                          style: const TextStyle(
-                            fontSize: 16.0, // Başlığın font boyutunu ayarla
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 10, 10, 10),
-                          ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 184.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(educations[0].imageUrl),
+                          fit: BoxFit.cover,
                         ),
-                        const SizedBox(height: 4.0),
-                        Text(
-                          educations[0].date,
-                          style: const TextStyle(
-                            fontSize: 12.0, // Tarihin font boyutunu ayarla
-                            color: Color.fromARGB(255, 10, 10, 10),
-                          ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10.0),
+                          topRight: Radius.circular(10.0),
                         ),
-                        const SizedBox(height: 8.0),
-                        Row(
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: onPressed,
-                                child: Text(MagicStrings.goEducation),
+                            Text(
+                              educations[0].title,
+                              style: const TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 252, 251, 251),
                               ),
+                            ),
+                            const SizedBox(height: 4.0),
+                            Text(
+                              educations[0].date,
+                              style: const TextStyle(
+                                fontSize: 12.0,
+                                color: Color.fromARGB(255, 252, 251, 251),
+                              ),
+                            ),
+                            const SizedBox(height: 8.0),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: onPressed,
+                                    child: Text(MagicStrings.goEducation),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

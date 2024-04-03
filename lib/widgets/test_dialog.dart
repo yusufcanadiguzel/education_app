@@ -71,7 +71,7 @@ class TestDialog extends StatelessWidget {
           },
           child: Text(
             MagicStrings.startTest,
-            style: TextStyle(color: Colors.white), // Metin rengi değiştirildi
+            style: TextStyle(color: Colors.black), // Metin rengi değiştirildi
           ),
         ),
       ],

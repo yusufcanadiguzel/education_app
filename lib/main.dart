@@ -24,7 +24,7 @@ Future<void> main() async {
 
   Bloc.observer = CustomBlocObserver();
 
-  // initFCM fonksiyonunu çağırarak Firebase Messaging'i başlatın
+  // initFCM fonksiyonunu çağırarak Firebase Messaging'i başlat
   FCMMethods.initFCM();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

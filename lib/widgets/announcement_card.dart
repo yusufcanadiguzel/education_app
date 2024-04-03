@@ -2,7 +2,7 @@ import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
 
 class AnnouncementCard extends StatelessWidget {
-  AnnouncementCard({super.key});
+  AnnouncementCard({Key? key}) : super(key: key);
 
   final title = MagicStrings.empty;
   final desc = MagicStrings.empty;
@@ -11,12 +11,14 @@ class AnnouncementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: const Color(0xFF151A3C), // Arka plan rengi
       child: ClipPath(
         child: Container(
-          decoration: const BoxDecoration(
-              border: Border(
-            left: BorderSide(color: Colors.green, width: 10),
-          )),
+          decoration: BoxDecoration(
+            border: Border(
+              left: BorderSide(color: Colors.green, width: 10),
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
@@ -45,7 +47,7 @@ class AnnouncementCard extends StatelessWidget {
                       child: Text(
                         MagicStrings.newGroupsDc,
                         style: const TextStyle(
-                            color: Color(0xFF767676), fontSize: 14.0),
+                            color: Color(0xfffcfbfb), fontSize: 14.0),
                       ),
                     )
                   ],
@@ -60,20 +62,20 @@ class AnnouncementCard extends StatelessWidget {
                         child: Row(
                           children: [
                             const Icon(Icons.calendar_month,
-                                color: Color(0xFF9397a0)),
+                                color: Color(0xfffcfbfb)),
                             const SizedBox(
                               width: 5.0,
                             ),
                             Text(
                               MagicStrings.defaultDate,
-                              style: const TextStyle(color: Color(0xFF9397a0)),
+                              style: const TextStyle(color: Color(0xfffcfbfb)),
                             )
                           ],
                         ),
                       ),
                       Text(
                         MagicStrings.showMore,
-                        style: const TextStyle(color: Color(0xFF9397a0)),
+                        style: const TextStyle(color: Color(0xfffcfbfb)),
                       )
                     ],
                   ),
