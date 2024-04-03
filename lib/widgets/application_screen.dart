@@ -1,12 +1,12 @@
-import 'package:education_app/constants/strings/magic_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:education_app/constants/strings/magic_strings.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +38,10 @@ class ApplicationStatusCard extends StatelessWidget {
   final List<String> statuses;
 
   const ApplicationStatusCard({
-    super.key,
+    Key? key,
     required this.formName,
     required this.statuses,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +51,7 @@ class ApplicationStatusCard extends StatelessWidget {
         width: double.infinity,
         height: 200.0, // İstediğiniz yüksekliği burada belirleyebilirsiniz
         child: Card(
+          color: const Color(0xFF151A3C), // Kartın arka plan rengi burada ayarlanıyor
           elevation: 4.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
@@ -77,7 +78,7 @@ class ApplicationStatusCard extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                     Container(
@@ -121,7 +122,7 @@ class ApplicationStatusCard extends StatelessWidget {
                           child: Text(
                             status,
                             style: const TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 14.0,
                             ),
                           ),

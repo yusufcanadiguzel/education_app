@@ -18,6 +18,7 @@ import '../widgets/custom_app_bar.dart';
 import '../widgets/drawers/custom_user_drawer.dart';
 import '../widgets/user/custom_user_circle_avatar.dart';
 import 'community/communities_screen.dart';
+import 'tobeto_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -78,10 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
             create: (context) => GetUserByIdBloc(
               repository: context.read<AuthenticationBloc>().userRepository,
             )..add(
-                GetUserById(
-                  id: context.read<AuthenticationBloc>().state.user!.uid,
-                ),
+              GetUserById(
+                id: context.read<AuthenticationBloc>().state.user!.uid,
               ),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomUserPictureCircle(
@@ -121,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 BlocProvider(
                   create: (context) => GetUserByIdBloc(
                       repository:
-                          context.read<AuthenticationBloc>().userRepository)
+                      context.read<AuthenticationBloc>().userRepository)
                     ..add(
                       GetUserById(
                         id: context.read<AuthenticationBloc>().state.user!.uid,
@@ -132,12 +133,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   create: (context) => GetAllCommunitiesBloc(
                     repository: FirebaseCommunityRepository(),
                   )..add(
-                      GetAllCommunities(),
-                    ),
+                    GetAllCommunities(),
+                  ),
                 )
               ],
               child: const CommunitiesScreen(),
             ),
+            TobetoScreen(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -146,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 FontAwesomeIcons.house,
                 color:
-                    _currentPage == 0 ? const Color(0xFFFF0067) : Colors.black,
+                _currentPage == 0 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),
@@ -154,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 FontAwesomeIcons.book,
                 color:
-                    _currentPage == 1 ? const Color(0xFFFF0067) : Colors.black,
+                _currentPage == 1 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),
@@ -162,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 FontAwesomeIcons.flaskVial,
                 color:
-                    _currentPage == 2 ? const Color(0xFFFF0067) : Colors.black,
+                _currentPage == 2 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),
@@ -170,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 FontAwesomeIcons.squarePlus,
                 color:
-                    _currentPage == 3 ? const Color(0xFFFF0067) : Colors.black,
+                _currentPage == 3 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),
@@ -178,7 +180,15 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 FontAwesomeIcons.peopleRoof,
                 color:
-                    _currentPage == 4 ? const Color(0xFFFF0067) : Colors.black,
+                _currentPage == 4 ? const Color(0xFFFF0067) : Colors.black,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.graduationCap,
+                color:
+                _currentPage == 5 ? const Color(0xFFFF0067) : Colors.black,
               ),
               label: '',
             ),

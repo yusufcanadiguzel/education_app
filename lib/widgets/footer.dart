@@ -19,7 +19,7 @@ class Footer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 100,
+                width: 42,
                 child: Image.asset(
                   MagicStrings.tobetoLogoPath,
                 ),
